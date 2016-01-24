@@ -2,9 +2,11 @@
 #define _TCPCLIENT_H
 #include <string>
 #include <list>
+#include <map>
 #include <uv.h>
 #include "packet_sync.h"
 #include "pod_circularbuffer.h"
+#include "protocol.h"
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE (1024 * 10)
@@ -52,6 +54,9 @@ public:
 	bool SetNoDelay(bool enable);
 	bool SetKeepAlive(int enable, unsigned int delay);
 	const char* GetLastErrMsg() const { return _err_msg.c_str(); }
+	void AddProtocol(int proto_id, Protocol* proto);
+	void RemoveProtocol(int proto_id);
+	Protocol* GetProtocol(int proto_id);
 
 
 protected:
@@ -63,7 +68,7 @@ protected:
 	static void OnClientClose(uv_handle_t* handle);
 	static void AsyncCB(uv_async_t* handle);
 	static void CloseWalkCB(uv_handle_t* handle, void* arg);
-	static void GetPacket(const NetPacket& packet_head, const unsigned char* data, void* userdata);
+	static void GetPacket(const NetPacket& packet_head, const char* data, void* userdata);
 	static void ReconnectTimer(uv_timer_t* handle);
 
 private:
@@ -95,6 +100,8 @@ private:
 	uv_connect_t		_connect_req;
 	int			_connect_status;
 	
+	std::map<int/*protocol id*/, Protocol*> _protocols;
+
 	PodCircularBuffer<char> _write_circularbuf;
 	uv_mutex_t _mutex_writebuf;
 

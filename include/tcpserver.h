@@ -6,7 +6,8 @@
 #include <vector>
 #include "uv.h"
 #include "log.h"
-#include "tcpserverprotocolprocess.h"
+//#include "tcpserverprotocolprocess.h"
+#include "protocol.h"
 #include "net_base.h"
 #include "packet_sync.h"
 
@@ -52,7 +53,7 @@ public:
 	void SetNewConnectCB(NewConnectCB cb, void *userdata);
 	void SetRecvCB(int sid, ServerRecvCB cb, void *userdata);
 	void SetCloseCB(TcpCloseCB cb, void *userdata);
-	void SetProtocol(TCPServerProtocolProcess* proto);
+	// void SetProtocol(TCPServerProtocolProcess* proto);
 
 	bool Start(const char* ip, int port);
 	void Close();
@@ -60,6 +61,11 @@ public:
 	bool SetNoDelay(bool enable);
 	bool SetKeepAlive(int enable, unsigned int delay);
 	const char* GetLastErrMsg() const { return _err_msg.c_str(); }
+	void AddProtocol(int proto_id, Protocol* proto);
+	void RemoveProtocol(int proto_id);
+	Protocol* GetProtocol(int proto_id);
+	bool _send(const std::string& data, SessionCtx* ctx);
+
 
 protected:
 	static int GenerateSessionID();
@@ -78,7 +84,7 @@ private:
 	bool _run(int status = UV_RUN_DEFAULT);
 	bool _bind(const char* ip, int port);
 	bool _listen(int backlog = SOMAXCONN);
-	bool _send(const std::string& data, SessionCtx* ctx);
+	//bool _send(const std::string& data, SessionCtx* ctx);
 	bool _broadcast(const std::string& data, std::vector<int> exclude_ids);
 	static void _start_thread(void *arg);
 	SessionCtx* _fetch_one_ctx(TCPServer* server);
@@ -104,7 +110,8 @@ private:
 	std::map<int/*session id*/, Session* /*session*/> _sessions;
 	uv_mutex_t	_mutex_sessions;
 
-	TCPServerProtocolProcess*	_protocol;
+	// TCPServerProtocolProcess*	_protocol;
+	std::map<int/*protocol id*/, Protocol*> _protocols;
 	uv_thread_t	_start_thread_handle;
 	int			_start_status;
 	std::string	_err_msg;
@@ -131,7 +138,7 @@ public:
 	friend void AllocBufferForRecv(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf);
 	friend void OnRecv(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf);
 	friend void OnSend(uv_write_t *req, int status);
-	friend void GetPacket(const NetPacket& packethead, const unsigned char *packetdata, void *userdata);
+	friend void GetPacket(const NetPacket& packethead, const char *packetdata, void *userdata);
 };
 
 // TODO: 其实这个Session类比较累赘，可以考虑干掉，只用SessionCtx即可
@@ -167,14 +174,14 @@ public:
 	friend void AllocBufferForRecv(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf);
 	friend void OnRecv(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf);
 	friend void OnSend(uv_write_t *req, int status);
-	friend void GetPacket(const NetPacket& packethead, const unsigned char *packetdata, void *userdata);
+	friend void GetPacket(const NetPacket& packethead, const char *packetdata, void *userdata);
 };
 
 // Global Function
 void AllocBufferForRecv(uv_handle_t* handle, size_t suggested_size, uv_buf_t* buf);
 void OnRecv(uv_stream_t* client, ssize_t nread, const uv_buf_t* buf);
 void OnSend(uv_write_t* req, int status);
-void GetPacket(const NetPacket& packethead, const unsigned char* packetdata, void* userdata);
+void GetPacket(const NetPacket& packethead, const char* packetdata, void* userdata);
 
 }	// end of namespace UVNET
 
