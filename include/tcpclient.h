@@ -57,6 +57,7 @@ public:
 	void AddProtocol(int proto_id, Protocol* proto);
 	void RemoveProtocol(int proto_id);
 	Protocol* GetProtocol(int proto_id);
+	uv_loop_t* GetLoop() { return &_loop; }
 
 
 protected:
