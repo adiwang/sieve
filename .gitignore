@@ -17,3 +17,6 @@ test/testtcpserver
 missing
 Makefile
 configure
+queryd/queryd
+*.deps
+queryd/log/
