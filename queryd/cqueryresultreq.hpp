@@ -2,6 +2,7 @@
 #include "protocol.h"
 #include "net_base.h"
 #include "packet_sync.h"
+#include "rediscb.h"
 
 class CQueryResultReq : public Protocol
 {
@@ -28,8 +29,9 @@ public:
 		packet.type = 2;
 		packet.datalen = data_size;
 
-		marshal_data = PacketData(packet, data);
+		_marshal_data = PacketData(packet, data);
 		free(data);
+		return _marshal_data;
 	}
 
 	virtual void UnMarshal(const char* buf, int length)
@@ -37,13 +39,14 @@ public:
 		_ic_card_no = std::string(buf, length);
 	}
 
-	virtual const std::string& Process(const char* buf, int length)
+	virtual void Process(const char* buf, int length, void* userdata)
 	{
 		UnMarshal(buf, length);
+		if(_ic_card_no.empty()) return;
+		redisAsyncCommand(redis_context, OnReply, new WrapOfRedisUserdata(userdata, _ic_card_no), "GET %s", _ic_card_no.c_str());
 	}
 
 public:
 	std::string _ic_card_no;
-	std::string marshal_data;
-	std::string _resp;
+	std::string _marshal_data;
 };

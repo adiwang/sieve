@@ -30,8 +30,8 @@ int main (int argc, char **argv)
 	    return 1;
 	}
 	redisLibuvAttach(redis_context, server.GetLoop());
-    	redisAsyncSetConnectCallback(redis_context, OnConnect);
-    	redisAsyncSetDisconnectCallback(redis_context, OnDisconnect);
+	redisAsyncSetConnectCallback(redis_context, OnConnect);
+	redisAsyncSetDisconnectCallback(redis_context, OnDisconnect);
 	/*
     	redisAsyncCommand(c, NULL, NULL, "SET key %b", argv[argc-1], strlen(argv[argc-1]));
     	redisAsyncCommand(c, getCallback, (char*)"end-1", "GET key");
