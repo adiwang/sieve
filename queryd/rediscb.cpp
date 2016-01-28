@@ -2,13 +2,15 @@
 #include "stdio.h"
 #include "squeryresultrep.hpp"
 #include "tcpserver.h"
+#include <cstdio>
 
-void OnReply(redisAsyncContext *c, void *r, void *privdata)
+void OnGetResult(redisAsyncContext *c, void *r, void *privdata)
 {
     redisReply *reply = (redisReply *)r;
     if (reply == NULL) return;
-    //TODO: privdata中存放相关session，用来发送数据
-    //printf("argv[%s]: %s\n", (char*)privdata, reply->str);
+ 
+	// TODO: 替换为LOG
+	printf("OnGetResult: %s\n", reply->str);
 
 	WrapOfRedisUserdata* wrapdata = (WrapOfRedisUserdata *)privdata;
 
@@ -21,6 +23,8 @@ void OnReply(redisAsyncContext *c, void *r, void *privdata)
 
 	server->_send(proto._marshal_data, ctx);
 
+	// 删除相应的key的存储结果
+	// redisAsyncCommand(redis_context, NULL, NULL, "DEL %s", card_no.c_str());
 	delete wrapdata;
 }
 

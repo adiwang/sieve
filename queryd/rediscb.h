@@ -14,7 +14,7 @@ struct WrapOfRedisUserdata
 	WrapOfRedisUserdata(void* userdata, std::string _ic_card_no) : _userdata(userdata), _ic_card_no(ic_card_no) {}
 };
 
-void OnReply(redisAsyncContext *c, void *r, void *privdata);
+void OnGetResult(redisAsyncContext *c, void *r, void *privdata);
 void OnConnect(const redisAsyncContext *c, int status); 
 void OnDisconnect(const redisAsyncContext *c, int status);
 

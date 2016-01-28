@@ -43,7 +43,7 @@ public:
 	{
 		UnMarshal(buf, length);
 		if(_ic_card_no.empty()) return;
-		redisAsyncCommand(redis_context, OnReply, new WrapOfRedisUserdata(userdata, _ic_card_no), "GET %s", _ic_card_no.c_str());
+		redisAsyncCommand(redis_context, OnGetResult, new WrapOfRedisUserdata(userdata, _ic_card_no), "GET %s", _ic_card_no.c_str());
 	}
 
 public:
