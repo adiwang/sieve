@@ -58,6 +58,9 @@ public:
 		bool isFinish() { return mask == 0x004F; }
 	};
 
+	typedef std::list<ObjectDataFrame> FrameList;
+	typedef std::list<ObjectDataFrame>::iterator FrameListIterator;
+
 	ChannelData(){}
 	~ChannelData(){}
 
@@ -66,11 +69,11 @@ public:
 	void AddWeight(double weight);
 
 private:
-	std::vector<ObjectDataFrame> frames;
+	FrameList frames;
 	uv_mutex_t	lock;
 
 private:
-	void ProcessDataFrame(ObjectDataFrame& data_frame);
+	void ProcessDataFrame(FrameListIterator it);
 };
 
 }	// end of namespace

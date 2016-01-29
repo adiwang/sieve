@@ -15,7 +15,7 @@ namespace CASD
 void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, char *data, int data_len)
 {
 	uv_mutex_lock(&lock);
-	for(std::<vector>::iterator it = frames.begin(); it != frames.end(); ++it)
+	for(FrameListIterator it = frames.begin(); it != frames.end(); ++it)
 	{
 		// 如果该帧数据已设置过，则寻找下一帧未设置的数据
 		if(it->mask & (1 << image_seq)) continue;
@@ -27,9 +27,8 @@ void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, 
 			it->mask |= (1 << image_seq);
 			if(it->isFinish())
 			{
-				frames.erase(it);
 				uv_mutex_unlock(&lock);
-				ProcessDataFrame(*it);
+				ProcessDataFrame(it);
 			}
 			return;
 		}
@@ -46,24 +45,19 @@ void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, 
 void Channel::AddWeight(double weight)
 {
 	uv_mutex_lock(&lock);
-	for(std::<vector>::iterator it = frames.begin(); it != frames.end(); ++it)
+	for(FrameListIterator it = frames.begin(); it != frames.end(); ++it)
 	{
 		// 如果该帧数据已设置过，则寻找下一帧未设置的数据
 		if(it->mask & WEIGHT_MASK) continue;
-		if(it->ic_card_no.empty())
+		it->weight = weight;
+		it->mask |= WEIGHT_MASK;
+		uv_mutex_unlock(&lock);
+		if(it->isFinish())
 		{
-			// ic编码为空说明该数据帧可用
-			it->weight = weight;
-			it->mask |= WEIGHT_MASK;
 			uv_mutex_unlock(&lock);
-			if(it->isFinish())
-			{
-				frames.erase(it);
-				uv_mutex_unlock(&lock);
-				ProcessDataFrame(*it);
-			}
-			return;
+			ProcessDataFrame(it);
 		}
+		return;
 	}
 	// 遍历一遍未找到相应数据帧和空闲帧，需要添加新的帧
 	ObjectDataFrame data_frame;
@@ -74,9 +68,14 @@ void Channel::AddWeight(double weight)
 
 }
 
-void Channel::ProcessDataFrame(ObjectDataFrame& data_frame)
+void Channel::ProcessDataFrame(FrameListIterator it)
 {
 	//TODO
+
+	// 处理完数据后释放数据帧
+	uv_mutex_lock(&lock);
+	frames.erase(it);
+	uv_mutex_unlock(&lock);
 }
 
 }	// end of namespace
