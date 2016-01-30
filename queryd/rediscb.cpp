@@ -14,7 +14,7 @@ void OnGetResult(redisAsyncContext *c, void *r, void *privdata)
 
 	WrapOfRedisUserdata* wrapdata = (WrapOfRedisUserdata *)privdata;
 
-	UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)wrapdata->userdata;
+	UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)wrapdata->_userdata;
 	UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 	std::string card_no = wrapdata->_ic_card_no;
 

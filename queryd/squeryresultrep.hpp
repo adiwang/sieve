@@ -23,7 +23,7 @@ public:
 		int data_size = _ic_card_no.size() + 4/*proto id*/ + 4/*result*/;
 		char * data = (char *)malloc(data_size);
 		Int32ToChar(proto_id, data);
-		Int32ToChar(result, data + 4);
+		Int32ToChar(_result, data + 4);
 		memcpy(data + 8, _ic_card_no.data(), _ic_card_no.size());
 
 		NetPacket packet;
