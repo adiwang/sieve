@@ -1,5 +1,5 @@
-#ifndef _CASD_OBJDEF_H
-#define _CASD_OBJDEF_H
+#ifndef _CASD_CHANNEL_H
+#define _CASD_CHANNEL_H
 #include <string>
 #include <vector>
 #include <map>
@@ -76,7 +76,36 @@ private:
 	void ProcessDataFrame(FrameListIterator it);
 };
 
+class ChannelManager
+{
+public:
+	typedef std::map<uint32_t, Channel*> ChannelMap;
+	typedef std::map<uint32_t, Channel*>::iterator ChannelMapIterator;
+
+	~ChannelManager() 
+	{
+		for(ChannelMapIterator it = _channels.begin(); it != _channel.end(); ++it)
+		{
+			if(it->second)
+			{
+				delete it->second;
+			}
+		}
+		_channels.clear();
+	}
+	static ChannelManger& GetInstance() 
+	{ 
+		static ChannelManager instance; 
+		return instance;  
+	}	
+
+private:
+	ChannelManager() {}
+public:
+	ChannelMap _channels;
+};
+
 }	// end of namespace
 
 
-#endif
+#endif // end _CASD_CHANNEL_H
