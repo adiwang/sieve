@@ -36,5 +36,6 @@ int main (int argc, char **argv)
     	redisAsyncCommand(c, NULL, NULL, "SET key %b", argv[argc-1], strlen(argv[argc-1]));
     	redisAsyncCommand(c, getCallback, (char*)"end-1", "GET key");
 	*/
+	while(true) ThreadSleep(10);
 	return 0;
 }

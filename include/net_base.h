@@ -1,18 +1,5 @@
-﻿/***************************************
-* @file     net_base.h
-* @brief    网络库基本功能函数
-* @details  大小端判断
-            32&64位系统判断
-            ntohll与htonl的实现
-			int32与int64序列/反序列化为char[4],char[8]
-			数据包头结构定义
-			在win平台测试过，linux平台未测试
-* @author   phata, wqvbjhc@gmail.com
-* @date     2014-5-16
-* @mod      2014-5-21 phata 包定义添加了包头包尾版本和校验位信息
-****************************************/
-#ifndef NET_BASE_H
-#define NET_BASE_H
+﻿#ifndef _NET_BASE_H
+#define _NET_BASE_H
 #include <stdint.h>
 #include <string.h>
 #if defined (WIN32) || defined (_WIN32)
@@ -45,7 +32,7 @@ inline bool IsSystem32()
     return x64 == 0;
 }
 
-namespace Phata
+namespace UVNET 
 {
 //htonll与ntohll win8才支持，linux支持也不全，所以自己实现
 inline uint64_t htonll(uint64_t num)
@@ -108,7 +95,7 @@ inline bool CharToInt32(const char* charnum, uint32_t& intnum)
 //把64位的int保存在char[8]中.先转为网络字节序，然后int的最高位保存为char[0],最低位保存于char[7]
 inline bool Int64ToChar(const uint64_t intnum,char* charnum)
 {
-    uint64_t network_byteorder=Phata::htonll(intnum);//转换为网络字节序
+    uint64_t network_byteorder=UVNET::htonll(intnum);//转换为网络字节序
     charnum[0]=(unsigned char)((network_byteorder & 0xff00000000000000ULL)>>56);//int的最高位
     charnum[1]=(unsigned char)((network_byteorder & 0x00ff000000000000ULL)>>48);//int的次高位
     charnum[2]=(unsigned char)((network_byteorder & 0x0000ff0000000000ULL)>>40);
@@ -125,7 +112,7 @@ inline bool CharToInt64(const char* charnum, uint64_t& intnum)
 {
     intnum =  ((uint64_t)charnum[0] << 56) + ((uint64_t)charnum[1] << 48) + ((uint64_t)charnum[2] << 40) + ((uint64_t)charnum[3] << 32) +
               (charnum[4] << 24) + (charnum[5] << 16) + (charnum[6] << 8) + charnum[7];
-    intnum=Phata::ntohll(intnum);//转换为网络字节序
+    intnum=UVNET::ntohll(intnum);//转换为网络字节序
     return true;
 }
 
@@ -194,4 +181,4 @@ inline bool CharToNetPacket(const char* chardata, NetPacket& package){
 	package.reserve = tmp32;
 	return true;
 }
-#endif//NET_BASE_H
+#endif // _NET_BASE_H

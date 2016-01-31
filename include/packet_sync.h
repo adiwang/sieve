@@ -10,14 +10,9 @@ Packet packet;
 packet.SetPacketCB(GetPacket,&serpac);
 packet.Start(0x01,0x02);
 //socket有数据到达时，调用packet.recvdata((const unsigned char*)buf,bufsize); 只要足够一帧它会触发GetFullPacket
-
-* @author   phata, wqvbjhc@gmail.com
-* @date     2014-05-21
-* @mod      2014-08-04 phata 修复解析一帧数据有误的bug
-            2014-11-12 phata GetUVError冲突，改为使用thread_uv.h中的
 ****************************************/
-#ifndef PACKET_SYNC_H
-#define PACKET_SYNC_H
+#ifndef _PACKET_SYNC_H
+#define _PACKET_SYNC_H
 #include <algorithm>
 #include <openssl/md5.h>
 #include "net_base.h"
@@ -275,4 +270,4 @@ typedef enum {
 //TCPClient连接回调函数
 typedef void (*ConnectCB)(NET_EVENT_TYPE eventtype, void* userdata);
 
-#endif//PACKET_SYNC_H
+#endif// _PACKET_SYNC_H

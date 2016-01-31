@@ -1,3 +1,5 @@
+#ifndef _CQUERYRESULT_H
+#define _CQUERYRESULT_H
 #include <string>
 #include "protocol.h"
 #include "net_base.h"
@@ -50,3 +52,4 @@ public:
 	std::string _ic_card_no;
 	std::string _marshal_data;
 };
+#endif // end _CQUERYRESULT_H

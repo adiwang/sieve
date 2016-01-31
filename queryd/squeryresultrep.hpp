@@ -1,3 +1,5 @@
+#ifndef _SQUERYRESULTREP_H
+#define _SQUERYRESULTREP_H
 #include <string>
 #include <cstdio>
 
@@ -56,3 +58,4 @@ public:
 	uint32_t _result;
 	std::string _marshal_data;
 };
+#endif // end _SQUERYRESULTREP_H
