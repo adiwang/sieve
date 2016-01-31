@@ -2,6 +2,8 @@
 #include <string>
 #include "tcpclient.h"
 #include "pb/netmessage.pb.h"
+#include "protocolid.h"
+
 using namespace std;
 using namespace UVNET;
 
@@ -22,7 +24,7 @@ public:
 
 		std::string data;
 		CProto cproto;
-		cproto.set_id(1);
+		cproto.set_id(PROTOCOL_ID_ECHO);
 		cproto.set_body(ep.SerializeAsString());
 		cproto.SerializeToString(&data);
 
@@ -82,7 +84,7 @@ int main(int argc, char** argv)
     //client.SetRecvCB(ReadCB, &client);
     client.SetCloseCB(CloseCB, &client);
     EchoProtocol protocol;
-    client.AddProtocol(1, &protocol);
+    client.AddProtocol(PROTOCOL_ID_ECHO, &protocol);
     if(!client.Connect(serverip.c_str(), serverport))
     {
             fprintf(stdout, "connect error:%s\n", client.GetLastErrMsg());

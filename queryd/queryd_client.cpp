@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
 	client.SetCloseCB(CloseCB, &client);
 	CQueryResultReq req_proto;
 	SQueryResultRep rep_proto;
-	client.AddProtocol(2, &req_proto);
-	client.AddProtocol(3, &rep_proto);
+	client.AddProtocol(PROTOCOL_ID_CQUERYRESULTREQ, &req_proto);
+	client.AddProtocol(PROTOCOL_ID_SQUERYRESULTREP, &rep_proto);
 
 	if(!client.Connect(serverip.c_str(), serverport))
 	{

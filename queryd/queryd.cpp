@@ -15,7 +15,7 @@ int main (int argc, char **argv)
 {
 	UVNET::TCPServer server(0x01,0x02);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "queryd", "./log");
-	server.AddProtocol(2, new CQueryResultReq());
+	server.AddProtocol(PROTOCOL_ID_CQUERYRESULTREQ, new CQueryResultReq());
 	if(!server.Start("0.0.0.0",12345)) 
 	{
 	    fprintf(stdout,"Start Server error:%s\n",server.GetLastErrMsg());

@@ -2,6 +2,7 @@
 #define _CQUERYRESULT_H
 #include <string>
 #include "protocol.h"
+#include "protocolid.h"
 #include "net_base.h"
 #include "packet_sync.h"
 #include "rediscb.h"
@@ -11,7 +12,7 @@ class CQueryResultReq : public Protocol
 public:
 	enum
 	{
-		PROTOCOL_ID = 2,
+		PROTOCOL_ID = PROTOCOL_ID_CQUERYRESULTREQ,
 	};
 	CQueryResultReq() {}
 	virtual ~CQueryResultReq() {}

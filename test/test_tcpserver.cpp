@@ -8,6 +8,7 @@
 #include "pb/netmessage.pb.h"
 #include <cstdio>
 #include "uv.h"
+#include "protocolid.h"
 
 class EchoProtocol: public Protocol
 {
@@ -21,7 +22,7 @@ public:
 
 		std::string data;
 		CProto cproto;
-		cproto.set_id(1);
+		cproto.set_id(PROTOCOL_ID_ECHO);
 		cproto.set_body(ep.SerializeAsString());
 		cproto.SerializeToString(&data);
 
@@ -64,7 +65,7 @@ int main(int argc, char** argv)
     // DeclareDumpFile();
     TCPServer::StartLog(LL_DEBUG, "tcpserver", "./log");
     server.SetNewConnectCB(NewConnect,&server);
-    server.AddProtocol(1, &protocol);
+    server.AddProtocol(PROTOCOL_ID_ECHO, &protocol);
     if(!server.Start("0.0.0.0",12345)) {
         fprintf(stdout,"Start Server error:%s\n",server.GetLastErrMsg());
     }

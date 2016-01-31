@@ -4,6 +4,7 @@
 #include <cstdio>
 
 #include "protocol.h"
+#include "protocolid.h"
 #include "net_base.h"
 #include "packet_sync.h"
 #include "rediscb.h"
@@ -13,7 +14,7 @@ class SQueryResultRep : public Protocol
 public:
 	enum
 	{
-		PROTOCOL_ID = 3,
+		PROTOCOL_ID = PROTOCOL_ID_SQUERYRESULTREP,
 	};
 	SQueryResultRep() {}
 	virtual ~SQueryResultRep() {}
