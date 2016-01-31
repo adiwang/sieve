@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include "tcpclient.h"
-#include "cqueryresultreq.hpp"
-#include "squeryresultrep.hpp"
+#include "protocol/cqueryresultreq.hpp"
+#include "protocol/squeryresultrep.hpp"
 
 using namespace UVNET;
 

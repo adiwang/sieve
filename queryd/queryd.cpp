@@ -9,7 +9,7 @@
 
 #include "tcpserver.h"
 #include "rediscb.h"
-#include "cqueryresultreq.hpp"
+#include "protocol/cqueryresultreq.hpp"
 
 int main (int argc, char **argv) 
 {

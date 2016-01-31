@@ -1,6 +1,6 @@
 #include "rediscb.h"
 #include "stdio.h"
-#include "squeryresultrep.hpp"
+#include "protocol/squeryresultrep.hpp"
 #include "tcpserver.h"
 #include <cstdio>
 
