@@ -20,3 +20,4 @@ configure
 queryd/queryd
 *.deps
 queryd/log/
+queryd/querydclient
