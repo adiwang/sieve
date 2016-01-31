@@ -31,6 +31,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* EchoProto_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   EchoProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* CSetCamaraSeqReqProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  CSetCamaraSeqReqProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* SSetCamaraSeqRepProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  SSetCamaraSeqRepProto_reflection_ = NULL;
 
 }  // namespace
 
@@ -106,6 +112,36 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       sizeof(EchoProto),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EchoProto, _internal_metadata_),
       -1);
+  CSetCamaraSeqReqProto_descriptor_ = file->message_type(4);
+  static const int CSetCamaraSeqReqProto_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSetCamaraSeqReqProto, seq_),
+  };
+  CSetCamaraSeqReqProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      CSetCamaraSeqReqProto_descriptor_,
+      CSetCamaraSeqReqProto::default_instance_,
+      CSetCamaraSeqReqProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSetCamaraSeqReqProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(CSetCamaraSeqReqProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSetCamaraSeqReqProto, _internal_metadata_),
+      -1);
+  SSetCamaraSeqRepProto_descriptor_ = file->message_type(5);
+  static const int SSetCamaraSeqRepProto_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSetCamaraSeqRepProto, result_),
+  };
+  SSetCamaraSeqRepProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      SSetCamaraSeqRepProto_descriptor_,
+      SSetCamaraSeqRepProto::default_instance_,
+      SSetCamaraSeqRepProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSetCamaraSeqRepProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(SSetCamaraSeqRepProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSetCamaraSeqRepProto, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -126,6 +162,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
       CP2_descriptor_, &CP2::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       EchoProto_descriptor_, &EchoProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      CSetCamaraSeqReqProto_descriptor_, &CSetCamaraSeqReqProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      SSetCamaraSeqRepProto_descriptor_, &SSetCamaraSeqRepProto::default_instance());
 }
 
 }  // namespace
@@ -139,6 +179,10 @@ void protobuf_ShutdownFile_netmessage_2eproto() {
   delete CP2_reflection_;
   delete EchoProto::default_instance_;
   delete EchoProto_reflection_;
+  delete CSetCamaraSeqReqProto::default_instance_;
+  delete CSetCamaraSeqReqProto_reflection_;
+  delete SSetCamaraSeqRepProto::default_instance_;
+  delete SSetCamaraSeqRepProto_reflection_;
 }
 
 void protobuf_AddDesc_netmessage_2eproto() {
@@ -152,17 +196,22 @@ void protobuf_AddDesc_netmessage_2eproto() {
     "\022\014\n\004body\030\002 \002(\t\"&\n\003CP1\022\t\n\001a\030\001 \002(\005\022\t\n\001b\030\002 "
     "\002(\003\022\t\n\001c\030\003 \002(\t\"&\n\003CP2\022\t\n\001a\030\001 \002(\t\022\t\n\001b\030\002 "
     "\002(\t\022\t\n\001c\030\003 \002(\003\"\031\n\tEchoProto\022\014\n\004data\030\001 \002("
-    "\t", 161);
+    "\t\"$\n\025CSetCamaraSeqReqProto\022\013\n\003seq\030\001 \002(\r\""
+    "\'\n\025SSetCamaraSeqRepProto\022\016\n\006result\030\001 \002(\r", 240);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
   CProto::default_instance_ = new CProto();
   CP1::default_instance_ = new CP1();
   CP2::default_instance_ = new CP2();
   EchoProto::default_instance_ = new EchoProto();
+  CSetCamaraSeqReqProto::default_instance_ = new CSetCamaraSeqReqProto();
+  SSetCamaraSeqRepProto::default_instance_ = new SSetCamaraSeqRepProto();
   CProto::default_instance_->InitAsDefaultInstance();
   CP1::default_instance_->InitAsDefaultInstance();
   CP2::default_instance_->InitAsDefaultInstance();
   EchoProto::default_instance_->InitAsDefaultInstance();
+  CSetCamaraSeqReqProto::default_instance_->InitAsDefaultInstance();
+  SSetCamaraSeqRepProto::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_netmessage_2eproto);
 }
 
@@ -1840,6 +1889,524 @@ void EchoProto::clear_data() {
   }
   data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
   // @@protoc_insertion_point(field_set_allocated:EchoProto.data)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CSetCamaraSeqReqProto::kSeqFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CSetCamaraSeqReqProto::CSetCamaraSeqReqProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:CSetCamaraSeqReqProto)
+}
+
+void CSetCamaraSeqReqProto::InitAsDefaultInstance() {
+}
+
+CSetCamaraSeqReqProto::CSetCamaraSeqReqProto(const CSetCamaraSeqReqProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:CSetCamaraSeqReqProto)
+}
+
+void CSetCamaraSeqReqProto::SharedCtor() {
+  _cached_size_ = 0;
+  seq_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+CSetCamaraSeqReqProto::~CSetCamaraSeqReqProto() {
+  // @@protoc_insertion_point(destructor:CSetCamaraSeqReqProto)
+  SharedDtor();
+}
+
+void CSetCamaraSeqReqProto::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void CSetCamaraSeqReqProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CSetCamaraSeqReqProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CSetCamaraSeqReqProto_descriptor_;
+}
+
+const CSetCamaraSeqReqProto& CSetCamaraSeqReqProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+CSetCamaraSeqReqProto* CSetCamaraSeqReqProto::default_instance_ = NULL;
+
+CSetCamaraSeqReqProto* CSetCamaraSeqReqProto::New(::google::protobuf::Arena* arena) const {
+  CSetCamaraSeqReqProto* n = new CSetCamaraSeqReqProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void CSetCamaraSeqReqProto::Clear() {
+  seq_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool CSetCamaraSeqReqProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:CSetCamaraSeqReqProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 seq = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &seq_)));
+          set_has_seq();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:CSetCamaraSeqReqProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:CSetCamaraSeqReqProto)
+  return false;
+#undef DO_
+}
+
+void CSetCamaraSeqReqProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:CSetCamaraSeqReqProto)
+  // required uint32 seq = 1;
+  if (has_seq()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->seq(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:CSetCamaraSeqReqProto)
+}
+
+::google::protobuf::uint8* CSetCamaraSeqReqProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:CSetCamaraSeqReqProto)
+  // required uint32 seq = 1;
+  if (has_seq()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->seq(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:CSetCamaraSeqReqProto)
+  return target;
+}
+
+int CSetCamaraSeqReqProto::ByteSize() const {
+  int total_size = 0;
+
+  // required uint32 seq = 1;
+  if (has_seq()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->seq());
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CSetCamaraSeqReqProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const CSetCamaraSeqReqProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const CSetCamaraSeqReqProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void CSetCamaraSeqReqProto::MergeFrom(const CSetCamaraSeqReqProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_seq()) {
+      set_seq(from.seq());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void CSetCamaraSeqReqProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CSetCamaraSeqReqProto::CopyFrom(const CSetCamaraSeqReqProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CSetCamaraSeqReqProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void CSetCamaraSeqReqProto::Swap(CSetCamaraSeqReqProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CSetCamaraSeqReqProto::InternalSwap(CSetCamaraSeqReqProto* other) {
+  std::swap(seq_, other->seq_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata CSetCamaraSeqReqProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = CSetCamaraSeqReqProto_descriptor_;
+  metadata.reflection = CSetCamaraSeqReqProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// CSetCamaraSeqReqProto
+
+// required uint32 seq = 1;
+bool CSetCamaraSeqReqProto::has_seq() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void CSetCamaraSeqReqProto::set_has_seq() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void CSetCamaraSeqReqProto::clear_has_seq() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void CSetCamaraSeqReqProto::clear_seq() {
+  seq_ = 0u;
+  clear_has_seq();
+}
+ ::google::protobuf::uint32 CSetCamaraSeqReqProto::seq() const {
+  // @@protoc_insertion_point(field_get:CSetCamaraSeqReqProto.seq)
+  return seq_;
+}
+ void CSetCamaraSeqReqProto::set_seq(::google::protobuf::uint32 value) {
+  set_has_seq();
+  seq_ = value;
+  // @@protoc_insertion_point(field_set:CSetCamaraSeqReqProto.seq)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SSetCamaraSeqRepProto::kResultFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+SSetCamaraSeqRepProto::SSetCamaraSeqRepProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:SSetCamaraSeqRepProto)
+}
+
+void SSetCamaraSeqRepProto::InitAsDefaultInstance() {
+}
+
+SSetCamaraSeqRepProto::SSetCamaraSeqRepProto(const SSetCamaraSeqRepProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SSetCamaraSeqRepProto)
+}
+
+void SSetCamaraSeqRepProto::SharedCtor() {
+  _cached_size_ = 0;
+  result_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SSetCamaraSeqRepProto::~SSetCamaraSeqRepProto() {
+  // @@protoc_insertion_point(destructor:SSetCamaraSeqRepProto)
+  SharedDtor();
+}
+
+void SSetCamaraSeqRepProto::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SSetCamaraSeqRepProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SSetCamaraSeqRepProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SSetCamaraSeqRepProto_descriptor_;
+}
+
+const SSetCamaraSeqRepProto& SSetCamaraSeqRepProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+SSetCamaraSeqRepProto* SSetCamaraSeqRepProto::default_instance_ = NULL;
+
+SSetCamaraSeqRepProto* SSetCamaraSeqRepProto::New(::google::protobuf::Arena* arena) const {
+  SSetCamaraSeqRepProto* n = new SSetCamaraSeqRepProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void SSetCamaraSeqRepProto::Clear() {
+  result_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool SSetCamaraSeqRepProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:SSetCamaraSeqRepProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 result = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &result_)));
+          set_has_result();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:SSetCamaraSeqRepProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SSetCamaraSeqRepProto)
+  return false;
+#undef DO_
+}
+
+void SSetCamaraSeqRepProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SSetCamaraSeqRepProto)
+  // required uint32 result = 1;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:SSetCamaraSeqRepProto)
+}
+
+::google::protobuf::uint8* SSetCamaraSeqRepProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SSetCamaraSeqRepProto)
+  // required uint32 result = 1;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->result(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:SSetCamaraSeqRepProto)
+  return target;
+}
+
+int SSetCamaraSeqRepProto::ByteSize() const {
+  int total_size = 0;
+
+  // required uint32 result = 1;
+  if (has_result()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->result());
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SSetCamaraSeqRepProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const SSetCamaraSeqRepProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const SSetCamaraSeqRepProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SSetCamaraSeqRepProto::MergeFrom(const SSetCamaraSeqRepProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void SSetCamaraSeqRepProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SSetCamaraSeqRepProto::CopyFrom(const SSetCamaraSeqRepProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SSetCamaraSeqRepProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void SSetCamaraSeqRepProto::Swap(SSetCamaraSeqRepProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void SSetCamaraSeqRepProto::InternalSwap(SSetCamaraSeqRepProto* other) {
+  std::swap(result_, other->result_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata SSetCamaraSeqRepProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SSetCamaraSeqRepProto_descriptor_;
+  metadata.reflection = SSetCamaraSeqRepProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// SSetCamaraSeqRepProto
+
+// required uint32 result = 1;
+bool SSetCamaraSeqRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void SSetCamaraSeqRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void SSetCamaraSeqRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void SSetCamaraSeqRepProto::clear_result() {
+  result_ = 0u;
+  clear_has_result();
+}
+ ::google::protobuf::uint32 SSetCamaraSeqRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SSetCamaraSeqRepProto.result)
+  return result_;
+}
+ void SSetCamaraSeqRepProto::set_result(::google::protobuf::uint32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SSetCamaraSeqRepProto.result)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

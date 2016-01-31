@@ -37,7 +37,9 @@ void protobuf_ShutdownFile_netmessage_2eproto();
 class CP1;
 class CP2;
 class CProto;
+class CSetCamaraSeqReqProto;
 class EchoProto;
+class SSetCamaraSeqRepProto;
 
 // ===================================================================
 
@@ -479,6 +481,184 @@ class EchoProto : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static EchoProto* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class CSetCamaraSeqReqProto : public ::google::protobuf::Message {
+ public:
+  CSetCamaraSeqReqProto();
+  virtual ~CSetCamaraSeqReqProto();
+
+  CSetCamaraSeqReqProto(const CSetCamaraSeqReqProto& from);
+
+  inline CSetCamaraSeqReqProto& operator=(const CSetCamaraSeqReqProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CSetCamaraSeqReqProto& default_instance();
+
+  void Swap(CSetCamaraSeqReqProto* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CSetCamaraSeqReqProto* New() const { return New(NULL); }
+
+  CSetCamaraSeqReqProto* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CSetCamaraSeqReqProto& from);
+  void MergeFrom(const CSetCamaraSeqReqProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(CSetCamaraSeqReqProto* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 seq = 1;
+  bool has_seq() const;
+  void clear_seq();
+  static const int kSeqFieldNumber = 1;
+  ::google::protobuf::uint32 seq() const;
+  void set_seq(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:CSetCamaraSeqReqProto)
+ private:
+  inline void set_has_seq();
+  inline void clear_has_seq();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 seq_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CSetCamaraSeqReqProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SSetCamaraSeqRepProto : public ::google::protobuf::Message {
+ public:
+  SSetCamaraSeqRepProto();
+  virtual ~SSetCamaraSeqRepProto();
+
+  SSetCamaraSeqRepProto(const SSetCamaraSeqRepProto& from);
+
+  inline SSetCamaraSeqRepProto& operator=(const SSetCamaraSeqRepProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SSetCamaraSeqRepProto& default_instance();
+
+  void Swap(SSetCamaraSeqRepProto* other);
+
+  // implements Message ----------------------------------------------
+
+  inline SSetCamaraSeqRepProto* New() const { return New(NULL); }
+
+  SSetCamaraSeqRepProto* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SSetCamaraSeqRepProto& from);
+  void MergeFrom(const SSetCamaraSeqRepProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(SSetCamaraSeqRepProto* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 result = 1;
+  bool has_result() const;
+  void clear_result();
+  static const int kResultFieldNumber = 1;
+  ::google::protobuf::uint32 result() const;
+  void set_result(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:SSetCamaraSeqRepProto)
+ private:
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 result_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static SSetCamaraSeqRepProto* default_instance_;
+};
 // ===================================================================
 
 
@@ -860,7 +1040,67 @@ inline void EchoProto::set_allocated_data(::std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:EchoProto.data)
 }
 
+// -------------------------------------------------------------------
+
+// CSetCamaraSeqReqProto
+
+// required uint32 seq = 1;
+inline bool CSetCamaraSeqReqProto::has_seq() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CSetCamaraSeqReqProto::set_has_seq() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CSetCamaraSeqReqProto::clear_has_seq() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CSetCamaraSeqReqProto::clear_seq() {
+  seq_ = 0u;
+  clear_has_seq();
+}
+inline ::google::protobuf::uint32 CSetCamaraSeqReqProto::seq() const {
+  // @@protoc_insertion_point(field_get:CSetCamaraSeqReqProto.seq)
+  return seq_;
+}
+inline void CSetCamaraSeqReqProto::set_seq(::google::protobuf::uint32 value) {
+  set_has_seq();
+  seq_ = value;
+  // @@protoc_insertion_point(field_set:CSetCamaraSeqReqProto.seq)
+}
+
+// -------------------------------------------------------------------
+
+// SSetCamaraSeqRepProto
+
+// required uint32 result = 1;
+inline bool SSetCamaraSeqRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SSetCamaraSeqRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SSetCamaraSeqRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SSetCamaraSeqRepProto::clear_result() {
+  result_ = 0u;
+  clear_has_result();
+}
+inline ::google::protobuf::uint32 SSetCamaraSeqRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SSetCamaraSeqRepProto.result)
+  return result_;
+}
+inline void SSetCamaraSeqRepProto::set_result(::google::protobuf::uint32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SSetCamaraSeqRepProto.result)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
