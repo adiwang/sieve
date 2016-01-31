@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SRC_DIR=./protocol
+SRC_DIR=./pbdef
 DST_DIR=./pb
 
 rm -rf $DST_DIR/*.pb.h $DST_DIR/*.pb.cc

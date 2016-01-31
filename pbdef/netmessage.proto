@@ -1,0 +1,36 @@
+message CProto
+{
+	required int32 id = 1;
+	required string body = 2;
+}
+
+message CP1
+{
+	required int32 a = 1;
+	required int64 b = 2;
+	required string c = 3;
+}
+
+message CP2
+{
+	required string a = 1;
+	required string b = 2;
+	required int64 c = 3;
+}
+
+message EchoProto
+{
+	required string data = 1;
+}
+
+// cpsd向casd发送的设置相机序号的协议
+message CSetCamaraSeqReqProto
+{
+	required uint32 seq = 1;	// 相机序号
+}
+
+// casd向cpsd返回的设置相机序号的响应协议
+message SSetCamaraSeqRepProto
+{
+	required uint32 result = 1;	// 0: 代表成功, 否则: 失败
+}
