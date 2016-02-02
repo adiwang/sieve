@@ -76,6 +76,7 @@ private:
 	void ProcessDataFrame(FrameListIterator it);
 };
 
+
 class ChannelManager
 {
 public:
@@ -97,12 +98,14 @@ public:
 	{ 
 		static ChannelManager instance; 
 		return instance;  
-	}	
+	}
 
 private:
 	ChannelManager() {}
 public:
 	ChannelMap _channels;
+	std::map<int, uint32_t> _sid2seq;
+	std::map<uint32_t, int> _seq2sid;
 };
 
 }	// end of namespace

@@ -14,6 +14,7 @@ namespace CASD
 */
 void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, char *data, int data_len)
 {
+	if(image_seq < 0 || image_seq > 5) return;
 	uv_mutex_lock(&lock);
 	for(FrameListIterator it = frames.begin(); it != frames.end(); ++it)
 	{
