@@ -34,3 +34,21 @@ message SSetCamaraSeqRepProto
 {
 	required uint32 result = 1;	// 0: 代表成功, 否则: 失败
 }
+
+// cpsd向casd发送的图片处理数据的协议
+message CSendImageProcessDataReqProto
+{
+	required string ic_card_no = 1;		// ic卡号
+	required int32 image_seq = 2;		// 图片序号: 0-5分别是底, 4侧, 顶
+	required int32 x = 3;			// 一系列特征
+	required int32 y = 4;
+	required bytes data = 5;
+}
+
+// casd向cpsd返回的发送图片处理数据的响应协议
+message SSendImageProcessDataRepProto
+{
+	required string ic_card_no = 1;		// ic卡号
+	required int32 image_seq = 2;		// 图片序号: 0-5分别是底, 4侧, 顶
+	required int32 result = 3;
+}
