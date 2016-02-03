@@ -13,42 +13,7 @@
 
 class CSetCamaraSeqReq : public Protocol
 {
-public:
-	enum
-	{
-		PROTOCOL_ID = PROTOCOL_ID_CSETCAMARASEQREQ,
-	};
-	CSetCamaraSeqReq() : _seq(0) {}
-	CSetCamaraSeqReq(uint32_t seq) : _seq(seq) {}
-	~CSetCamaraSeqReq() {}
-
-	virtual const std::string& Marshal()
-	{
-		// 1. 设置协议具体子段
-		CSetCamaraSeqReqProto proto;
-		proto.set_seq(_seq);
-		// 2. 给协议wrap一层，添加protocol id
-		CProto cproto;
-		cproto.set_id(PROTOCOL_ID);
-		cproto.set_body(proto.SerializeAsString());
-		std::string data;
-		cproto.SerializeToString(&data);
-		// 3. 封包
-		NetPacket packet;
-		packet.header = 0x01;
-		packet.tail = 0x02;
-		packet.type = 1;
-		packet.datalen = data.size();
-		_marshal_data = PacketData(packet, data.c_str());
-		return _marshal_data;
-	}
-
-	virtual void UnMarshal(const char* buf, int length)
-	{
-		CSetCamaraSeqReqProto proto;
-		proto.ParseFromString(std::string(buf, length));
-		_seq = proto.seq();
-	}
+	#include "protocol/csetcamaraseqreq"
 
 	virtual void Process(const char* buf, int length, void* userdata)
 	{
@@ -90,10 +55,6 @@ public:
 			server->_send(rep._marshal_data, ctx);
 		}
 	}
-
-public:
-	uint32_t _seq;
-	std::string _marshal_data;
 };
 
 #endif	// end _CSETCAMARASEQREQ_H

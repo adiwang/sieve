@@ -1,23 +1,15 @@
-#ifndef _SSENDIMAGEPROCESSDATA_H
-#define _SSENDIMAGEPROCESSDATA_H
-#include <string>
-#include "protocol.h"
-#include "protocolid.h"
-#include "net_base.h"
-#include "packet_sync.h"
-#include "pb/netmessage.pb.h"
-#include "channel.h"
-#include "tcpserver.h"
-#include "ssendimageprocessdatarep.h"
+public:
+	std::string _ic_card_no;
+	int _image_seq;
+	int _result;
+	std::string _marshal_data;
 
-
-class SSendImageProcessDataRep : public Protocol
-{
 public:
 	enum
 	{
 		PROTOCOL_ID = PROTOCOL_ID_SSENDIMAGEPROCESSDATAREP,
 	};
+
 	SSendImageProcessDataRep() : _ic_card_no(), _image_seq(-1), _result(0) {}
 	SSendImageProcessDataRep(std::string ic_card_no, int image_seq, int result) : _ic_card_no(ic_card_no), _image_seq(image_seq), _result(result) {}
 	~SSendImageProcessDataRep() {}
@@ -53,21 +45,3 @@ public:
 		_image_seq = proto._image_seq();
 		_result = proto._result();
 	}
-
-	virtual void Process(const char* buf, int length, void* userdata)
-	{
-		UnMarshal(buf, length);
-		if(_result != 0)
-		{
-			// TODO: error handling
-		}
-	}
-
-public:
-	std::string _ic_card_no;
-	int _image_seq;
-	int _result;
-	std::string _marshal_data;
-};
-
-#endif // end _SSENDIMAGEPROCESSDATA_H

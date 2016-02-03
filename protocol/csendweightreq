@@ -1,13 +1,9 @@
-#ifndef _CSENDWEIGHTREQ_H
-#define _CSENDWEIGHTREQ_H
-#include <string>
-#include "net_base.h"
-#include "packet_sync.h"
-#include "channel.h"
-#include "protocolid.h"
+public:
+	uint32_t* _weights;
+	uint32_t _count;
+	uint32_t* _weight_array;
+	std::string _mashal_data;
 
-class CSendWeightReq
-{
 public:
 	enum
 	{
@@ -61,22 +57,4 @@ public:
 			CharToInt32(buf + 4 + i * sizeof(uint32_t), *(_weight_array + i));
 		}
 	}
-
-	virtual void Process(const char* buf, int length, void* userdata)
-	{
-		UnMarshal(buf, length);
-		ChannelManger& manager = ChannelManager::GetInstance();
-		for(uint32_t i = 0; i < _count; ++i)
-		{
-			manager._channels[i]->AddWeight(*(_weight_array + i));
-		}
-	}
-
-public:
-	uint32_t* _weights;
-	uint32_t _count;
-	uint32_t* _weight_array;
-	std::string _mashal_data;
-};
-
-#endif
+	

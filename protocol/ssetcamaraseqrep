@@ -1,18 +1,7 @@
-#ifndef _SSETCAMARASEQREP_H
-#define _SSETCAMARASEQREP_H
+public:
+	uint32_t _result;
+	std::string _marshal_data;
 
-#include <string>
-#include "protocol.h"
-#include "protocolid.h"
-#include "net_base.h"
-#include "packet_sync.h"
-#include "pb/netmessage.pb.h"
-#include "channel.h"
-#include "tcpserver.h"
-#include "ssetcamaraseqrep.hpp"
-
-class SSetCamaraSeqRep : public Protocol
-{
 public:
 	enum
 	{
@@ -49,19 +38,3 @@ public:
 		proto.ParseFromString(std::string(buf, length));
 		_result = proto.result();
 	}
-
-	virtual void Process(const char* buf, int length, void* userdata)
-	{
-		UnMarshal(buf, length);
-		if(result != 0)
-		{
-			// TODO: error handling
-		}
-	}
-
-public:
-	uint32_t _result;
-	std::string _marshal_data;
-};
-
-#endif // end _SSETCAMARASEQREP_H

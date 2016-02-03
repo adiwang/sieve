@@ -1,14 +1,7 @@
-#ifndef _CQUERYRESULT_H
-#define _CQUERYRESULT_H
-#include <string>
-#include "protocol.h"
-#include "protocolid.h"
-#include "net_base.h"
-#include "packet_sync.h"
-#include "rediscb.h"
+public:
+	std::string _ic_card_no;
+	std::string _marshal_data;
 
-class CQueryResultReq : public Protocol
-{
 public:
 	enum
 	{
@@ -41,16 +34,3 @@ public:
 	{
 		_ic_card_no = std::string(buf, length);
 	}
-
-	virtual void Process(const char* buf, int length, void* userdata)
-	{
-		UnMarshal(buf, length);
-		if(_ic_card_no.empty()) return;
-		redisAsyncCommand(redis_context, OnGetResult, new WrapOfRedisUserdata(userdata, _ic_card_no), "GET %s", _ic_card_no.c_str());
-	}
-
-public:
-	std::string _ic_card_no;
-	std::string _marshal_data;
-};
-#endif // end _CQUERYRESULT_H
