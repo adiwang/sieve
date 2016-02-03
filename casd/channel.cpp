@@ -1,4 +1,5 @@
 #include "channel.h"
+#include "rediscb.h"
 
 // TODO: 放到一个单独的地方去定义enum
 #define WEIGHT_MASK 0x0040
@@ -72,11 +73,14 @@ void Channel::AddWeight(double weight)
 void Channel::ProcessDataFrame(FrameListIterator it)
 {
 	//TODO
-
+	
+	int result = 1;
 	// 处理完数据后释放数据帧
 	uv_mutex_lock(&lock);
 	frames.erase(it);
 	uv_mutex_unlock(&lock);
+	// 将结果存往redis
+	redisAsyncCommand(redis_context, NULL, NULL, "SET %s %d", it->ic_card_no.c_str(), result);
 }
 
 }	// end of namespace
