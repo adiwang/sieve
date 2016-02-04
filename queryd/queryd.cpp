@@ -10,9 +10,19 @@
 #include "tcpserver.h"
 #include "rediscb.h"
 #include "protocol/cqueryresultreq.hpp"
+#include "configfile.h"
 
 int main (int argc, char **argv) 
 {
+	ConfigFile& cf = ConfigFile::GetInstance();
+	if(!cf.LoadConf("queryd.conf"))
+	{
+		fprintf(stdout,"load conf error\n");
+		return 1;
+	}
+	std::string logfile = cf.Value("Global", "LogFile", "./log");
+	std::string ip = cf.Value("Gloabal", "Address", "127.0.0.1");
+
 	UVNET::TCPServer server(0x01,0x02);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "queryd", "./log");
 	server.AddProtocol(PROTOCOL_ID_CQUERYRESULTREQ, new CQueryResultReq());
