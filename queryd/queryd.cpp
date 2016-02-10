@@ -9,31 +9,39 @@
 
 #include "tcpserver.h"
 #include "rediscb.h"
-#include "protocol/cqueryresultreq.hpp"
+#include "cqueryresultreq.hpp"
 #include "configfile.h"
 
 int main (int argc, char **argv) 
 {
-	ConfigFile& cf = ConfigFile::GetInstance();
-	if(!cf.LoadConf("queryd.conf"))
+	if(argc < 2)
 	{
-		fprintf(stdout,"load conf error\n");
+		fprintf(stdout,"Usage:\n\t%s <conffile>\n", argv[0]);
+		return 1;
+	}
+	ConfigFile& cf = ConfigFile::GetInstance();
+	if(!cf.LoadConf(argv[1]))
+	{
+		LOG_ERROR("load conf file %s error", argv[1]);
 		return 1;
 	}
 	std::string logfile = cf.Value("Global", "LogFile", "./log");
 	std::string ip = cf.Value("Gloabal", "Address", "127.0.0.1");
+	std::string port = cf.Value("Global", "Port", "12345");
+	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
+	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
 
 	UVNET::TCPServer server(0x01,0x02);
-	UVNET::TCPServer::StartLog(LL_DEBUG, "queryd", "./log");
+	UVNET::TCPServer::StartLog(LL_DEBUG, "queryd", logfile.c_str());
 	server.AddProtocol(PROTOCOL_ID_CQUERYRESULTREQ, new CQueryResultReq());
-	if(!server.Start("0.0.0.0",12345)) 
+	if(!server.Start(ip.c_str(), atoi(port.c_str()))) 
 	{
 	    fprintf(stdout,"Start Server error:%s\n",server.GetLastErrMsg());
 	}
 	server.SetKeepAlive(1,60);//enable Keepalive, 60s
 	
 	signal(SIGPIPE, SIG_IGN);
-	redis_context = redisAsyncConnect("127.0.0.1", 6379);
+	redis_context = redisAsyncConnect(redis_address.c_str(), atoi(redis_port.c_str()));
 	if (redis_context->err) 
 	{
 	    printf("Error: %s\n", redis_context->errstr);

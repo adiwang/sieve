@@ -1,13 +1,13 @@
 #include "rediscb.h"
 #include "stdio.h"
-#include "protocol/squeryresultrep.hpp"
+#include "squeryresultrep.hpp"
 #include "tcpserver.h"
 #include <cstdio>
 
 void OnGetResult(redisAsyncContext *c, void *r, void *privdata)
 {
     redisReply *reply = (redisReply *)r;
-    if (reply == NULL) return;
+    if (reply == NULL || reply->str == NULL) return;
  
 	// TODO: 替换为LOG
 	printf("OnGetResult: %s\n", reply->str);
