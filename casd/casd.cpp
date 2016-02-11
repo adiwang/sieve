@@ -12,22 +12,40 @@
 #include "csetcamaraseqreq.hpp"
 #include "csendweightreq.hpp"
 #include "csendimageprocessdatareq.hpp"
+#include "configfile.h"
 
 int main (int argc, char **argv) 
 {
+	if(argc < 2)
+	{
+	    fprintf(stdout,"Usage:\n\t%s <conf_file>", argv[0]);
+	    return 1;
+	}
+	ConfigFile& cf = ConfigFile::GetInstance();
+	if(!cf.LoadConf(argv[1]))
+	{
+		fprintf(stdout,"load conf file %s error", argv[1]);
+		return 2;
+	}
+	std::string logfile = cf.Value("Global", "LogFile", "./log");
+	std::string ip = cf.Value("Gloabal", "Address", "127.0.0.1");
+	std::string port = cf.Value("Global", "Port", "12345");
+	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
+	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
+
 	UVNET::TCPServer server(0x01,0x02);
-	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", "./log");
+	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
 	server.AddProtocol(PROTOCOL_ID_CSETCAMARASEQREQ, new CSetCamaraSeqReq());
 	server.AddProtocol(PROTOCOL_ID_CSENDWEIGHTREQ, new CSendWeightReq());
 	server.AddProtocol(PROTOCOL_ID_CSENDIMAGEPROCESSDATAREQ, new CSendImageProcessDataReq());
-	if(!server.Start("0.0.0.0",12345)) 
+	if(!server.Start(ip.c_str(), atoi(port.c_str()))) 
 	{
 	    fprintf(stdout,"Start Server error:%s\n",server.GetLastErrMsg());
 	}
 	server.SetKeepAlive(1,60);//enable Keepalive, 60s
 	
 	signal(SIGPIPE, SIG_IGN);
-	redis_context = redisAsyncConnect("127.0.0.1", 6379);
+	redis_context = redisAsyncConnect(redis_address.c_str(), atoi(redis_port.c_str()));
 	if (redis_context->err) 
 	{
 	    printf("Error: %s\n", redis_context->errstr);

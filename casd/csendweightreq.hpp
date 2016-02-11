@@ -6,14 +6,14 @@
 #include "channel.h"
 #include "protocolid.h"
 
-class CSendWeightReq
+class CSendWeightReq : public Protocol
 {
 	#include "protocol/csendweightreq"
 
 	virtual void Process(const char* buf, int length, void* userdata)
 	{
 		UnMarshal(buf, length);
-		ChannelManger& manager = ChannelManager::GetInstance();
+		CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 		for(uint32_t i = 0; i < _count; ++i)
 		{
 			manager._channels[i]->AddWeight(*(_weight_array + i));

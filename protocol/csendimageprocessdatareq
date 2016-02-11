@@ -49,7 +49,7 @@ public:
 		CSendImageProcessDataReqProto proto;
 		proto.ParseFromString(std::string(buf, length));
 		_ic_card_no = proto.ic_card_no();
-		_image_seq = proto._image_seq();
+		_image_seq = proto.image_seq();
 		_x = proto.x();
 		_y = proto.y();
 		_data = proto.data();

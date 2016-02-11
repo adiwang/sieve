@@ -22,7 +22,7 @@ int main (int argc, char **argv)
 	ConfigFile& cf = ConfigFile::GetInstance();
 	if(!cf.LoadConf(argv[1]))
 	{
-		LOG_ERROR("load conf file %s error", argv[1]);
+		fprintf(stdout,"load conf file %s error", argv[1]);
 		return 1;
 	}
 	std::string logfile = cf.Value("Global", "LogFile", "./log");

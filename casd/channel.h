@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
 #include "uv.h"
 
 namespace CASD
@@ -61,11 +62,11 @@ public:
 	typedef std::list<ObjectDataFrame> FrameList;
 	typedef std::list<ObjectDataFrame>::iterator FrameListIterator;
 
-	ChannelData(){}
-	~ChannelData(){}
+	Channel(){}
+	~Channel(){}
 
 public:
-	void AddImageData(std::string ic_card_no, int image_seq, int x, int y, char *data, int data_len);
+	void AddImageData(std::string ic_card_no, int image_seq, int x, int y, const char *data, int data_len);
 	void AddWeight(double weight);
 
 private:
@@ -85,7 +86,7 @@ public:
 
 	~ChannelManager() 
 	{
-		for(ChannelMapIterator it = _channels.begin(); it != _channel.end(); ++it)
+		for(ChannelMapIterator it = _channels.begin(); it != _channels.end(); ++it)
 		{
 			if(it->second)
 			{
@@ -94,7 +95,7 @@ public:
 		}
 		_channels.clear();
 	}
-	static ChannelManger& GetInstance() 
+	static ChannelManager& GetInstance() 
 	{ 
 		static ChannelManager instance; 
 		return instance;  

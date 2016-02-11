@@ -13,7 +13,7 @@ namespace CASD
 **	@image_seq: 图片序列号，指明是哪幅图片
 **  @x, y, data, data_len: 图像数据，根据需要修改
 */
-void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, char *data, int data_len)
+void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, const char *data, int data_len)
 {
 	if(image_seq < 0 || image_seq > 5) return;
 	uv_mutex_lock(&lock);
@@ -64,7 +64,7 @@ void Channel::AddWeight(double weight)
 	// 遍历一遍未找到相应数据帧和空闲帧，需要添加新的帧
 	ObjectDataFrame data_frame;
 	data_frame.weight = weight;
-	data_fram.mask | = WEIGHT_MASK;
+	data_frame.mask |= WEIGHT_MASK;
 	frames.push_back(data_frame);
 	uv_mutex_unlock(&lock);
 

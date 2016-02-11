@@ -37,6 +37,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* SSetCamaraSeqRepProto_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   SSetCamaraSeqRepProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* CSendImageProcessDataReqProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  CSendImageProcessDataReqProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* SSendImageProcessDataRepProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  SSendImageProcessDataRepProto_reflection_ = NULL;
 
 }  // namespace
 
@@ -142,6 +148,42 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       sizeof(SSetCamaraSeqRepProto),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSetCamaraSeqRepProto, _internal_metadata_),
       -1);
+  CSendImageProcessDataReqProto_descriptor_ = file->message_type(6);
+  static const int CSendImageProcessDataReqProto_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, ic_card_no_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, image_seq_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, y_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, data_),
+  };
+  CSendImageProcessDataReqProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      CSendImageProcessDataReqProto_descriptor_,
+      CSendImageProcessDataReqProto::default_instance_,
+      CSendImageProcessDataReqProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(CSendImageProcessDataReqProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CSendImageProcessDataReqProto, _internal_metadata_),
+      -1);
+  SSendImageProcessDataRepProto_descriptor_ = file->message_type(7);
+  static const int SSendImageProcessDataRepProto_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSendImageProcessDataRepProto, ic_card_no_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSendImageProcessDataRepProto, image_seq_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSendImageProcessDataRepProto, result_),
+  };
+  SSendImageProcessDataRepProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      SSendImageProcessDataRepProto_descriptor_,
+      SSendImageProcessDataRepProto::default_instance_,
+      SSendImageProcessDataRepProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSendImageProcessDataRepProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(SSendImageProcessDataRepProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSendImageProcessDataRepProto, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -166,6 +208,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
       CSetCamaraSeqReqProto_descriptor_, &CSetCamaraSeqReqProto::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       SSetCamaraSeqRepProto_descriptor_, &SSetCamaraSeqRepProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      CSendImageProcessDataReqProto_descriptor_, &CSendImageProcessDataReqProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      SSendImageProcessDataRepProto_descriptor_, &SSendImageProcessDataRepProto::default_instance());
 }
 
 }  // namespace
@@ -183,6 +229,10 @@ void protobuf_ShutdownFile_netmessage_2eproto() {
   delete CSetCamaraSeqReqProto_reflection_;
   delete SSetCamaraSeqRepProto::default_instance_;
   delete SSetCamaraSeqRepProto_reflection_;
+  delete CSendImageProcessDataReqProto::default_instance_;
+  delete CSendImageProcessDataReqProto_reflection_;
+  delete SSendImageProcessDataRepProto::default_instance_;
+  delete SSendImageProcessDataRepProto_reflection_;
 }
 
 void protobuf_AddDesc_netmessage_2eproto() {
@@ -197,7 +247,12 @@ void protobuf_AddDesc_netmessage_2eproto() {
     "\002(\003\022\t\n\001c\030\003 \002(\t\"&\n\003CP2\022\t\n\001a\030\001 \002(\t\022\t\n\001b\030\002 "
     "\002(\t\022\t\n\001c\030\003 \002(\003\"\031\n\tEchoProto\022\014\n\004data\030\001 \002("
     "\t\"$\n\025CSetCamaraSeqReqProto\022\013\n\003seq\030\001 \002(\r\""
-    "\'\n\025SSetCamaraSeqRepProto\022\016\n\006result\030\001 \002(\r", 240);
+    "\'\n\025SSetCamaraSeqRepProto\022\016\n\006result\030\001 \002(\r"
+    "\"j\n\035CSendImageProcessDataReqProto\022\022\n\nic_"
+    "card_no\030\001 \002(\t\022\021\n\timage_seq\030\002 \002(\005\022\t\n\001x\030\003 "
+    "\002(\005\022\t\n\001y\030\004 \002(\005\022\014\n\004data\030\005 \002(\014\"V\n\035SSendIma"
+    "geProcessDataRepProto\022\022\n\nic_card_no\030\001 \002("
+    "\t\022\021\n\timage_seq\030\002 \002(\005\022\016\n\006result\030\003 \002(\005", 436);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
   CProto::default_instance_ = new CProto();
@@ -206,12 +261,16 @@ void protobuf_AddDesc_netmessage_2eproto() {
   EchoProto::default_instance_ = new EchoProto();
   CSetCamaraSeqReqProto::default_instance_ = new CSetCamaraSeqReqProto();
   SSetCamaraSeqRepProto::default_instance_ = new SSetCamaraSeqRepProto();
+  CSendImageProcessDataReqProto::default_instance_ = new CSendImageProcessDataReqProto();
+  SSendImageProcessDataRepProto::default_instance_ = new SSendImageProcessDataRepProto();
   CProto::default_instance_->InitAsDefaultInstance();
   CP1::default_instance_->InitAsDefaultInstance();
   CP2::default_instance_->InitAsDefaultInstance();
   EchoProto::default_instance_->InitAsDefaultInstance();
   CSetCamaraSeqReqProto::default_instance_->InitAsDefaultInstance();
   SSetCamaraSeqRepProto::default_instance_->InitAsDefaultInstance();
+  CSendImageProcessDataReqProto::default_instance_->InitAsDefaultInstance();
+  SSendImageProcessDataRepProto::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_netmessage_2eproto);
 }
 
@@ -2407,6 +2466,1116 @@ void SSetCamaraSeqRepProto::clear_result() {
   set_has_result();
   result_ = value;
   // @@protoc_insertion_point(field_set:SSetCamaraSeqRepProto.result)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CSendImageProcessDataReqProto::kIcCardNoFieldNumber;
+const int CSendImageProcessDataReqProto::kImageSeqFieldNumber;
+const int CSendImageProcessDataReqProto::kXFieldNumber;
+const int CSendImageProcessDataReqProto::kYFieldNumber;
+const int CSendImageProcessDataReqProto::kDataFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CSendImageProcessDataReqProto::CSendImageProcessDataReqProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:CSendImageProcessDataReqProto)
+}
+
+void CSendImageProcessDataReqProto::InitAsDefaultInstance() {
+}
+
+CSendImageProcessDataReqProto::CSendImageProcessDataReqProto(const CSendImageProcessDataReqProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:CSendImageProcessDataReqProto)
+}
+
+void CSendImageProcessDataReqProto::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  ic_card_no_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  image_seq_ = 0;
+  x_ = 0;
+  y_ = 0;
+  data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+CSendImageProcessDataReqProto::~CSendImageProcessDataReqProto() {
+  // @@protoc_insertion_point(destructor:CSendImageProcessDataReqProto)
+  SharedDtor();
+}
+
+void CSendImageProcessDataReqProto::SharedDtor() {
+  ic_card_no_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  data_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != default_instance_) {
+  }
+}
+
+void CSendImageProcessDataReqProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CSendImageProcessDataReqProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CSendImageProcessDataReqProto_descriptor_;
+}
+
+const CSendImageProcessDataReqProto& CSendImageProcessDataReqProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+CSendImageProcessDataReqProto* CSendImageProcessDataReqProto::default_instance_ = NULL;
+
+CSendImageProcessDataReqProto* CSendImageProcessDataReqProto::New(::google::protobuf::Arena* arena) const {
+  CSendImageProcessDataReqProto* n = new CSendImageProcessDataReqProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void CSendImageProcessDataReqProto::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<CSendImageProcessDataReqProto*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 31u) {
+    ZR_(image_seq_, x_);
+    if (has_ic_card_no()) {
+      ic_card_no_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    y_ = 0;
+    if (has_data()) {
+      data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+  }
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool CSendImageProcessDataReqProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:CSendImageProcessDataReqProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string ic_card_no = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_ic_card_no()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->ic_card_no().data(), this->ic_card_no().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "CSendImageProcessDataReqProto.ic_card_no");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_image_seq;
+        break;
+      }
+
+      // required int32 image_seq = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_image_seq:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &image_seq_)));
+          set_has_image_seq();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_x;
+        break;
+      }
+
+      // required int32 x = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_x:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &x_)));
+          set_has_x();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_y;
+        break;
+      }
+
+      // required int32 y = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_y:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &y_)));
+          set_has_y();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_data;
+        break;
+      }
+
+      // required bytes data = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_data:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_data()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:CSendImageProcessDataReqProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:CSendImageProcessDataReqProto)
+  return false;
+#undef DO_
+}
+
+void CSendImageProcessDataReqProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:CSendImageProcessDataReqProto)
+  // required string ic_card_no = 1;
+  if (has_ic_card_no()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->ic_card_no().data(), this->ic_card_no().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "CSendImageProcessDataReqProto.ic_card_no");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->ic_card_no(), output);
+  }
+
+  // required int32 image_seq = 2;
+  if (has_image_seq()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->image_seq(), output);
+  }
+
+  // required int32 x = 3;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->x(), output);
+  }
+
+  // required int32 y = 4;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->y(), output);
+  }
+
+  // required bytes data = 5;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      5, this->data(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:CSendImageProcessDataReqProto)
+}
+
+::google::protobuf::uint8* CSendImageProcessDataReqProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:CSendImageProcessDataReqProto)
+  // required string ic_card_no = 1;
+  if (has_ic_card_no()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->ic_card_no().data(), this->ic_card_no().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "CSendImageProcessDataReqProto.ic_card_no");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->ic_card_no(), target);
+  }
+
+  // required int32 image_seq = 2;
+  if (has_image_seq()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->image_seq(), target);
+  }
+
+  // required int32 x = 3;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->x(), target);
+  }
+
+  // required int32 y = 4;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->y(), target);
+  }
+
+  // required bytes data = 5;
+  if (has_data()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        5, this->data(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:CSendImageProcessDataReqProto)
+  return target;
+}
+
+int CSendImageProcessDataReqProto::RequiredFieldsByteSizeFallback() const {
+  int total_size = 0;
+
+  if (has_ic_card_no()) {
+    // required string ic_card_no = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->ic_card_no());
+  }
+
+  if (has_image_seq()) {
+    // required int32 image_seq = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->image_seq());
+  }
+
+  if (has_x()) {
+    // required int32 x = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->x());
+  }
+
+  if (has_y()) {
+    // required int32 y = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->y());
+  }
+
+  if (has_data()) {
+    // required bytes data = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->data());
+  }
+
+  return total_size;
+}
+int CSendImageProcessDataReqProto::ByteSize() const {
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
+    // required string ic_card_no = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->ic_card_no());
+
+    // required int32 image_seq = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->image_seq());
+
+    // required int32 x = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->x());
+
+    // required int32 y = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->y());
+
+    // required bytes data = 5;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->data());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CSendImageProcessDataReqProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const CSendImageProcessDataReqProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const CSendImageProcessDataReqProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void CSendImageProcessDataReqProto::MergeFrom(const CSendImageProcessDataReqProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ic_card_no()) {
+      set_has_ic_card_no();
+      ic_card_no_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ic_card_no_);
+    }
+    if (from.has_image_seq()) {
+      set_image_seq(from.image_seq());
+    }
+    if (from.has_x()) {
+      set_x(from.x());
+    }
+    if (from.has_y()) {
+      set_y(from.y());
+    }
+    if (from.has_data()) {
+      set_has_data();
+      data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void CSendImageProcessDataReqProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CSendImageProcessDataReqProto::CopyFrom(const CSendImageProcessDataReqProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CSendImageProcessDataReqProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
+  return true;
+}
+
+void CSendImageProcessDataReqProto::Swap(CSendImageProcessDataReqProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CSendImageProcessDataReqProto::InternalSwap(CSendImageProcessDataReqProto* other) {
+  ic_card_no_.Swap(&other->ic_card_no_);
+  std::swap(image_seq_, other->image_seq_);
+  std::swap(x_, other->x_);
+  std::swap(y_, other->y_);
+  data_.Swap(&other->data_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata CSendImageProcessDataReqProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = CSendImageProcessDataReqProto_descriptor_;
+  metadata.reflection = CSendImageProcessDataReqProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// CSendImageProcessDataReqProto
+
+// required string ic_card_no = 1;
+bool CSendImageProcessDataReqProto::has_ic_card_no() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void CSendImageProcessDataReqProto::set_has_ic_card_no() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void CSendImageProcessDataReqProto::clear_has_ic_card_no() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void CSendImageProcessDataReqProto::clear_ic_card_no() {
+  ic_card_no_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_ic_card_no();
+}
+ const ::std::string& CSendImageProcessDataReqProto::ic_card_no() const {
+  // @@protoc_insertion_point(field_get:CSendImageProcessDataReqProto.ic_card_no)
+  return ic_card_no_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CSendImageProcessDataReqProto::set_ic_card_no(const ::std::string& value) {
+  set_has_ic_card_no();
+  ic_card_no_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:CSendImageProcessDataReqProto.ic_card_no)
+}
+ void CSendImageProcessDataReqProto::set_ic_card_no(const char* value) {
+  set_has_ic_card_no();
+  ic_card_no_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:CSendImageProcessDataReqProto.ic_card_no)
+}
+ void CSendImageProcessDataReqProto::set_ic_card_no(const char* value, size_t size) {
+  set_has_ic_card_no();
+  ic_card_no_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:CSendImageProcessDataReqProto.ic_card_no)
+}
+ ::std::string* CSendImageProcessDataReqProto::mutable_ic_card_no() {
+  set_has_ic_card_no();
+  // @@protoc_insertion_point(field_mutable:CSendImageProcessDataReqProto.ic_card_no)
+  return ic_card_no_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CSendImageProcessDataReqProto::release_ic_card_no() {
+  clear_has_ic_card_no();
+  return ic_card_no_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CSendImageProcessDataReqProto::set_allocated_ic_card_no(::std::string* ic_card_no) {
+  if (ic_card_no != NULL) {
+    set_has_ic_card_no();
+  } else {
+    clear_has_ic_card_no();
+  }
+  ic_card_no_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ic_card_no);
+  // @@protoc_insertion_point(field_set_allocated:CSendImageProcessDataReqProto.ic_card_no)
+}
+
+// required int32 image_seq = 2;
+bool CSendImageProcessDataReqProto::has_image_seq() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void CSendImageProcessDataReqProto::set_has_image_seq() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void CSendImageProcessDataReqProto::clear_has_image_seq() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void CSendImageProcessDataReqProto::clear_image_seq() {
+  image_seq_ = 0;
+  clear_has_image_seq();
+}
+ ::google::protobuf::int32 CSendImageProcessDataReqProto::image_seq() const {
+  // @@protoc_insertion_point(field_get:CSendImageProcessDataReqProto.image_seq)
+  return image_seq_;
+}
+ void CSendImageProcessDataReqProto::set_image_seq(::google::protobuf::int32 value) {
+  set_has_image_seq();
+  image_seq_ = value;
+  // @@protoc_insertion_point(field_set:CSendImageProcessDataReqProto.image_seq)
+}
+
+// required int32 x = 3;
+bool CSendImageProcessDataReqProto::has_x() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void CSendImageProcessDataReqProto::set_has_x() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void CSendImageProcessDataReqProto::clear_has_x() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void CSendImageProcessDataReqProto::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+ ::google::protobuf::int32 CSendImageProcessDataReqProto::x() const {
+  // @@protoc_insertion_point(field_get:CSendImageProcessDataReqProto.x)
+  return x_;
+}
+ void CSendImageProcessDataReqProto::set_x(::google::protobuf::int32 value) {
+  set_has_x();
+  x_ = value;
+  // @@protoc_insertion_point(field_set:CSendImageProcessDataReqProto.x)
+}
+
+// required int32 y = 4;
+bool CSendImageProcessDataReqProto::has_y() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void CSendImageProcessDataReqProto::set_has_y() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void CSendImageProcessDataReqProto::clear_has_y() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void CSendImageProcessDataReqProto::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+ ::google::protobuf::int32 CSendImageProcessDataReqProto::y() const {
+  // @@protoc_insertion_point(field_get:CSendImageProcessDataReqProto.y)
+  return y_;
+}
+ void CSendImageProcessDataReqProto::set_y(::google::protobuf::int32 value) {
+  set_has_y();
+  y_ = value;
+  // @@protoc_insertion_point(field_set:CSendImageProcessDataReqProto.y)
+}
+
+// required bytes data = 5;
+bool CSendImageProcessDataReqProto::has_data() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void CSendImageProcessDataReqProto::set_has_data() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void CSendImageProcessDataReqProto::clear_has_data() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void CSendImageProcessDataReqProto::clear_data() {
+  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_data();
+}
+ const ::std::string& CSendImageProcessDataReqProto::data() const {
+  // @@protoc_insertion_point(field_get:CSendImageProcessDataReqProto.data)
+  return data_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CSendImageProcessDataReqProto::set_data(const ::std::string& value) {
+  set_has_data();
+  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:CSendImageProcessDataReqProto.data)
+}
+ void CSendImageProcessDataReqProto::set_data(const char* value) {
+  set_has_data();
+  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:CSendImageProcessDataReqProto.data)
+}
+ void CSendImageProcessDataReqProto::set_data(const void* value, size_t size) {
+  set_has_data();
+  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:CSendImageProcessDataReqProto.data)
+}
+ ::std::string* CSendImageProcessDataReqProto::mutable_data() {
+  set_has_data();
+  // @@protoc_insertion_point(field_mutable:CSendImageProcessDataReqProto.data)
+  return data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CSendImageProcessDataReqProto::release_data() {
+  clear_has_data();
+  return data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CSendImageProcessDataReqProto::set_allocated_data(::std::string* data) {
+  if (data != NULL) {
+    set_has_data();
+  } else {
+    clear_has_data();
+  }
+  data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
+  // @@protoc_insertion_point(field_set_allocated:CSendImageProcessDataReqProto.data)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SSendImageProcessDataRepProto::kIcCardNoFieldNumber;
+const int SSendImageProcessDataRepProto::kImageSeqFieldNumber;
+const int SSendImageProcessDataRepProto::kResultFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+SSendImageProcessDataRepProto::SSendImageProcessDataRepProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:SSendImageProcessDataRepProto)
+}
+
+void SSendImageProcessDataRepProto::InitAsDefaultInstance() {
+}
+
+SSendImageProcessDataRepProto::SSendImageProcessDataRepProto(const SSendImageProcessDataRepProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SSendImageProcessDataRepProto)
+}
+
+void SSendImageProcessDataRepProto::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  ic_card_no_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  image_seq_ = 0;
+  result_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SSendImageProcessDataRepProto::~SSendImageProcessDataRepProto() {
+  // @@protoc_insertion_point(destructor:SSendImageProcessDataRepProto)
+  SharedDtor();
+}
+
+void SSendImageProcessDataRepProto::SharedDtor() {
+  ic_card_no_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != default_instance_) {
+  }
+}
+
+void SSendImageProcessDataRepProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SSendImageProcessDataRepProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SSendImageProcessDataRepProto_descriptor_;
+}
+
+const SSendImageProcessDataRepProto& SSendImageProcessDataRepProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+SSendImageProcessDataRepProto* SSendImageProcessDataRepProto::default_instance_ = NULL;
+
+SSendImageProcessDataRepProto* SSendImageProcessDataRepProto::New(::google::protobuf::Arena* arena) const {
+  SSendImageProcessDataRepProto* n = new SSendImageProcessDataRepProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void SSendImageProcessDataRepProto::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<SSendImageProcessDataRepProto*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  if (_has_bits_[0 / 32] & 7u) {
+    ZR_(image_seq_, result_);
+    if (has_ic_card_no()) {
+      ic_card_no_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+  }
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool SSendImageProcessDataRepProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:SSendImageProcessDataRepProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string ic_card_no = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_ic_card_no()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->ic_card_no().data(), this->ic_card_no().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "SSendImageProcessDataRepProto.ic_card_no");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_image_seq;
+        break;
+      }
+
+      // required int32 image_seq = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_image_seq:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &image_seq_)));
+          set_has_image_seq();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_result;
+        break;
+      }
+
+      // required int32 result = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_result:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &result_)));
+          set_has_result();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:SSendImageProcessDataRepProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SSendImageProcessDataRepProto)
+  return false;
+#undef DO_
+}
+
+void SSendImageProcessDataRepProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SSendImageProcessDataRepProto)
+  // required string ic_card_no = 1;
+  if (has_ic_card_no()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->ic_card_no().data(), this->ic_card_no().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SSendImageProcessDataRepProto.ic_card_no");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->ic_card_no(), output);
+  }
+
+  // required int32 image_seq = 2;
+  if (has_image_seq()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->image_seq(), output);
+  }
+
+  // required int32 result = 3;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->result(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:SSendImageProcessDataRepProto)
+}
+
+::google::protobuf::uint8* SSendImageProcessDataRepProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SSendImageProcessDataRepProto)
+  // required string ic_card_no = 1;
+  if (has_ic_card_no()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->ic_card_no().data(), this->ic_card_no().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "SSendImageProcessDataRepProto.ic_card_no");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->ic_card_no(), target);
+  }
+
+  // required int32 image_seq = 2;
+  if (has_image_seq()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->image_seq(), target);
+  }
+
+  // required int32 result = 3;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->result(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:SSendImageProcessDataRepProto)
+  return target;
+}
+
+int SSendImageProcessDataRepProto::RequiredFieldsByteSizeFallback() const {
+  int total_size = 0;
+
+  if (has_ic_card_no()) {
+    // required string ic_card_no = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->ic_card_no());
+  }
+
+  if (has_image_seq()) {
+    // required int32 image_seq = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->image_seq());
+  }
+
+  if (has_result()) {
+    // required int32 result = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->result());
+  }
+
+  return total_size;
+}
+int SSendImageProcessDataRepProto::ByteSize() const {
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
+    // required string ic_card_no = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->ic_card_no());
+
+    // required int32 image_seq = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->image_seq());
+
+    // required int32 result = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->result());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SSendImageProcessDataRepProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const SSendImageProcessDataRepProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const SSendImageProcessDataRepProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SSendImageProcessDataRepProto::MergeFrom(const SSendImageProcessDataRepProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ic_card_no()) {
+      set_has_ic_card_no();
+      ic_card_no_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ic_card_no_);
+    }
+    if (from.has_image_seq()) {
+      set_image_seq(from.image_seq());
+    }
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void SSendImageProcessDataRepProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SSendImageProcessDataRepProto::CopyFrom(const SSendImageProcessDataRepProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SSendImageProcessDataRepProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void SSendImageProcessDataRepProto::Swap(SSendImageProcessDataRepProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void SSendImageProcessDataRepProto::InternalSwap(SSendImageProcessDataRepProto* other) {
+  ic_card_no_.Swap(&other->ic_card_no_);
+  std::swap(image_seq_, other->image_seq_);
+  std::swap(result_, other->result_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata SSendImageProcessDataRepProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SSendImageProcessDataRepProto_descriptor_;
+  metadata.reflection = SSendImageProcessDataRepProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// SSendImageProcessDataRepProto
+
+// required string ic_card_no = 1;
+bool SSendImageProcessDataRepProto::has_ic_card_no() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void SSendImageProcessDataRepProto::set_has_ic_card_no() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void SSendImageProcessDataRepProto::clear_has_ic_card_no() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void SSendImageProcessDataRepProto::clear_ic_card_no() {
+  ic_card_no_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_ic_card_no();
+}
+ const ::std::string& SSendImageProcessDataRepProto::ic_card_no() const {
+  // @@protoc_insertion_point(field_get:SSendImageProcessDataRepProto.ic_card_no)
+  return ic_card_no_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void SSendImageProcessDataRepProto::set_ic_card_no(const ::std::string& value) {
+  set_has_ic_card_no();
+  ic_card_no_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SSendImageProcessDataRepProto.ic_card_no)
+}
+ void SSendImageProcessDataRepProto::set_ic_card_no(const char* value) {
+  set_has_ic_card_no();
+  ic_card_no_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SSendImageProcessDataRepProto.ic_card_no)
+}
+ void SSendImageProcessDataRepProto::set_ic_card_no(const char* value, size_t size) {
+  set_has_ic_card_no();
+  ic_card_no_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SSendImageProcessDataRepProto.ic_card_no)
+}
+ ::std::string* SSendImageProcessDataRepProto::mutable_ic_card_no() {
+  set_has_ic_card_no();
+  // @@protoc_insertion_point(field_mutable:SSendImageProcessDataRepProto.ic_card_no)
+  return ic_card_no_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* SSendImageProcessDataRepProto::release_ic_card_no() {
+  clear_has_ic_card_no();
+  return ic_card_no_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void SSendImageProcessDataRepProto::set_allocated_ic_card_no(::std::string* ic_card_no) {
+  if (ic_card_no != NULL) {
+    set_has_ic_card_no();
+  } else {
+    clear_has_ic_card_no();
+  }
+  ic_card_no_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ic_card_no);
+  // @@protoc_insertion_point(field_set_allocated:SSendImageProcessDataRepProto.ic_card_no)
+}
+
+// required int32 image_seq = 2;
+bool SSendImageProcessDataRepProto::has_image_seq() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void SSendImageProcessDataRepProto::set_has_image_seq() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void SSendImageProcessDataRepProto::clear_has_image_seq() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void SSendImageProcessDataRepProto::clear_image_seq() {
+  image_seq_ = 0;
+  clear_has_image_seq();
+}
+ ::google::protobuf::int32 SSendImageProcessDataRepProto::image_seq() const {
+  // @@protoc_insertion_point(field_get:SSendImageProcessDataRepProto.image_seq)
+  return image_seq_;
+}
+ void SSendImageProcessDataRepProto::set_image_seq(::google::protobuf::int32 value) {
+  set_has_image_seq();
+  image_seq_ = value;
+  // @@protoc_insertion_point(field_set:SSendImageProcessDataRepProto.image_seq)
+}
+
+// required int32 result = 3;
+bool SSendImageProcessDataRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void SSendImageProcessDataRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void SSendImageProcessDataRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void SSendImageProcessDataRepProto::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+ ::google::protobuf::int32 SSendImageProcessDataRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SSendImageProcessDataRepProto.result)
+  return result_;
+}
+ void SSendImageProcessDataRepProto::set_result(::google::protobuf::int32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SSendImageProcessDataRepProto.result)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

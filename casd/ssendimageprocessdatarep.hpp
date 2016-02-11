@@ -8,7 +8,6 @@
 #include "pb/netmessage.pb.h"
 #include "channel.h"
 #include "tcpserver.h"
-#include "ssendimageprocessdatarep.h"
 
 
 class SSendImageProcessDataRep : public Protocol

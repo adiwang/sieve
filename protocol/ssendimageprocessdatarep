@@ -42,6 +42,6 @@ public:
 		SSendImageProcessDataRepProto proto;
 		proto.ParseFromString(std::string(buf, length));
 		_ic_card_no = proto.ic_card_no();
-		_image_seq = proto._image_seq();
-		_result = proto._result();
+		_image_seq = proto.image_seq();
+		_result = proto.result();
 	}
