@@ -8,7 +8,7 @@
 #include "pb/netmessage.pb.h"
 #include "channel.h"
 #include "tcpserver.h"
-#include "ssendimageprocessdatarep.h"
+#include "ssendimageprocessdatarep.hpp"
 
 
 class CSendImageProcessDataReq : public Protocol
@@ -22,7 +22,7 @@ class CSendImageProcessDataReq : public Protocol
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 		SSendImageProcessDataRep rep(_ic_card_no, _image_seq, 0);
 		
-		ChannelManager& manager = ChannelManager::GetInstance();
+		CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 		std::map<int, uint32_t>::iterator it = manager._sid2seq.find(ctx->sid);
 		if(it == manager._sid2seq.end())
 		{
@@ -32,7 +32,7 @@ class CSendImageProcessDataReq : public Protocol
 			server->_send(_marshal_data, ctx);
 			return;
 		}
-		ChannelManager::ChannelMapIterator cit = manager._channels.find(it->second);
+		CASD::ChannelManager::ChannelMapIterator cit = manager._channels.find(it->second);
 		if(cit == manager._channels.end())
 		{
 			// 未找到相应的通道，发送错误协议，并返回
@@ -41,7 +41,7 @@ class CSendImageProcessDataReq : public Protocol
 			server->_send(_marshal_data, ctx);
 			return;
 		}
-		Channel* channel = cit->second;
+		CASD::Channel* channel = cit->second;
 		channel->AddImageData(_ic_card_no, _image_seq, _x, _y, _data.c_str(), _data.size());
 		
 		rep.Marshal();

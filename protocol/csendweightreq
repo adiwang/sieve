@@ -2,7 +2,7 @@ public:
 	uint32_t* _weights;
 	uint32_t _count;
 	uint32_t* _weight_array;
-	std::string _mashal_data;
+	std::string _marshal_data;
 
 public:
 	enum
@@ -12,7 +12,7 @@ public:
 
 	CSendWeightReq() : _weights(NULL), _count(0), _weight_array(NULL) {}
 
-	CSendWeight(uint32_t* weights, uint32_t count) : _weights(weights), _count(count), _weight_array(NULL) {}
+	CSendWeightReq(uint32_t* weights, uint32_t count) : _weights(weights), _count(count), _weight_array(NULL) {}
 	
 	virtual ~CSendWeightReq() 
 	{
@@ -31,7 +31,7 @@ public:
 		char * data = (char *)malloc(data_size);
 		Int32ToChar(proto_id, data);
 		Int32ToChar(_count, data + 4);
-		for(uint32_t i = 0; i < _count, ++i)
+		for(uint32_t i = 0; i < _count; ++i)
 		{
 			Int32ToChar(*(_weights + i), data + 8 + i * 4);
 		}
