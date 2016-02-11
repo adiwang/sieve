@@ -21,3 +21,5 @@ queryd/queryd
 *.deps
 queryd/log/
 queryd/querydclient
+casd/casd
+casd/log/
