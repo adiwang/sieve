@@ -7,6 +7,10 @@
 namespace CASD
 {
 
+int Channel::ObjectDataFrame::pic_num = 0;
+unsigned short Channel::ObjectDataFrame::finish_mask = 0;
+int ChannelManager::_top_camara_num = 0;
+
 /**
 **	添加图片处理数据
 **  @ic_card_no: ic卡编码
@@ -15,19 +19,19 @@ namespace CASD
 */
 void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, const char *data, int data_len)
 {
-	if(image_seq < 0 || image_seq > 5) return;
+	if(image_seq < 0 || image_seq > 6) return;
 	uv_mutex_lock(&lock);
 	for(FrameListIterator it = frames.begin(); it != frames.end(); ++it)
 	{
 		// 如果该帧数据已设置过，则寻找下一帧未设置的数据
-		if(it->mask & (1 << image_seq)) continue;
-		if(it->ic_card_no.compare(ic_card_no) == 0)
+		if((*it)->mask & (1 << image_seq)) continue;
+		if((*it)->ic_card_no.compare(ic_card_no) == 0)
 		{
 			// ic编码为空说明该数据帧可用
-			it->ic_card_no = ic_card_no;
-			it->pics[image_seq].SetData(x, y, data, data_len);
-			it->mask |= (1 << image_seq);
-			if(it->isFinish())
+			(*it)->ic_card_no = ic_card_no;
+			(*it)->pics[image_seq].SetData(x, y, data, data_len);
+			(*it)->mask |= (1 << image_seq);
+			if((*it)->IsFinish())
 			{
 				uv_mutex_unlock(&lock);
 				ProcessDataFrame(it);
@@ -36,25 +40,26 @@ void Channel::AddImageData(std::string ic_card_no, int image_seq, int x, int y, 
 		}
 	}
 	// 遍历一遍未找到相应数据帧和空闲帧，需要添加新的帧
-	ObjectDataFrame data_frame;
-	data_frame.ic_card_no = ic_card_no;
-	data_frame.pics[image_seq].SetData(x, y, data, data_len);
-	data_frame.mask |= (1 << image_seq);
+	ObjectDataFrame* data_frame = new ObjectDataFrame();
+	data_frame->Init();
+	data_frame->ic_card_no = ic_card_no;
+	data_frame->pics[image_seq].SetData(x, y, data, data_len);
+	data_frame->mask |= (1 << image_seq);
 	frames.push_back(data_frame);
 	uv_mutex_unlock(&lock);
 }
 
-void Channel::AddWeight(double weight)
+void Channel::AddWeight(int weight)
 {
 	uv_mutex_lock(&lock);
 	for(FrameListIterator it = frames.begin(); it != frames.end(); ++it)
 	{
 		// 如果该帧数据已设置过，则寻找下一帧未设置的数据
-		if(it->mask & WEIGHT_MASK) continue;
-		it->weight = weight;
-		it->mask |= WEIGHT_MASK;
+		if((*it)->mask & WEIGHT_MASK) continue;
+		(*it)->weight = weight;
+		(*it)->mask |= WEIGHT_MASK;
 		uv_mutex_unlock(&lock);
-		if(it->isFinish())
+		if((*it)->IsFinish())
 		{
 			uv_mutex_unlock(&lock);
 			ProcessDataFrame(it);
@@ -62,9 +67,10 @@ void Channel::AddWeight(double weight)
 		return;
 	}
 	// 遍历一遍未找到相应数据帧和空闲帧，需要添加新的帧
-	ObjectDataFrame data_frame;
-	data_frame.weight = weight;
-	data_frame.mask |= WEIGHT_MASK;
+	ObjectDataFrame* data_frame = new ObjectDataFrame(7);
+	data_frame->Init();
+	data_frame->weight = weight;
+	data_frame->mask |= WEIGHT_MASK;
 	frames.push_back(data_frame);
 	uv_mutex_unlock(&lock);
 
@@ -77,6 +83,7 @@ void Channel::ProcessDataFrame(FrameListIterator it)
 	int result = 1;
 	// 处理完数据后释放数据帧
 	uv_mutex_lock(&lock);
+	delete *it;
 	frames.erase(it);
 	uv_mutex_unlock(&lock);
 	// 将结果存往redis

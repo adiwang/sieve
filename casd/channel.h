@@ -48,26 +48,58 @@ public:
 	class ObjectDataFrame
 	{
 	public:
-		ImageProcessData pics[6];		// 一个物体包括6幅图片，底 + 4 侧 + 顶
-		double weight;					// 由称重传感器传递的物体重量
+		// ImageProcessData pics[7];		// 一个物体包括6幅图片，底 + 4 侧 + 2 顶
+		ImageProcessData* pics;				// 图像数据数组
+		int weight;							// 由称重传感器传递的物体重量
 		// TODO: 其他一些列的属性添加
-		std::string ic_card_no;			// ic卡编码
-		unsigned short mask;			// 物体数据填充掩码，每填充一部分数据，相应的二进制位需要置1
+		std::string ic_card_no;				// ic卡编码
+		unsigned short mask;				// 物体数据填充掩码，每填充一部分数据，相应的二进制位需要置1
 
-		ObjectDataFrame() {}
-		~ObjectDataFrame() {}
-		bool isFinish() { return mask == 0x004F; }
+		static int pic_num;					// 图像数据的数量，目前 底 + 4 侧 + 2 顶
+		static unsigned short finish_mask;	// 帧数据装填完毕时的掩码
+
+		ObjectDataFrame() : pics(NULL), weight(0), ic_card_no(), mask(0)
+		{
+		}
+		~ObjectDataFrame()
+		{
+			if(pics)
+			{
+				delete []pics;
+				pics = NULL;
+			}
+		}
+		void Init()
+		{
+			if(pics == NULL && pic_num > 0)
+			{
+				pics = new ImageProcessData[pic_num];
+			}
+			
+		}
+
+		static SetPicNum(int num) { pic_num = num; }
+		static SetFinishMask(unsigned short fmask) { finish_mask = fmask; }
+
+		bool IsFinish() { return mask == finish_mask; }
 	};
 
-	typedef std::list<ObjectDataFrame> FrameList;
-	typedef std::list<ObjectDataFrame>::iterator FrameListIterator;
+	typedef std::list<ObjectDataFrame*> FrameList;
+	typedef std::list<ObjectDataFrame*>::iterator FrameListIterator;
 
 	Channel(){}
-	~Channel(){}
+	~Channel()
+	{
+		for(FrameListIterator it = FrameList.begin(); it != FrameList.end(); ++it)
+		{
+			delete *it;
+		}
+		FrameList.clear();
+	}
 
 public:
 	void AddImageData(std::string ic_card_no, int image_seq, int x, int y, const char *data, int data_len);
-	void AddWeight(double weight);
+	void AddWeight(int weight);
 
 private:
 	FrameList frames;
@@ -94,6 +126,12 @@ public:
 			}
 		}
 		_channels.clear();
+
+		if(_top_scan_idx)
+		{
+			delete []_top_scan_idx;
+			_top_scan_idx = NULL;
+		}
 	}
 	static ChannelManager& GetInstance() 
 	{ 
@@ -101,12 +139,28 @@ public:
 		return instance;  
 	}
 
+	void Init()
+	{
+		if(_top_scan_idx == NULL && _top_camara_num > 0)
+		{
+			_top_scan_idx = new int[_top_camara_num];
+		}
+	}
+
+	static void SetTopCamaraNum(int num)
+	{
+		_top_camara_num = num;
+	}
+
 private:
-	ChannelManager() {}
+	ChannelManager() :  _top_scan_idx(NULL), _cur_channel_count(0) {}
 public:
 	ChannelMap _channels;
 	std::map<int, uint32_t> _sid2seq;
 	std::map<uint32_t, int> _seq2sid;
+	int* _top_scan_idx;							// top camara处理到的channel索引, 有几个top camara，这个就要求几个元素
+	static int _top_camara_num;					// top_camara数量
+	int _cur_channel_count;						// 当前channel的数量
 };
 
 }	// end of namespace

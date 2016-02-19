@@ -31,6 +31,8 @@ class CSetCamaraSeqReq : public Protocol
 				// 首次设置该序号的相机
 				CASD::Channel* pChannel = new CASD::Channel();
 				manager._channels.insert(std::make_pair(_seq, pChannel));
+				// TODO: 需要考虑channel挂掉
+				++manager._cur_channel_count;
 			}
 			else
 			{

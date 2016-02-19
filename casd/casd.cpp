@@ -13,6 +13,7 @@
 #include "csendweightreq.hpp"
 #include "csendimageprocessdatareq.hpp"
 #include "configfile.h"
+#include "channel.h"
 
 int main (int argc, char **argv) 
 {
@@ -32,6 +33,13 @@ int main (int argc, char **argv)
 	std::string port = cf.Value("Global", "Port", "12345");
 	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
+
+	// TODO: 配置文件中存数据
+	CASD::Channel::ObjectDataFrame::SetPicNum(7);
+	CASD::Channel::ObjectDataFrame::SetFinishMask(0xFFFF);
+	CASD::ChannelManager::SetTopCamaraNum(2);
+	CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
+	manager.Init();
 
 	UVNET::TCPServer server(0x01,0x02);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
