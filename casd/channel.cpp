@@ -67,7 +67,7 @@ void Channel::AddWeight(int weight)
 		return;
 	}
 	// 遍历一遍未找到相应数据帧和空闲帧，需要添加新的帧
-	ObjectDataFrame* data_frame = new ObjectDataFrame(7);
+	ObjectDataFrame* data_frame = new ObjectDataFrame();
 	data_frame->Init();
 	data_frame->weight = weight;
 	data_frame->mask |= WEIGHT_MASK;
@@ -87,7 +87,7 @@ void Channel::ProcessDataFrame(FrameListIterator it)
 	frames.erase(it);
 	uv_mutex_unlock(&lock);
 	// 将结果存往redis
-	redisAsyncCommand(redis_context, NULL, NULL, "SET %s %d", it->ic_card_no.c_str(), result);
+	redisAsyncCommand(redis_context, NULL, NULL, "SET %s %d", (*it)->ic_card_no.c_str(), result);
 }
 
 }	// end of namespace

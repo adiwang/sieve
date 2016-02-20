@@ -78,8 +78,8 @@ public:
 			
 		}
 
-		static SetPicNum(int num) { pic_num = num; }
-		static SetFinishMask(unsigned short fmask) { finish_mask = fmask; }
+		static void SetPicNum(int num) { pic_num = num; }
+		static void SetFinishMask(unsigned short fmask) { finish_mask = fmask; }
 
 		bool IsFinish() { return mask == finish_mask; }
 	};
@@ -90,11 +90,11 @@ public:
 	Channel(){}
 	~Channel()
 	{
-		for(FrameListIterator it = FrameList.begin(); it != FrameList.end(); ++it)
+		for(FrameListIterator it = frames.begin(); it != frames.end(); ++it)
 		{
 			delete *it;
 		}
-		FrameList.clear();
+		frames.clear();
 	}
 
 public:
@@ -143,7 +143,7 @@ public:
 	{
 		if(_top_scan_idx == NULL && _top_camara_num > 0)
 		{
-			_top_scan_idx = new int[_top_camara_num];
+			_top_scan_idx = new uint32_t[_top_camara_num];
 		}
 	}
 
@@ -158,7 +158,7 @@ public:
 	ChannelMap _channels;
 	std::map<int, uint32_t> _sid2seq;
 	std::map<uint32_t, int> _seq2sid;
-	int* _top_scan_idx;							// top camara处理到的channel索引, 有几个top camara，这个就要求几个元素
+	uint32_t* _top_scan_idx;							// top camara处理到的channel索引, 有几个top camara，这个就要求几个元素
 	static int _top_camara_num;					// top_camara数量
 	int _cur_channel_count;						// 当前channel的数量
 };

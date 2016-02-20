@@ -32,12 +32,12 @@ class CSendImageProcessDataReq : public Protocol
 			if(_image_seq == 5)
 			{
 				// top camara 0
-				pChannel_seq = &(chmanager._top_camara_num[0]);
+				pChannel_seq = &(manager._top_scan_idx[0]);
 
 			}else if(_image_seq == 6)
 			{
 				// top camara 1
-				pChannel_seq = &(chmanager._top_camara_num[1]);
+				pChannel_seq = &(manager._top_scan_idx[1]);
 			}
 
 			if(pChannel_seq)
