@@ -10,3 +10,17 @@
    (2) 使用hiredis
        编译时需要包含hiredis.h，编译选项需要指定 -I/usr/local/include
        链接时需要 -L/usr/local/lib -lhiredis 
+
+2. 依赖pylon
+   (1) pylon的安装
+       cd ~/pylon-5.0.0.1234-x86
+       将pylon安装到了/usr/local下, 目录为/usr/local/pylon5
+       sudo tar -C /usr/local -xzf pylonSDK*.tar.gz
+       编译Sample, 由于pylon安装到了/usr/local/pylon5, 因此需要运行设置环境变量脚本, 如下:
+       source /usr/local/pylon5/bin/pylon-setup-env.sh /usr/local/pylon5
+       或者
+       export PYLON_ROOT=/usr/local/pylon5
+       然后编译Sample
+       make
+       执行./Grab/Grab
+       
