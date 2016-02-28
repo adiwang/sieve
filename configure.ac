@@ -45,5 +45,6 @@ AC_CONFIG_FILES([Makefile
                  test/Makefile
 		 pb/Makefile
 		 queryd/Makefile
-		 casd/Makefile])
+		 casd/Makefile
+		 cpsd/Makefile])
 AC_OUTPUT
