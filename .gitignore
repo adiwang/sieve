@@ -23,3 +23,5 @@ queryd/log/
 queryd/querydclient
 casd/casd
 casd/log/
+cpsd/cpsd
+cpsd/log/
