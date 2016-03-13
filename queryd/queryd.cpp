@@ -31,7 +31,7 @@ int main (int argc, char **argv)
 	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
 
-	UVNET::TCPServer server(0x01,0x02);
+	UVNET::TCPServer server(0xF0,0x0F);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "queryd", logfile.c_str());
 	server.AddProtocol(PROTOCOL_ID_CQUERYRESULTREQ, new CQueryResultReq());
 	if(!server.Start(ip.c_str(), atoi(port.c_str()))) 

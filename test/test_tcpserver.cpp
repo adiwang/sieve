@@ -27,8 +27,8 @@ public:
 		cproto.SerializeToString(&data);
 
 		NetPacket tmppack;
-		tmppack.header = 0x01;
-		tmppack.tail = 0x02;
+		tmppack.header = 0xF0;
+		tmppack.tail = 0x0F;
 		tmppack.type = 1;
 		tmppack.datalen = data.size();
 		std::string response = PacketData(tmppack, data.c_str());
@@ -44,7 +44,7 @@ using namespace UVNET;
 bool is_eist = false;
 int call_time = 0;
 
-UVNET::TCPServer server(0x01,0x02);
+UVNET::TCPServer server(0xF0,0x0F);
 
 void CloseCB(int clientid, void* userdata)
 {

@@ -29,8 +29,8 @@ public:
 		cproto.SerializeToString(&data);
 
 		NetPacket tmppack;
-		tmppack.header = 0x01;
-		tmppack.tail = 0x02;
+		tmppack.header = 0xF0;
+		tmppack.tail = 0x0F;
 		tmppack.type = 1;
 		tmppack.datalen = data.size();
 		std::string response = PacketData(tmppack, data.c_str());
@@ -80,7 +80,7 @@ int main(int argc, char** argv)
     serverip = argv[1];
     serverport = std::stoi(argv[2]);
 
-    TCPClient client(0x01, 0x02);
+    TCPClient client(0xF0, 0x0F);
     //client.SetRecvCB(ReadCB, &client);
     client.SetCloseCB(CloseCB, &client);
     EchoProtocol protocol;
@@ -103,8 +103,8 @@ int main(int argc, char** argv)
     cproto.SerializeToString(&data);
 
     NetPacket packet;
-    packet.header = 0x01;
-    packet.tail = 0x02;
+    packet.header = 0xF0;
+    packet.tail = 0x0F;
     packet.type = 1;
     packet.datalen = data.size();
     std::string str = PacketData(packet, data.c_str());
