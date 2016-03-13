@@ -33,15 +33,18 @@ int main (int argc, char **argv)
 	std::string port = cf.Value("Global", "Port", "12345");
 	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
+	int bottom_image_num = atoi(cf.Value("Global", "BottomImageNum", "1").c_str());
+	int side_image_num = atoi(cf.Value("Global", "SideImageNum", "4").c_str());
+	int top_image_num = atoi(cf.Value("Global", "TopImageNum", "1").c_str());
+	unsigned int finish_mask = atoi(cf.Value("Global", "FinishMask", "1").c_str());
 
-	// TODO: 配置文件中存数据
-	CASD::Channel::ObjectDataFrame::SetPicNum(7);
-	CASD::Channel::ObjectDataFrame::SetFinishMask(0xFFFF);
-	CASD::ChannelManager::SetTopCamaraNum(2);
+	CASD::Channel::ObjectDataFrame::SetPicNum(bottom_image_num + side_image_num + top_image_num);
+	CASD::Channel::ObjectDataFrame::SetFinishMask(finish_mask);
+	CASD::ChannelManager::SetTopCamaraNum(top_image_num);
 	CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 	manager.Init();
 
-	UVNET::TCPServer server(0x01,0x02);
+	UVNET::TCPServer server(0xF0,0x0F);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
 	server.AddProtocol(PROTOCOL_ID_CSETCAMARASEQREQ, new CSetCamaraSeqReq());
 	server.AddProtocol(PROTOCOL_ID_CSENDWEIGHTREQ, new CSendWeightReq());
