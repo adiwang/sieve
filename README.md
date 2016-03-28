@@ -24,3 +24,13 @@
        make
        执行./Grab/Grab
        
+   (2) 连接和调试相机
+       关闭防火墙: sudo systemctl status firewalld.service
+       关闭reverse path filter: 
+       编辑/etc/sysctl.conf文件, 
+        net.ipv4.conf.all.rp_filter=0
+        net.ipv4.conf.eth1.rp_filter=0
+       根据实际情况而定。
+       添加网络连接，在ipv4标签页中将"地址"改为"仅本地连接".
+
+       
