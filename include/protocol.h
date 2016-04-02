@@ -13,6 +13,7 @@ public:
     Protocol(){}
     virtual ~Protocol(){}
     virtual void Process(const char* buf, int length, void* userdata) = 0;
+    virtual Protocol* Clone() = 0;
 };
 
 #endif//_PROTOCOL_H

@@ -39,3 +39,8 @@ public:
 		CharToInt32(buf, _result);
 		_ic_card_no = std::string(buf + 4, length - 4);
 	}
+
+    virtual Protocol* Clone()
+    {
+        return new SQueryResultRep();
+    }

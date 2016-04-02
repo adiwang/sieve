@@ -39,3 +39,8 @@ public:
 		proto.ParseFromString(std::string(buf, length));
 		_seq = proto.seq();
 	}
+
+    virtual Protocol* Clone()
+    {
+        return new CSetCamaraSeqReq();
+    }

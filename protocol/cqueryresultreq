@@ -34,3 +34,8 @@ public:
 	{
 		_ic_card_no = std::string(buf, length);
 	}
+
+    virtual Protocol* Clone()
+    {
+        return new CQueryResultReq();
+    }

@@ -37,6 +37,10 @@ public:
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 		server->_send(response, ctx);
 	}
+    virtual Protocol* Clone()
+    {
+        return new EchoProtocol();
+    }
 };
 
 using namespace std;

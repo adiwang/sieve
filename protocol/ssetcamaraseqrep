@@ -38,3 +38,8 @@ public:
 		proto.ParseFromString(std::string(buf, length));
 		_result = proto.result();
 	}
+
+    virtual Protocol* Clone()
+    {
+        return new SSetCamaraSeqRep();
+    }

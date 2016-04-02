@@ -39,6 +39,10 @@ public:
 		UVNET::TCPClient* pClient = (UVNET::TCPClient *)ctx->parent_server;
 		pClient->Send(response.c_str(), response.size());
 	}
+    virtual Protocol* Clone()
+    {
+        return new EchoProtocol();
+    }
 };
 
 void CloseCB(int clientid, void* userdata)

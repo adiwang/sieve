@@ -632,7 +632,9 @@ namespace UVNET
 			proto_handle = pClient->GetProtocol(proto_id);
 			if(proto_handle)
 			{
-				proto_handle->Process(proto_data, data_size, userdata);
+                Protocol* tmpProto = proto_handle->Clone();
+				tmpProto->Process(proto_data, data_size, userdata);
+                delete tmpProto;
 			}
 		}
 	}

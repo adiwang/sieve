@@ -45,3 +45,8 @@ public:
 		_image_seq = proto.image_seq();
 		_result = proto.result();
 	}
+
+    virtual Protocol* Clone()
+    {
+        return new SSendImageProcessDataRep();
+    }

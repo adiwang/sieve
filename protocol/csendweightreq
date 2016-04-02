@@ -58,3 +58,7 @@ public:
 		}
 	}
 	
+    virtual Protocol* Clone()
+    {
+        return new CSendWeightReq();
+    }

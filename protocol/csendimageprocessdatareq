@@ -54,3 +54,9 @@ public:
 		_y = proto.y();
 		_data = proto.data();
 	}
+    
+    virtual Protocol* Clone()
+    {
+        return new CSendImageProcessDataReq();
+    }
+
