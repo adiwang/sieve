@@ -656,6 +656,19 @@ bool TCPServer::_send(const std::string& data, SessionCtx* ctx)
 }
 
 /**
+**	获取指定的session
+**  @sid: session id
+**  @return: NULL, 未找到; 其他, Session
+*/
+Session* TCPServer::GetSession(int sid)
+{
+	std::map<int, Session*>::iterator it = _sessions.find(sid);
+	if(it != _sessions.end())
+		return it->second;
+	return NULL;
+}
+
+/**
 **	调用Clog的init
 **  @log_level: 日志级别
 **  @module_name: 模块名

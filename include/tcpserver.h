@@ -66,6 +66,7 @@ public:
 	Protocol* GetProtocol(int proto_id);
 	bool _send(const std::string& data, SessionCtx* ctx);
 	uv_loop_t* GetLoop() { return &_loop; }
+	Session* GetSession(int sid);
 
 
 protected:
