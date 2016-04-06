@@ -1,0 +1,49 @@
+public:
+	uint32_t _result;
+	std::string _image_path;
+	std::string _marshal_data;
+
+public:
+	enum
+	{
+		PROTOCOL_ID = PROTOCOL_ID_FVALIDATEPOSREQP,
+	};
+	
+	FValidatePosReqp() : _result(0) {}
+	FValidatePosReqp(uint32_t result, std::string& image_path) : _seq(seq), _image_path(image_path) {}
+	~FValidatePosReqp() {}
+
+	virtual const std::string& Marshal()
+	{
+		// 1. 设置协议具体子段
+		FValidatePosReqpProto proto;
+		proto.set_result(_result);
+		proto.set_image_path(_image_path);
+		// 2. 给协议wrap一层，添加protocol id
+		CProto cproto;
+		cproto.set_id(PROTOCOL_ID);
+		cproto.set_body(proto.SerializeAsString());
+		std::string data;
+		cproto.SerializeToString(&data);
+		// 3. 封包
+		NetPacket packet;
+		packet.header = 0xF0;
+		packet.tail = 0x0F;
+		packet.type = 1;
+		packet.datalen = data.size();
+		_marshal_data = PacketData(packet, data.c_str());
+		return _marshal_data;
+	}
+
+	virtual void UnMarshal(const char* buf, int length)
+	{
+		FValidatePosReqpProto proto;
+		proto.ParseFromString(std::string(buf, length));
+		_result = proto.seq();
+		_image_path = proto.image_path();
+	}
+
+    virtual Protocol* Clone()
+    {
+        return new FValidatePosReqp();
+    }

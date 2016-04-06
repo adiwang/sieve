@@ -52,3 +52,72 @@ message SSendImageProcessDataRepProto
 	required int32 image_seq = 2;		// 图片序号: 0-5分别是底, 4侧, 顶
 	required int32 result = 3;
 }
+
+// cpsd向casd注册通道序号协议
+message CRegisterCpsdReqProto
+{
+	required uint32 seq = 1;		// 通道序号
+}
+
+// cpsd向casd注册通道序号的响应协议
+message SRegisterCpsdRepProto
+{
+	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+}
+
+// 客户端向casd注册通道序号协议
+message CRegisterClientReqProto
+{
+	required uint32 seq = 1;		// 通道序号
+}
+
+// 客户端向casd注册通道序号的响应协议
+message SRegisterClientRepProto
+{
+	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+}
+
+// cpsd向casd发送校验图片摆放位置的协议
+// casd向客户端转发校验图片摆放位置的协议
+message FValidatePosReqpProto
+{
+	required uint32 result = 1;		// 0: 代表成功, 否则: 代表失败
+	required string image_path = 2;		// 图片路径
+}
+
+// cpsd向casd发送的请求处理特征的协议
+message CProcessFeatureReqProto
+{
+	required int32 image_seq = 1;		// 图片序号
+	required int32 x = 2;			// 一系列特征
+	required int32 y = 3;
+	required bytes data = 4;
+}
+
+// casd返回给cpsd的请求处理特征的响应协议
+message SProcessFeatureRepProto
+{
+	required int32 image_seq = 1;		// 图片序号
+	required uint32 result = 2;		// 0: 代表成功，否则: 失败
+}
+
+// casd返回给客户端的处理结果的协议
+message SProcessResultProto
+{
+	required int32 image_seq = 1;		// 图片序号
+	required uint32 result = 2;		// 0: 代表成功, 否则: 失败
+	required int32	level = 3;		// 等级
+	required bytes data = 4;		// 其它数据
+}
+
+// 客户端向casd发送的设置状态的协议
+message CSetProcessStateReqProto
+{
+	required int32 state = 1;		// 状态: 0:学习状态, 1: 分选状态
+}
+
+// casd返回给客户端的设置状态的响应协议
+message SSetProcessStateRepProto
+{
+	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+}
