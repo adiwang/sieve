@@ -45,10 +45,22 @@ class CSetProcessStateReq : public Protocol
 			NotifyError(server, ctx, 3);
 			return;
 		}
+		int cpsd_sid = pChannel->GetCpsdSid();
+		UVNET::Session* cpsd_session = server->GetSession(cpsd_sid);
+		if(!cpsd_session)
+		{
+			// 通道的cpsd不存在
+			NotifyError(server, ctx, 4);
+			return;
+		}
+		// 向cpsd转发此协议，目的是为了让cpsd能重置计数
+		UVNET::SessionCtx* cpsd_ctx = cpsd_session->GetCtx();
+		server->_send(Marshal(), cpsd_ctx);
+
 		SSetProcessStateRep rep;
 		if(_state < 0 || _state >= 2)
 		{
-			rep._result = 1;
+			rep._result = 5;
 		}
 		else
 		{
