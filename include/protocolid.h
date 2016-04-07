@@ -19,7 +19,7 @@ enum
 	PROTOCOL_ID_CPROCESSFEATUREREQ = 14,		// CProcessFeatureReq协议, cpsd向casd发送的处理特征的协议
 	PROTOCOL_ID_SPROCESSFEATUREREP = 15,		// SProcessFeatureRep协议, casd向cpsd返回的处理特征的响应协议
 	PROTOCOL_ID_SPROCESSRESULT = 16,			// SProcessResult协议, casd向客户端发送的处理结果的协议
-	PROTOCOL_ID_CSETPROCESSSTATEREQ = 17,		// CProcessStateReq协议, 客户端向casd发送的设置处理状态的协议
+	PROTOCOL_ID_CSETPROCESSSTATEREQ = 17,		// CProcessStateReq协议, 客户端向casd发送的设置处理状态的协议, 同时casd向cpsd转发该协议
 	PROTOCOL_ID_SSETPROCESSSTATEREP = 18,		// SProcessStateRep协议, casd向客户端返回的设置处理状态的响应协议
 };
 #endif // end _PROTOCOLID_H
