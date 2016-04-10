@@ -55,7 +55,7 @@ class CProcessFeatureReq : public Protocol
 			// 调用Learn来进行学习, 得到学习的结果，更新redis, 内存中的数据更新由算法类负责
 			client_rep._level = 1;
 			client_rep._result = 0;
-			client_rep.data = "learn test";
+			client_rep._data = "learn test";
 		}
 		else if(state == CASD::Channel::ST_CLASS)
 		{
@@ -63,7 +63,7 @@ class CProcessFeatureReq : public Protocol
 			// 调用Class来进行分选，得到分选结果，存到redis，设置生命周期
 			client_rep._level = 2;
 			client_rep._result = 0;
-			client_rep.data = "class test";
+			client_rep._data = "class test";
 		}
 		else
 		{
@@ -81,7 +81,8 @@ class CProcessFeatureReq : public Protocol
 		}
 	}
 
-	private void NotifyError(UVNET::TCPServer* server, UVNET::SessionCtx* ctx, int retcode)
+private:
+    void NotifyError(UVNET::TCPServer* server, UVNET::SessionCtx* ctx, int retcode)
 	{
 		SProcessFeatureRep rep;
 		rep._image_seq = _image_seq;

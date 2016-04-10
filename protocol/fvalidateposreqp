@@ -10,7 +10,7 @@ public:
 	};
 	
 	FValidatePosReqp() : _result(0) {}
-	FValidatePosReqp(uint32_t result, std::string& image_path) : _seq(seq), _image_path(image_path) {}
+	FValidatePosReqp(uint32_t result, std::string& image_path) : _result(result), _image_path(image_path) {}
 	~FValidatePosReqp() {}
 
 	virtual const std::string& Marshal()
@@ -39,7 +39,7 @@ public:
 	{
 		FValidatePosReqpProto proto;
 		proto.ParseFromString(std::string(buf, length));
-		_result = proto.seq();
+		_result = proto.result();
 		_image_path = proto.image_path();
 	}
 

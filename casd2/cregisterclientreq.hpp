@@ -18,11 +18,12 @@ class CRegisterClientReq : public Protocol
 	virtual void Process(const char* buf, int length, void* userdata)
 	{
 		UnMarshal(buf, length);
+		UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
+		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
+
 		SRegisterClientRep rep;
 		if(_seq > 0)
 		{
-			UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
-			UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 
 			CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 			CASD::Channel* pChannel = manager.GetChannel(_seq);

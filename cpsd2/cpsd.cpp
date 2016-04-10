@@ -4,9 +4,15 @@
 #include <signal.h>
 
 #include "tcpclient.h"
-#include "csendimageprocessdatareq.hpp"
-#include "csetcamaraseqreq.hpp"
 #include "configfile.h"
+
+#include "fvalidateposreqp.hpp"
+#include "sregistercpsdrep.hpp"
+#include "sprocessfeaturerep.hpp"
+#include "csetprocessstatereq.hpp"
+#include "cprocessfeaturereq.hpp"
+#include "cregistercpsdreq.hpp"
+#include "protocolid.h"
 
 #include <pylon/PylonIncludes.h>
 using namespace Pylon;
@@ -19,7 +25,7 @@ uint32_t gCurImageSeq = 0;
 uint32_t gImagesNumPerObj = 0; 
 UVNET::TCPClient casd_client(0xF0,0x0F);
 
-std::vector<CGrabResultPtr*> gGrabResultList;
+std::vector<CGrabResultPtr> gGrabResultList;
 
 class CSampleImageEventHandler : public CImageEventHandler
 {
@@ -35,7 +41,7 @@ public:
 		}
 		//TODO: 根据当前日期和批次
 		std::string image_path = "/tmp/20160407.png";
-		CImagePersistence::Save( ImageFileFormat_Png, image_path, ptrGrabResult);
+		CImagePersistence::Save( ImageFileFormat_Png, "/tmp/20160407.png", ptrGrabResult);
 
 		uint32_t image_seq = gCurImageSeq;
 		if(gCurImageSeq == 0)
@@ -46,8 +52,8 @@ public:
 			gGrabResultList.clear();
 			bool isPosSuccess = true;
 			FValidatePosReqp validate_proto;
-			FValidatePosReqp._result = isPosSuccess ? 0 : 1;
-			FValidatePosReqp._image_path = image_path;
+			validate_proto._result = isPosSuccess ? 0 : 1;
+			validate_proto._image_path = image_path;
 			validate_proto.Marshal();
 			if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
     		{
@@ -62,7 +68,7 @@ public:
 		else if(gCurImageSeq < gImagesNumPerObj - 1)
 		{
 			// 图片数目未达到足够的数量，保存图片数据到vector中
-			gGrabResultList.push_back(&ptrGrabResult);
+			gGrabResultList.push_back(ptrGrabResult);
 			++gCurImageSeq;
 		}
 		else
@@ -147,7 +153,7 @@ int main (int argc, char **argv)
     {
 	CTlFactory& TlFactory = CTlFactory::GetInstance();
 	CDeviceInfo di;
-	di.SetSerialNumber( serialnum );
+	di.SetSerialNumber( GenICam::gcstring(serialnum.c_str()) );
 	di.SetDeviceClass( BaslerGigEDeviceClass );
 	IPylonDevice* device = TlFactory.CreateDevice( di );
         // Create an instant camera object for the camera device found first.

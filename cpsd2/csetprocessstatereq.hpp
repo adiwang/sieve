@@ -6,11 +6,8 @@
 #include "net_base.h"
 #include "packet_sync.h"
 #include "pb/netmessage.pb.h"
-#include "channel.h"
-#include "tcpserver.h"
-#include "ssetprocessstaterep.hpp"
 
-extern int32_t gCurImageSeq;
+extern uint32_t gCurImageSeq;
 class CSetProcessStateReq : public Protocol
 {
 	#include "protocol/csetprocessstatereq"

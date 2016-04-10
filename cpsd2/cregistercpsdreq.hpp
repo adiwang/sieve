@@ -6,9 +6,6 @@
 #include "net_base.h"
 #include "packet_sync.h"
 #include "pb/netmessage.pb.h"
-#include "channel.h"
-#include "tcpserver.h"
-#include "sregistercpsdrep.hpp"
 
 
 class CRegisterCpsdReq : public Protocol

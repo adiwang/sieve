@@ -71,7 +71,8 @@ class CSetProcessStateReq : public Protocol
 		server->_send(rep._marshal_data, ctx);
 	}
 
-	private void NotifyError(UVNET::TCPServer* server, UVNET::SessionCtx* ctx, int retcode)
+private:
+    void NotifyError(UVNET::TCPServer* server, UVNET::SessionCtx* ctx, int retcode)
 	{
 		SSetProcessStateRep rep;
 		rep._result = retcode;

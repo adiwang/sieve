@@ -116,7 +116,7 @@ Channel* ChannelManager::GetChannel(uint32_t seq)
 {
 	Channel* ret = NULL;
 	uv_rwlock_rdlock(&_lock);
-	std::map<uint32_t, Channel*> it = _channels.find(seq);
+	ChannelMapIterator it = _channels.find(seq);
 	if(it != _channels.end()) ret = it->second;
 	uv_rwlock_rdunlock(&_lock);
 	return ret;
@@ -131,7 +131,7 @@ bool ChannelManager::RemoveChannel(uint32_t seq)
 {
 	bool ret = false;
 	uv_rwlock_wrlock(&_lock);
-	std::map<uint32_t, Channel*> it = _channels.find(seq);
+	ChannelMapIterator it = _channels.find(seq);
 	if(it != _channels.end())
 	{
 		delete it->second;

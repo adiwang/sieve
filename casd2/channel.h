@@ -39,7 +39,6 @@ public:
 	int GetState();
 
 private:
-	ImageProcessData data;						// 图像处理后的数据
 	uint32_t _seq;								// 当前通道序号
 	int		 _cpsd_sid;							// cpsd的session id
 	int		 _client_sid;						// 客户端的session id

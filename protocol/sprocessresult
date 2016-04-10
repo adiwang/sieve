@@ -2,7 +2,7 @@ public:
 	int _image_seq;
 	uint32_t _result;
 	int _level;
-	std::string data;
+	std::string _data;
 	std::string _marshal_data;
 
 public:

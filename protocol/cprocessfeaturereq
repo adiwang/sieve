@@ -12,7 +12,7 @@ public:
 	};
 	
 	CProcessFeatureReq() : _image_seq(0), _x(0), _y(0) {}
-	CProcessFeatureReq(uint32_t image_seq, int x, int y, data) : _image_seq(image_seq), _x(x), _y(y), _data(data) {}
+	CProcessFeatureReq(uint32_t image_seq, int x, int y, std::string data) : _image_seq(image_seq), _x(x), _y(y), _data(data) {}
 	~CProcessFeatureReq() {}
 
 	virtual const std::string& Marshal()

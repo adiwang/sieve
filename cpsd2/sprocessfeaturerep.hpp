@@ -7,8 +7,6 @@
 #include "net_base.h"
 #include "packet_sync.h"
 #include "pb/netmessage.pb.h"
-#include "channel.h"
-#include "tcpserver.h"
 
 class SProcessFeatureRep : public Protocol
 {
