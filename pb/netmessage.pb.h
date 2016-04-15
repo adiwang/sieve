@@ -1459,49 +1459,134 @@ class CProcessFeatureReqProto : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 image_seq = 1;
-  bool has_image_seq() const;
-  void clear_image_seq();
-  static const int kImageSeqFieldNumber = 1;
-  ::google::protobuf::int32 image_seq() const;
-  void set_image_seq(::google::protobuf::int32 value);
+  // required double AvgSaturation = 1;
+  bool has_avgsaturation() const;
+  void clear_avgsaturation();
+  static const int kAvgSaturationFieldNumber = 1;
+  double avgsaturation() const;
+  void set_avgsaturation(double value);
 
-  // required int32 x = 2;
-  bool has_x() const;
-  void clear_x();
-  static const int kXFieldNumber = 2;
-  ::google::protobuf::int32 x() const;
-  void set_x(::google::protobuf::int32 value);
+  // required double AvgHue = 2;
+  bool has_avghue() const;
+  void clear_avghue();
+  static const int kAvgHueFieldNumber = 2;
+  double avghue() const;
+  void set_avghue(double value);
 
-  // required int32 y = 3;
-  bool has_y() const;
-  void clear_y();
-  static const int kYFieldNumber = 3;
-  ::google::protobuf::int32 y() const;
-  void set_y(::google::protobuf::int32 value);
+  // required double AvgIntensity = 3;
+  bool has_avgintensity() const;
+  void clear_avgintensity();
+  static const int kAvgIntensityFieldNumber = 3;
+  double avgintensity() const;
+  void set_avgintensity(double value);
 
-  // required bytes data = 4;
-  bool has_data() const;
-  void clear_data();
-  static const int kDataFieldNumber = 4;
-  const ::std::string& data() const;
-  void set_data(const ::std::string& value);
-  void set_data(const char* value);
-  void set_data(const void* value, size_t size);
-  ::std::string* mutable_data();
-  ::std::string* release_data();
-  void set_allocated_data(::std::string* data);
+  // required double DeviationSaturation = 4;
+  bool has_deviationsaturation() const;
+  void clear_deviationsaturation();
+  static const int kDeviationSaturationFieldNumber = 4;
+  double deviationsaturation() const;
+  void set_deviationsaturation(double value);
+
+  // required double DeviationHue = 5;
+  bool has_deviationhue() const;
+  void clear_deviationhue();
+  static const int kDeviationHueFieldNumber = 5;
+  double deviationhue() const;
+  void set_deviationhue(double value);
+
+  // required double DeviationIntensity = 6;
+  bool has_deviationintensity() const;
+  void clear_deviationintensity();
+  static const int kDeviationIntensityFieldNumber = 6;
+  double deviationintensity() const;
+  void set_deviationintensity(double value);
+
+  // required double Length = 7;
+  bool has_length() const;
+  void clear_length();
+  static const int kLengthFieldNumber = 7;
+  double length() const;
+  void set_length(double value);
+
+  // required double Width = 8;
+  bool has_width() const;
+  void clear_width();
+  static const int kWidthFieldNumber = 8;
+  double width() const;
+  void set_width(double value);
+
+  // required double WidthLengthRatio = 9;
+  bool has_widthlengthratio() const;
+  void clear_widthlengthratio();
+  static const int kWidthLengthRatioFieldNumber = 9;
+  double widthlengthratio() const;
+  void set_widthlengthratio(double value);
+
+  // required double ApexAngle = 10;
+  bool has_apexangle() const;
+  void clear_apexangle();
+  static const int kApexAngleFieldNumber = 10;
+  double apexangle() const;
+  void set_apexangle(double value);
+
+  // required double Circularity = 11;
+  bool has_circularity() const;
+  void clear_circularity();
+  static const int kCircularityFieldNumber = 11;
+  double circularity() const;
+  void set_circularity(double value);
+
+  // required double Area = 12;
+  bool has_area() const;
+  void clear_area();
+  static const int kAreaFieldNumber = 12;
+  double area() const;
+  void set_area(double value);
+
+  // required double ThickMean = 13;
+  bool has_thickmean() const;
+  void clear_thickmean();
+  static const int kThickMeanFieldNumber = 13;
+  double thickmean() const;
+  void set_thickmean(double value);
+
+  // required double DefectRate = 14;
+  bool has_defectrate() const;
+  void clear_defectrate();
+  static const int kDefectRateFieldNumber = 14;
+  double defectrate() const;
+  void set_defectrate(double value);
 
   // @@protoc_insertion_point(class_scope:CProcessFeatureReqProto)
  private:
-  inline void set_has_image_seq();
-  inline void clear_has_image_seq();
-  inline void set_has_x();
-  inline void clear_has_x();
-  inline void set_has_y();
-  inline void clear_has_y();
-  inline void set_has_data();
-  inline void clear_has_data();
+  inline void set_has_avgsaturation();
+  inline void clear_has_avgsaturation();
+  inline void set_has_avghue();
+  inline void clear_has_avghue();
+  inline void set_has_avgintensity();
+  inline void clear_has_avgintensity();
+  inline void set_has_deviationsaturation();
+  inline void clear_has_deviationsaturation();
+  inline void set_has_deviationhue();
+  inline void clear_has_deviationhue();
+  inline void set_has_deviationintensity();
+  inline void clear_has_deviationintensity();
+  inline void set_has_length();
+  inline void clear_has_length();
+  inline void set_has_width();
+  inline void clear_has_width();
+  inline void set_has_widthlengthratio();
+  inline void clear_has_widthlengthratio();
+  inline void set_has_apexangle();
+  inline void clear_has_apexangle();
+  inline void set_has_circularity();
+  inline void clear_has_circularity();
+  inline void set_has_area();
+  inline void clear_has_area();
+  inline void set_has_thickmean();
+  inline void clear_has_thickmean();
+  inline void set_has_defectrate();
+  inline void clear_has_defectrate();
 
   // helper for ByteSize()
   int RequiredFieldsByteSizeFallback() const;
@@ -1509,10 +1594,20 @@ class CProcessFeatureReqProto : public ::google::protobuf::Message {
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int32 image_seq_;
-  ::google::protobuf::int32 x_;
-  ::google::protobuf::internal::ArenaStringPtr data_;
-  ::google::protobuf::int32 y_;
+  double avgsaturation_;
+  double avghue_;
+  double avgintensity_;
+  double deviationsaturation_;
+  double deviationhue_;
+  double deviationintensity_;
+  double length_;
+  double width_;
+  double widthlengthratio_;
+  double apexangle_;
+  double circularity_;
+  double area_;
+  double thickmean_;
+  double defectrate_;
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
   friend void protobuf_ShutdownFile_netmessage_2eproto();
@@ -1586,34 +1681,21 @@ class SProcessFeatureRepProto : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 image_seq = 1;
-  bool has_image_seq() const;
-  void clear_image_seq();
-  static const int kImageSeqFieldNumber = 1;
-  ::google::protobuf::int32 image_seq() const;
-  void set_image_seq(::google::protobuf::int32 value);
-
-  // required uint32 result = 2;
+  // required uint32 result = 1;
   bool has_result() const;
   void clear_result();
-  static const int kResultFieldNumber = 2;
+  static const int kResultFieldNumber = 1;
   ::google::protobuf::uint32 result() const;
   void set_result(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:SProcessFeatureRepProto)
  private:
-  inline void set_has_image_seq();
-  inline void clear_has_image_seq();
   inline void set_has_result();
   inline void clear_has_result();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int32 image_seq_;
   ::google::protobuf::uint32 result_;
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
@@ -1688,31 +1770,24 @@ class SProcessResultProto : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 image_seq = 1;
-  bool has_image_seq() const;
-  void clear_image_seq();
-  static const int kImageSeqFieldNumber = 1;
-  ::google::protobuf::int32 image_seq() const;
-  void set_image_seq(::google::protobuf::int32 value);
-
-  // required uint32 result = 2;
+  // required uint32 result = 1;
   bool has_result() const;
   void clear_result();
-  static const int kResultFieldNumber = 2;
+  static const int kResultFieldNumber = 1;
   ::google::protobuf::uint32 result() const;
   void set_result(::google::protobuf::uint32 value);
 
-  // required int32 level = 3;
+  // required int32 level = 2;
   bool has_level() const;
   void clear_level();
-  static const int kLevelFieldNumber = 3;
+  static const int kLevelFieldNumber = 2;
   ::google::protobuf::int32 level() const;
   void set_level(::google::protobuf::int32 value);
 
-  // required bytes data = 4;
+  // required bytes data = 3;
   bool has_data() const;
   void clear_data();
-  static const int kDataFieldNumber = 4;
+  static const int kDataFieldNumber = 3;
   const ::std::string& data() const;
   void set_data(const ::std::string& value);
   void set_data(const char* value);
@@ -1723,8 +1798,6 @@ class SProcessResultProto : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:SProcessResultProto)
  private:
-  inline void set_has_image_seq();
-  inline void clear_has_image_seq();
   inline void set_has_result();
   inline void clear_has_result();
   inline void set_has_level();
@@ -1738,10 +1811,9 @@ class SProcessResultProto : public ::google::protobuf::Message {
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::int32 image_seq_;
   ::google::protobuf::uint32 result_;
-  ::google::protobuf::internal::ArenaStringPtr data_;
   ::google::protobuf::int32 level_;
+  ::google::protobuf::internal::ArenaStringPtr data_;
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
   friend void protobuf_ShutdownFile_netmessage_2eproto();
@@ -2848,168 +2920,355 @@ inline void FValidatePosReqpProto::set_allocated_image_path(::std::string* image
 
 // CProcessFeatureReqProto
 
-// required int32 image_seq = 1;
-inline bool CProcessFeatureReqProto::has_image_seq() const {
+// required double AvgSaturation = 1;
+inline bool CProcessFeatureReqProto::has_avgsaturation() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CProcessFeatureReqProto::set_has_image_seq() {
+inline void CProcessFeatureReqProto::set_has_avgsaturation() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CProcessFeatureReqProto::clear_has_image_seq() {
+inline void CProcessFeatureReqProto::clear_has_avgsaturation() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CProcessFeatureReqProto::clear_image_seq() {
-  image_seq_ = 0;
-  clear_has_image_seq();
+inline void CProcessFeatureReqProto::clear_avgsaturation() {
+  avgsaturation_ = 0;
+  clear_has_avgsaturation();
 }
-inline ::google::protobuf::int32 CProcessFeatureReqProto::image_seq() const {
-  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.image_seq)
-  return image_seq_;
+inline double CProcessFeatureReqProto::avgsaturation() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.AvgSaturation)
+  return avgsaturation_;
 }
-inline void CProcessFeatureReqProto::set_image_seq(::google::protobuf::int32 value) {
-  set_has_image_seq();
-  image_seq_ = value;
-  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.image_seq)
+inline void CProcessFeatureReqProto::set_avgsaturation(double value) {
+  set_has_avgsaturation();
+  avgsaturation_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.AvgSaturation)
 }
 
-// required int32 x = 2;
-inline bool CProcessFeatureReqProto::has_x() const {
+// required double AvgHue = 2;
+inline bool CProcessFeatureReqProto::has_avghue() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void CProcessFeatureReqProto::set_has_x() {
+inline void CProcessFeatureReqProto::set_has_avghue() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void CProcessFeatureReqProto::clear_has_x() {
+inline void CProcessFeatureReqProto::clear_has_avghue() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void CProcessFeatureReqProto::clear_x() {
-  x_ = 0;
-  clear_has_x();
+inline void CProcessFeatureReqProto::clear_avghue() {
+  avghue_ = 0;
+  clear_has_avghue();
 }
-inline ::google::protobuf::int32 CProcessFeatureReqProto::x() const {
-  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.x)
-  return x_;
+inline double CProcessFeatureReqProto::avghue() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.AvgHue)
+  return avghue_;
 }
-inline void CProcessFeatureReqProto::set_x(::google::protobuf::int32 value) {
-  set_has_x();
-  x_ = value;
-  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.x)
+inline void CProcessFeatureReqProto::set_avghue(double value) {
+  set_has_avghue();
+  avghue_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.AvgHue)
 }
 
-// required int32 y = 3;
-inline bool CProcessFeatureReqProto::has_y() const {
+// required double AvgIntensity = 3;
+inline bool CProcessFeatureReqProto::has_avgintensity() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void CProcessFeatureReqProto::set_has_y() {
+inline void CProcessFeatureReqProto::set_has_avgintensity() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void CProcessFeatureReqProto::clear_has_y() {
+inline void CProcessFeatureReqProto::clear_has_avgintensity() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void CProcessFeatureReqProto::clear_y() {
-  y_ = 0;
-  clear_has_y();
+inline void CProcessFeatureReqProto::clear_avgintensity() {
+  avgintensity_ = 0;
+  clear_has_avgintensity();
 }
-inline ::google::protobuf::int32 CProcessFeatureReqProto::y() const {
-  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.y)
-  return y_;
+inline double CProcessFeatureReqProto::avgintensity() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.AvgIntensity)
+  return avgintensity_;
 }
-inline void CProcessFeatureReqProto::set_y(::google::protobuf::int32 value) {
-  set_has_y();
-  y_ = value;
-  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.y)
+inline void CProcessFeatureReqProto::set_avgintensity(double value) {
+  set_has_avgintensity();
+  avgintensity_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.AvgIntensity)
 }
 
-// required bytes data = 4;
-inline bool CProcessFeatureReqProto::has_data() const {
+// required double DeviationSaturation = 4;
+inline bool CProcessFeatureReqProto::has_deviationsaturation() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void CProcessFeatureReqProto::set_has_data() {
+inline void CProcessFeatureReqProto::set_has_deviationsaturation() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void CProcessFeatureReqProto::clear_has_data() {
+inline void CProcessFeatureReqProto::clear_has_deviationsaturation() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void CProcessFeatureReqProto::clear_data() {
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_data();
+inline void CProcessFeatureReqProto::clear_deviationsaturation() {
+  deviationsaturation_ = 0;
+  clear_has_deviationsaturation();
 }
-inline const ::std::string& CProcessFeatureReqProto::data() const {
-  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.data)
-  return data_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline double CProcessFeatureReqProto::deviationsaturation() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.DeviationSaturation)
+  return deviationsaturation_;
 }
-inline void CProcessFeatureReqProto::set_data(const ::std::string& value) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.data)
+inline void CProcessFeatureReqProto::set_deviationsaturation(double value) {
+  set_has_deviationsaturation();
+  deviationsaturation_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DeviationSaturation)
 }
-inline void CProcessFeatureReqProto::set_data(const char* value) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:CProcessFeatureReqProto.data)
+
+// required double DeviationHue = 5;
+inline bool CProcessFeatureReqProto::has_deviationhue() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void CProcessFeatureReqProto::set_data(const void* value, size_t size) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:CProcessFeatureReqProto.data)
+inline void CProcessFeatureReqProto::set_has_deviationhue() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline ::std::string* CProcessFeatureReqProto::mutable_data() {
-  set_has_data();
-  // @@protoc_insertion_point(field_mutable:CProcessFeatureReqProto.data)
-  return data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void CProcessFeatureReqProto::clear_has_deviationhue() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline ::std::string* CProcessFeatureReqProto::release_data() {
-  clear_has_data();
-  return data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void CProcessFeatureReqProto::clear_deviationhue() {
+  deviationhue_ = 0;
+  clear_has_deviationhue();
 }
-inline void CProcessFeatureReqProto::set_allocated_data(::std::string* data) {
-  if (data != NULL) {
-    set_has_data();
-  } else {
-    clear_has_data();
-  }
-  data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
-  // @@protoc_insertion_point(field_set_allocated:CProcessFeatureReqProto.data)
+inline double CProcessFeatureReqProto::deviationhue() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.DeviationHue)
+  return deviationhue_;
+}
+inline void CProcessFeatureReqProto::set_deviationhue(double value) {
+  set_has_deviationhue();
+  deviationhue_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DeviationHue)
+}
+
+// required double DeviationIntensity = 6;
+inline bool CProcessFeatureReqProto::has_deviationintensity() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_deviationintensity() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void CProcessFeatureReqProto::clear_has_deviationintensity() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void CProcessFeatureReqProto::clear_deviationintensity() {
+  deviationintensity_ = 0;
+  clear_has_deviationintensity();
+}
+inline double CProcessFeatureReqProto::deviationintensity() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.DeviationIntensity)
+  return deviationintensity_;
+}
+inline void CProcessFeatureReqProto::set_deviationintensity(double value) {
+  set_has_deviationintensity();
+  deviationintensity_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DeviationIntensity)
+}
+
+// required double Length = 7;
+inline bool CProcessFeatureReqProto::has_length() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_length() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void CProcessFeatureReqProto::clear_has_length() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void CProcessFeatureReqProto::clear_length() {
+  length_ = 0;
+  clear_has_length();
+}
+inline double CProcessFeatureReqProto::length() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.Length)
+  return length_;
+}
+inline void CProcessFeatureReqProto::set_length(double value) {
+  set_has_length();
+  length_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Length)
+}
+
+// required double Width = 8;
+inline bool CProcessFeatureReqProto::has_width() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_width() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void CProcessFeatureReqProto::clear_has_width() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void CProcessFeatureReqProto::clear_width() {
+  width_ = 0;
+  clear_has_width();
+}
+inline double CProcessFeatureReqProto::width() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.Width)
+  return width_;
+}
+inline void CProcessFeatureReqProto::set_width(double value) {
+  set_has_width();
+  width_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Width)
+}
+
+// required double WidthLengthRatio = 9;
+inline bool CProcessFeatureReqProto::has_widthlengthratio() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_widthlengthratio() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void CProcessFeatureReqProto::clear_has_widthlengthratio() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void CProcessFeatureReqProto::clear_widthlengthratio() {
+  widthlengthratio_ = 0;
+  clear_has_widthlengthratio();
+}
+inline double CProcessFeatureReqProto::widthlengthratio() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.WidthLengthRatio)
+  return widthlengthratio_;
+}
+inline void CProcessFeatureReqProto::set_widthlengthratio(double value) {
+  set_has_widthlengthratio();
+  widthlengthratio_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.WidthLengthRatio)
+}
+
+// required double ApexAngle = 10;
+inline bool CProcessFeatureReqProto::has_apexangle() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_apexangle() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void CProcessFeatureReqProto::clear_has_apexangle() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void CProcessFeatureReqProto::clear_apexangle() {
+  apexangle_ = 0;
+  clear_has_apexangle();
+}
+inline double CProcessFeatureReqProto::apexangle() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.ApexAngle)
+  return apexangle_;
+}
+inline void CProcessFeatureReqProto::set_apexangle(double value) {
+  set_has_apexangle();
+  apexangle_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.ApexAngle)
+}
+
+// required double Circularity = 11;
+inline bool CProcessFeatureReqProto::has_circularity() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_circularity() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void CProcessFeatureReqProto::clear_has_circularity() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void CProcessFeatureReqProto::clear_circularity() {
+  circularity_ = 0;
+  clear_has_circularity();
+}
+inline double CProcessFeatureReqProto::circularity() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.Circularity)
+  return circularity_;
+}
+inline void CProcessFeatureReqProto::set_circularity(double value) {
+  set_has_circularity();
+  circularity_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Circularity)
+}
+
+// required double Area = 12;
+inline bool CProcessFeatureReqProto::has_area() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_area() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void CProcessFeatureReqProto::clear_has_area() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void CProcessFeatureReqProto::clear_area() {
+  area_ = 0;
+  clear_has_area();
+}
+inline double CProcessFeatureReqProto::area() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.Area)
+  return area_;
+}
+inline void CProcessFeatureReqProto::set_area(double value) {
+  set_has_area();
+  area_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Area)
+}
+
+// required double ThickMean = 13;
+inline bool CProcessFeatureReqProto::has_thickmean() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_thickmean() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void CProcessFeatureReqProto::clear_has_thickmean() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void CProcessFeatureReqProto::clear_thickmean() {
+  thickmean_ = 0;
+  clear_has_thickmean();
+}
+inline double CProcessFeatureReqProto::thickmean() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.ThickMean)
+  return thickmean_;
+}
+inline void CProcessFeatureReqProto::set_thickmean(double value) {
+  set_has_thickmean();
+  thickmean_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.ThickMean)
+}
+
+// required double DefectRate = 14;
+inline bool CProcessFeatureReqProto::has_defectrate() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void CProcessFeatureReqProto::set_has_defectrate() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void CProcessFeatureReqProto::clear_has_defectrate() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void CProcessFeatureReqProto::clear_defectrate() {
+  defectrate_ = 0;
+  clear_has_defectrate();
+}
+inline double CProcessFeatureReqProto::defectrate() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.DefectRate)
+  return defectrate_;
+}
+inline void CProcessFeatureReqProto::set_defectrate(double value) {
+  set_has_defectrate();
+  defectrate_ = value;
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DefectRate)
 }
 
 // -------------------------------------------------------------------
 
 // SProcessFeatureRepProto
 
-// required int32 image_seq = 1;
-inline bool SProcessFeatureRepProto::has_image_seq() const {
+// required uint32 result = 1;
+inline bool SProcessFeatureRepProto::has_result() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SProcessFeatureRepProto::set_has_image_seq() {
+inline void SProcessFeatureRepProto::set_has_result() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void SProcessFeatureRepProto::clear_has_image_seq() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void SProcessFeatureRepProto::clear_image_seq() {
-  image_seq_ = 0;
-  clear_has_image_seq();
-}
-inline ::google::protobuf::int32 SProcessFeatureRepProto::image_seq() const {
-  // @@protoc_insertion_point(field_get:SProcessFeatureRepProto.image_seq)
-  return image_seq_;
-}
-inline void SProcessFeatureRepProto::set_image_seq(::google::protobuf::int32 value) {
-  set_has_image_seq();
-  image_seq_ = value;
-  // @@protoc_insertion_point(field_set:SProcessFeatureRepProto.image_seq)
-}
-
-// required uint32 result = 2;
-inline bool SProcessFeatureRepProto::has_result() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void SProcessFeatureRepProto::set_has_result() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void SProcessFeatureRepProto::clear_has_result() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void SProcessFeatureRepProto::clear_result() {
   result_ = 0u;
@@ -3029,39 +3288,15 @@ inline void SProcessFeatureRepProto::set_result(::google::protobuf::uint32 value
 
 // SProcessResultProto
 
-// required int32 image_seq = 1;
-inline bool SProcessResultProto::has_image_seq() const {
+// required uint32 result = 1;
+inline bool SProcessResultProto::has_result() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SProcessResultProto::set_has_image_seq() {
+inline void SProcessResultProto::set_has_result() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void SProcessResultProto::clear_has_image_seq() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void SProcessResultProto::clear_image_seq() {
-  image_seq_ = 0;
-  clear_has_image_seq();
-}
-inline ::google::protobuf::int32 SProcessResultProto::image_seq() const {
-  // @@protoc_insertion_point(field_get:SProcessResultProto.image_seq)
-  return image_seq_;
-}
-inline void SProcessResultProto::set_image_seq(::google::protobuf::int32 value) {
-  set_has_image_seq();
-  image_seq_ = value;
-  // @@protoc_insertion_point(field_set:SProcessResultProto.image_seq)
-}
-
-// required uint32 result = 2;
-inline bool SProcessResultProto::has_result() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void SProcessResultProto::set_has_result() {
-  _has_bits_[0] |= 0x00000002u;
-}
 inline void SProcessResultProto::clear_has_result() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void SProcessResultProto::clear_result() {
   result_ = 0u;
@@ -3077,15 +3312,15 @@ inline void SProcessResultProto::set_result(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:SProcessResultProto.result)
 }
 
-// required int32 level = 3;
+// required int32 level = 2;
 inline bool SProcessResultProto::has_level() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void SProcessResultProto::set_has_level() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void SProcessResultProto::clear_has_level() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void SProcessResultProto::clear_level() {
   level_ = 0;
@@ -3101,15 +3336,15 @@ inline void SProcessResultProto::set_level(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:SProcessResultProto.level)
 }
 
-// required bytes data = 4;
+// required bytes data = 3;
 inline bool SProcessResultProto::has_data() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void SProcessResultProto::set_has_data() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void SProcessResultProto::clear_has_data() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void SProcessResultProto::clear_data() {
   data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());

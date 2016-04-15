@@ -88,26 +88,34 @@ message FValidatePosReqpProto
 // cpsd向casd发送的请求处理特征的协议
 message CProcessFeatureReqProto
 {
-	required int32 image_seq = 1;		// 图片序号
-	required int32 x = 2;			// 一系列特征
-	required int32 y = 3;
-	required bytes data = 4;
+    required double AvgSaturation = 1;                  // 平均饱和度
+    required double AvgHue = 2;                         // 平均色调
+    required double AvgIntensity = 3;                   // 平均亮度
+    required double DeviationSaturation = 4;            // 饱和度标准差
+    required double DeviationHue = 5;                   // 色度标准差
+    required double DeviationIntensity = 6;             // 亮度标准差
+    required double Length  = 7;                        // 叶片长度
+    required double Width = 8;                          // 叶片宽度
+    required double WidthLengthRatio = 9;               // 叶片长宽比
+    required double ApexAngle = 10;                     // 叶尖角
+    required double Circularity = 11;                   // 圆度
+    required double Area = 12;                          // 面积
+    required double ThickMean = 13;                     // 平均厚度
+    required double DefectRate = 14;                    // 残伤率
 }
 
 // casd返回给cpsd的请求处理特征的响应协议
 message SProcessFeatureRepProto
 {
-	required int32 image_seq = 1;		// 图片序号
-	required uint32 result = 2;		// 0: 代表成功，否则: 失败
+	required uint32 result = 1;		// 0: 代表成功，否则: 失败
 }
 
 // casd返回给客户端的处理结果的协议
 message SProcessResultProto
 {
-	required int32 image_seq = 1;		// 图片序号
-	required uint32 result = 2;		// 0: 代表成功, 否则: 失败
-	required int32	level = 3;		// 等级
-	required bytes data = 4;		// 其它数据
+	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+	required int32	level = 2;		// 等级
+	required bytes data = 3;		// 其它数据
 }
 
 // 客户端向casd发送的设置状态的协议

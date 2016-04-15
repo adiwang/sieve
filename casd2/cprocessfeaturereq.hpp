@@ -5,6 +5,7 @@
 #include "protocolid.h"
 #include "net_base.h"
 #include "packet_sync.h"
+#include "common_def.h"
 #include "pb/netmessage.pb.h"
 #include "channel.h"
 #include "tcpserver.h"
@@ -47,7 +48,6 @@ class CProcessFeatureReq : public Protocol
 			return;
 		}
 		SProcessResult client_rep;
-		client_rep._image_seq = _image_seq;
 		int state = pChannel->GetState();
 		if(state == CASD::Channel::ST_LEARN)
 		{
@@ -85,7 +85,6 @@ private:
     void NotifyError(UVNET::TCPServer* server, UVNET::SessionCtx* ctx, int retcode)
 	{
 		SProcessFeatureRep rep;
-		rep._image_seq = _image_seq;
 		rep._result = retcode;
 		rep.Marshal();
 		server->_send(rep._marshal_data, ctx);

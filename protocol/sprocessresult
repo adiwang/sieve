@@ -1,5 +1,4 @@
 public:
-	int _image_seq;
 	uint32_t _result;
 	int _level;
 	std::string _data;
@@ -10,9 +9,9 @@ public:
 	{
 		PROTOCOL_ID = PROTOCOL_ID_SPROCESSRESULT,
 	};
-	SProcessResult() : _image_seq(0), _result(0), _level(0){}
-	SProcessResult(int image_seq, uint32_t result, int level, std::string data) 
-		: _image_seq(image_seq), _result(result), _level(level), _data(data) 
+	SProcessResult() : _result(0), _level(0){}
+	SProcessResult(uint32_t result, int level, std::string data) 
+		: _result(result), _level(level), _data(data) 
 	{
 	}
 	~SProcessResult() {}
@@ -21,7 +20,6 @@ public:
 	{
 		// 1. 设置协议具体子段
 		SProcessResultProto proto;
-		proto.set_image_seq(_image_seq);
 		proto.set_result(_result);
 		proto.set_level(_level);
 		proto.set_data(_data);
@@ -45,7 +43,6 @@ public:
 	{
 		SProcessResultProto proto;
 		proto.ParseFromString(std::string(buf, length));
-		_image_seq = proto.image_seq();
 		_result = proto.result();
 		_level = proto.level();
 		_data = proto.data();

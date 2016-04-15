@@ -5,6 +5,7 @@
 #include "protocolid.h"
 #include "net_base.h"
 #include "packet_sync.h"
+#include "common_def.h"
 #include "pb/netmessage.pb.h"
 
 

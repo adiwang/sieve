@@ -1,5 +1,4 @@
 public:
-	int _image_seq;
 	uint32_t _result;
 	std::string _marshal_data;
 
@@ -9,14 +8,13 @@ public:
 		PROTOCOL_ID = PROTOCOL_ID_SPROCESSFEATUREREP,
 	};
 	SProcessFeatureRep() : _result(0) {}
-	SProcessFeatureRep(int image_seq, uint32_t result) : _image_seq(image_seq), _result(result) {}
+	SProcessFeatureRep(uint32_t result) : _result(result) {}
 	~SProcessFeatureRep() {}
 
 	virtual const std::string& Marshal()
 	{
 		// 1. 设置协议具体子段
 		SProcessFeatureRepProto proto;
-		proto.set_image_seq(_image_seq);
 		proto.set_result(_result);
 		// 2. 给协议wrap一层，添加protocol id
 		CProto cproto;
@@ -38,7 +36,6 @@ public:
 	{
 		SProcessFeatureRepProto proto;
 		proto.ParseFromString(std::string(buf, length));
-		_image_seq = proto.image_seq();
 		_result = proto.result();
 	}
 
