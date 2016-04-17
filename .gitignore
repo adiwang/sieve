@@ -29,3 +29,5 @@ casd2/casd
 cpsd2/cpsd
 casd2/test_pyloader
 casd2/script/
+common/json/sconscript
+common/json/jsoncpp
