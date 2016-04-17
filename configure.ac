@@ -42,6 +42,7 @@ AC_CHECK_FUNCS([localtime_r memchr memmove memset mkdir strerror])
 
 AC_CONFIG_FILES([Makefile
                  common/Makefile
+                 common/json/Makefile
                  test/Makefile
                  pb/Makefile
                  queryd/Makefile

@@ -1,3 +1,4 @@
+SUBDIRS = json
 noinst_PROGRAMS = tcpserver tcpclient log configfile
 tcpserver_SOURCES = tcpserver.cpp 
 #tcpserver_CPPFLAGS = -std=c++0x
