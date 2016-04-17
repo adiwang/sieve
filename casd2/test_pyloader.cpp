@@ -16,5 +16,7 @@ int main(int argc, char *argv[])
     int ok = 0;
     ok = PyArg_Parse(pRes, "i", &retval);
     cout << "call test.py add fucntion: 3 + 4 = " << retval << endl;
+    PyObject* pIns = PyLoader::GetInstance().CreateClassInstance("pytest", "guestlist");
+    PyLoader::GetInstance().CallInstanceMethod(pIns, "p");
     return 0;
 }
