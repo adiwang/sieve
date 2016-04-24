@@ -35,6 +35,8 @@ private:
 public:
     std::string GroupRankMap2Json(GroupRankMap& group2rank);
     int Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank);
+    void LeafFeature2Json(LeafFeature& feature, Json::Value& value);
+    void Json2LeafFeature(Json::Value& value, LeafFeature& feature);
 
 };
 

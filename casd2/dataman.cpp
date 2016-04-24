@@ -29,20 +29,7 @@ std::string DataMan::GroupRankMap2Json(GroupRankMap& group2rank)
                 for(FeatureListIter fit = rit->second.begin(); fit != rit->second.end(); ++fit)
                 {
                     Json::Value f_value;
-                    f_value["avg_saturation"] = fit->AvgSaturation;
-                    f_value["avg_hue"] = fit->AvgHue;
-                    f_value["avg_intensity"] = fit->AvgIntensity;
-                    f_value["deviation_saturation"] = fit->DeviationSaturation;
-                    f_value["deviation_hue"] = fit->DeviationHue;
-                    f_value["deviation_intensity"] = fit->DeviationIntensity;
-                    f_value["length"] = fit->Length;
-                    f_value["width"] = fit->Width;
-                    f_value["width_length_ratio"] = fit->WidthLengthRatio;
-                    f_value["apex_angle"] = fit->ApexAngle;
-                    f_value["circularity"] = fit->Circularity;
-                    f_value["area"] = fit->Area;
-                    f_value["thick_mean"] = fit->ThickMean;
-                    f_value["defect_rate"] = fit->DefectRate;
+                    LeafFeature2Json(*fit, f_value);
                     fl_value.append(f_value);
                 }
                 ss.str("");
@@ -90,20 +77,8 @@ int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
                 for(unsigned int i = 0; i < fl_value.size(); ++i)
                 {
                     LeafFeature f;
-                    f.AvgSaturation = fl_value[i]["avg_saturation"].asDouble();                 
-                    f.AvgHue = fl_value[i]["avg_hue"].asDouble();                 
-                    f.AvgIntensity = fl_value[i]["avg_intensity"].asDouble();                 
-                    f.DeviationSaturation = fl_value[i]["deviation_saturation"].asDouble();                 
-                    f.DeviationHue = fl_value[i]["deviation_hue"].asDouble();                 
-                    f.DeviationIntensity = fl_value[i]["deviation_intensity"].asDouble();                 
-                    f.Length = fl_value[i]["length"].asDouble();                 
-                    f.Width = fl_value[i]["width"].asDouble();                 
-                    f.WidthLengthRatio = fl_value[i]["width_length_ratio"].asDouble();                 
-                    f.ApexAngle = fl_value[i]["apex_angle"].asDouble();                 
-                    f.Circularity = fl_value[i]["circularity"].asDouble();                 
-                    f.Area = fl_value[i]["area"].asDouble();                 
-                    f.ThickMean = fl_value[i]["thick_mean"].asDouble();                 
-                    f.DefectRate = fl_value[i]["defect_rate"].asDouble();                 
+                    Json::Value& fval = fl_value[i];
+                    Json2LeafFeature(fval, f);
                     fl.push_back(f);
                 }
                 r2fl.insert(std::make_pair(atoi(r_name.c_str()), fl));
@@ -117,6 +92,42 @@ int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
         return 1;
     } 
     return 0;
+}
+
+void DataMan::LeafFeature2Json(LeafFeature& feature, Json::Value& value)
+{
+    value["avg_saturation"] = feature.AvgSaturation;
+    value["avg_hue"] = feature.AvgHue;
+    value["avg_intensity"] = feature.AvgIntensity;
+    value["deviation_saturation"] = feature.DeviationSaturation;
+    value["deviation_hue"] = feature.DeviationHue;
+    value["deviation_intensity"] = feature.DeviationIntensity;
+    value["length"] = feature.Length;
+    value["width"] = feature.Width;
+    value["width_length_ratio"] = feature.WidthLengthRatio;
+    value["apex_angle"] = feature.ApexAngle;
+    value["circularity"] = feature.Circularity;
+    value["area"] = feature.Area;
+    value["thick_mean"] = feature.ThickMean;
+    value["defect_rate"] = feature.DefectRate;
+}
+
+void DataMan::Json2LeafFeature(Json::Value& value, LeafFeature& feature)
+{
+    feature.AvgSaturation = value["avg_saturation"].asDouble();                 
+    feature.AvgHue = value["avg_hue"].asDouble();                 
+    feature.AvgIntensity = value["avg_intensity"].asDouble();                 
+    feature.DeviationSaturation = value["deviation_saturation"].asDouble();                 
+    feature.DeviationHue = value["deviation_hue"].asDouble();                 
+    feature.DeviationIntensity = value["deviation_intensity"].asDouble();                 
+    feature.Length = value["length"].asDouble();                 
+    feature.Width = value["width"].asDouble();                 
+    feature.WidthLengthRatio = value["width_length_ratio"].asDouble();                 
+    feature.ApexAngle = value["apex_angle"].asDouble();                 
+    feature.Circularity = value["circularity"].asDouble();                 
+    feature.Area = value["area"].asDouble();                 
+    feature.ThickMean = value["thick_mean"].asDouble();                 
+    feature.DefectRate = value["defect_rate"].asDouble(); 
 }
 
 
