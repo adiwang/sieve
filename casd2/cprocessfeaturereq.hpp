@@ -11,6 +11,8 @@
 #include "tcpserver.h"
 #include "sprocessfeaturerep.hpp"
 #include "sprocessresult.hpp"
+#include "common_def.h"
+#include <json/json.h>
 
 
 class CProcessFeatureReq : public Protocol
@@ -49,10 +51,20 @@ class CProcessFeatureReq : public Protocol
 		}
 		SProcessResult client_rep;
 		int state = pChannel->GetState();
+
+		LeafFeature feature;
+		feature.id = _id;
+		BuildLeafFeature(feature);
+
 		if(state == CASD::Channel::ST_LEARN)
 		{
 			// 学习
 			// 调用Learn来进行学习, 得到学习的结果，更新redis, 内存中的数据更新由算法类负责
+			//TODO: 
+			feature.Group = 1;
+			feature.Grade = 2;
+			SaveToSamples(feature);
+
 			client_rep._level = 1;
 			client_rep._result = 0;
 			client_rep._data = "learn test";
@@ -88,6 +100,31 @@ private:
 		rep._result = retcode;
 		rep.Marshal();
 		server->_send(rep._marshal_data, ctx);
+	}
+
+	void BuildLeafFeature(LeafFeature& feature)
+	{
+		feature.AvgSaturation = _AvgSaturation;
+		feature.AvgHue = _AvgHue;
+		feature.AvgIntensity = _AvgIntensity;
+		feature.DeviationSaturation = _DeviationSaturation;
+		feature.DeviationHue = _DeviationHue;
+		feature.DeviationIntensity = _DeviationIntensity;
+		feature.Length = _Length;
+		feature.Width = _Width;
+		feature.WidthLengthRatio = _WidthLengthRatio;
+		feature.ApexAngle = _ApexAngle;
+		feature.Circularity = _Circularity;
+		feature.Area = _Area;
+		feature.ThickMean = _ThickMean;
+		feature.DefectRate = _DefectRate;
+	}
+
+	void SaveToSamples(LeafFeature& feature)
+	{
+		Json::Value value;
+		DataMan::GetInstance().LeafFeature2Json(feature, value);
+		redisAsyncCommand(c, NULL, NULL, "HSET samples %s %s", feature.id.c_str(), value.toStyledString().c_str()));
 	}
 };
 

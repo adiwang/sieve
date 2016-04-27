@@ -1,3 +1,4 @@
+#include "pyloader.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -17,6 +18,7 @@
 #include "configfile.h"
 #include "channel.h"
 
+
 int main (int argc, char **argv) 
 {
 	if(argc < 2)
@@ -30,11 +32,16 @@ int main (int argc, char **argv)
 		fprintf(stdout,"load conf file %s error", argv[1]);
 		return 2;
 	}
+	// 加载配置
 	std::string logfile = cf.Value("Global", "LogFile", "./log");
 	std::string ip = cf.Value("Gloabal", "Address", "127.0.0.1");
 	std::string port = cf.Value("Global", "Port", "12345");
 	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
+
+	// 初始化
+	PyLoader::GetInstance().Init();
+    PyLoader::GetInstance().Load("leafgrade");
 
 	UVNET::TCPServer server(0xF0,0x0F);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
