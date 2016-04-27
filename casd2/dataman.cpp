@@ -59,7 +59,7 @@ int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
         Json::Value value;
         if(!reader.parse(jsonstr, value))       
         {
-            std::cerr << "DataMan::Json2GroupRankMap parse error! " << std::endl;
+            std::cerr << "DataMan::Json2GroupRankMap parse error!\n" << jsonstr << std::endl;
             return 1;
         }
         Json::Value::Members grp_names = value.getMemberNames();
@@ -130,5 +130,34 @@ void DataMan::Json2LeafFeature(Json::Value& value, LeafFeature& feature)
     feature.DefectRate = value["defect_rate"].asDouble(); 
 }
 
+void DataMan::AddSample(std::string jsonstr)
+{
+	Json::Reader reader;
+	Json::Value value;
+	if(!reader.parse(jsonstr, value))       
+	{
+		std::cerr << "DataMan::AddSample parse error!\n" << jsonstr << std::endl;
+		return;
+	}
+	int group = value["group"];
+	int grade = value["grade"];
+	GroupRankMapIter git = _samples.find(group);
+	if(git == _samples.end())
+	{
+		RankFeatureListMap r2fl;
+		_samples.insert(std::make_pair(group, r2fl));
+		git = _samples.find(group);
+	}
+	RankFeatureListMapIter rit = git->second.find(grade);
+	if(rit == git->second.end())
+	{
+		FeatureList fl;
+		git->second.insert(std::make_pair(grade, fl));
+		rit = git->second.find(grade);
+	}
+	LeafFeature feature;
+	Json2LeafFeature(value, feature);
+	rit->second.push_back(feature);
+}
 
 }   // end of namespace CASD
