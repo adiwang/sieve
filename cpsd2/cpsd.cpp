@@ -15,8 +15,9 @@
 #include "cregistercpsdreq.hpp"
 #include "protocolid.h"
 #include "leafanalysis.h"
-
+#include <time.h>
 #include <pylon/PylonIncludes.h>
+
 using namespace Pylon;
 using namespace std;
 
@@ -25,9 +26,25 @@ using namespace std;
 uint32_t gCurImageSeq = 0;
 // 一个物品需要在本相机需要拍摄几张图片
 uint32_t gImagesNumPerObj = 0; 
+// 当前物品的id
+std::string gCurID;
+
 UVNET::TCPClient casd_client(0xF0,0x0F);
 
 std::vector<CPylonImage> gGrabImages;
+
+void GenerateID()
+{
+	ConfigFile& cf = ConfigFile::GetInstance();
+	std::string region = cf.Value("Global", "Region", "");
+	int machine_id = atoi(cf.Value("Global", "MachineID", "").c_str());
+	time_t t = time(0); 
+	char cur_time[32] = {0};
+	strftime(cur_time, sizeof(cur_time), "%Y%m%d%H%M%S", localtime(&t));
+	char id[64] = {0};
+	snprintf(id, sizeof(id), "%s%04d%s", region.c_str(), machine_id, cur_time);
+	gCurID = std::string(id);
+}
 
 class CSampleImageEventHandler : public CImageEventHandler
 {
@@ -41,9 +58,6 @@ public:
             cout << "Error:" << ptrGrabResult->GetErrorCode() << " " << ptrGrabResult->GetErrorDescription() << std::endl;
             return;
         }
-        //TODO: 根据当前日期和批次
-        std::string image_path = "/tmp/20160407.png";
-        CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path.c_str()), ptrGrabResult);
 
         uint32_t image_seq = gCurImageSeq;
         LeafAnalysis& analysor = LeafAnalysis::GetInstance();
@@ -55,13 +69,17 @@ public:
         if(gCurImageSeq == 0)
         {
             // 当前图片序号是0说明这一张图片是物体的第一张图片，被用来校验摆放是否正确
-            
+            GenerateID();
+			char image_path[256] = {0};
+			snprintf(image_path, sizeof(image_path), "/tmp/%s/%2d.png", gCurID.c_str(), gCurImageSeq);
+			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
+
             gGrabImages.clear();
             bool isPosSuccess = true;
             FValidatePosReqp validate_proto;
             validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
             validate_proto._result = 0;
-            validate_proto._image_path = image_path;
+            validate_proto._image_path = std::string(image_path);
             validate_proto.Marshal();
             if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
             {
@@ -76,6 +94,9 @@ public:
         else if(gCurImageSeq <= gImagesNumPerObj - 1)
         {
             // 图片数目未达到足够的数量，保存图片数据到vector中
+			char image_path[256] = {0};
+			snprintf(image_path, sizeof(image_path), "/tmp/%s/%2d.png", gCurID.c_str(), gCurImageSeq);
+			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
             gGrabImages.push_back(image_BGR8);
             ++gCurImageSeq;
         }
@@ -86,7 +107,7 @@ public:
             // 调用处理类的处理函数
             analysor.FeatureExtract(gGrabImages);
             CProcessFeatureReq req_proto(analysor.GetFeature());
-
+			req_proto._id = gCurID;
             req_proto.Marshal();
             if (casd_client.Send(req_proto._marshal_data.c_str(), req_proto._marshal_data.size()) <= 0) 
             {
