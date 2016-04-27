@@ -1,4 +1,5 @@
 public:
+    string _id;
     double _AvgSaturation;
     double _AvgHue;
     double _AvgIntensity;
@@ -13,7 +14,7 @@ public:
     double _Area;
     double _ThickMean;
     double _DefectRate;
-	std::string _marshal_data;
+    std::string _marshal_data;
 
 public:
 	enum
@@ -64,20 +65,21 @@ public:
 	{
 		// 1. 设置协议具体子段
 		CProcessFeatureReqProto proto;
-        proto.set_avgsaturation(_AvgSaturation);
-        proto.set_avghue(_AvgHue);
-        proto.set_avgintensity(_AvgIntensity);
-        proto.set_deviationsaturation(_DeviationSaturation);
-        proto.set_deviationhue(_DeviationHue);
-        proto.set_deviationintensity(_DeviationIntensity);
-        proto.set_length(_Length);
-        proto.set_width(_Width);
-        proto.set_widthlengthratio(_WidthLengthRatio);
-        proto.set_apexangle(_ApexAngle);
-        proto.set_circularity(_Circularity);
-        proto.set_area(_Area);
-        proto.set_thickmean(_ThickMean);
-        proto.set_defectrate(_DefectRate);
+		proto.set_id(_id);
+		proto.set_avgsaturation(_AvgSaturation);
+		proto.set_avghue(_AvgHue);
+		proto.set_avgintensity(_AvgIntensity);
+		proto.set_deviationsaturation(_DeviationSaturation);
+		proto.set_deviationhue(_DeviationHue);
+		proto.set_deviationintensity(_DeviationIntensity);
+		proto.set_length(_Length);
+		proto.set_width(_Width);
+		proto.set_widthlengthratio(_WidthLengthRatio);
+		proto.set_apexangle(_ApexAngle);
+		proto.set_circularity(_Circularity);
+		proto.set_area(_Area);
+		proto.set_thickmean(_ThickMean);
+		proto.set_defectrate(_DefectRate);
 
 		// 2. 给协议wrap一层，添加protocol id
 		CProto cproto;
@@ -99,20 +101,21 @@ public:
 	{
 		CProcessFeatureReqProto proto;
 		proto.ParseFromString(std::string(buf, length));
-        _AvgSaturation = proto.avgsaturation();
-        _AvgHue = proto.avghue();
-        _AvgIntensity = proto.avgintensity();
-        _DeviationSaturation = proto.deviationsaturation();
-        _DeviationHue = proto.deviationhue();
-        _DeviationIntensity = proto.deviationintensity();
-        _Length = proto.length();
-        _Width = proto.width();
-        _WidthLengthRatio = proto.widthlengthratio();
-        _ApexAngle = proto.apexangle();
-        _Circularity = proto.circularity();
-        _Area = proto.area();
-        _ThickMean = proto.thickmean();
-        _DefectRate = proto.defectrate();
+		_id = proto.id();
+		_AvgSaturation = proto.avgsaturation();
+		_AvgHue = proto.avghue();
+		_AvgIntensity = proto.avgintensity();
+		_DeviationSaturation = proto.deviationsaturation();
+		_DeviationHue = proto.deviationhue();
+		_DeviationIntensity = proto.deviationintensity();
+		_Length = proto.length();
+		_Width = proto.width();
+		_WidthLengthRatio = proto.widthlengthratio();
+		_ApexAngle = proto.apexangle();
+		_Circularity = proto.circularity();
+		_Area = proto.area();
+		_ThickMean = proto.thickmean();
+		_DefectRate = proto.defectrate();
 	}
 
     virtual Protocol* Clone()

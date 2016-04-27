@@ -88,20 +88,21 @@ message FValidatePosReqpProto
 // cpsd向casd发送的请求处理特征的协议
 message CProcessFeatureReqProto
 {
-    required double AvgSaturation = 1;                  // 平均饱和度
-    required double AvgHue = 2;                         // 平均色调
-    required double AvgIntensity = 3;                   // 平均亮度
-    required double DeviationSaturation = 4;            // 饱和度标准差
-    required double DeviationHue = 5;                   // 色度标准差
-    required double DeviationIntensity = 6;             // 亮度标准差
-    required double Length  = 7;                        // 叶片长度
-    required double Width = 8;                          // 叶片宽度
-    required double WidthLengthRatio = 9;               // 叶片长宽比
-    required double ApexAngle = 10;                     // 叶尖角
-    required double Circularity = 11;                   // 圆度
-    required double Area = 12;                          // 面积
-    required double ThickMean = 13;                     // 平均厚度
-    required double DefectRate = 14;                    // 残伤率
+    required string id = 1;				// id
+    required double AvgSaturation = 2;                  // 平均饱和度
+    required double AvgHue = 3;                         // 平均色调
+    required double AvgIntensity = 4;                   // 平均亮度
+    required double DeviationSaturation = 5;            // 饱和度标准差
+    required double DeviationHue = 6;                   // 色度标准差
+    required double DeviationIntensity = 7;             // 亮度标准差
+    required double Length  = 8;                        // 叶片长度
+    required double Width = 9;                          // 叶片宽度
+    required double WidthLengthRatio = 10;               // 叶片长宽比
+    required double ApexAngle = 11;                     // 叶尖角
+    required double Circularity = 12;                   // 圆度
+    required double Area = 13;                          // 面积
+    required double ThickMean = 14;                     // 平均厚度
+    required double DefectRate = 15;                    // 残伤率
 }
 
 // casd返回给cpsd的请求处理特征的响应协议
