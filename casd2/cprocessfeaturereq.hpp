@@ -13,6 +13,8 @@
 #include "sprocessresult.hpp"
 #include "common_def.h"
 #include <json/json.h>
+#include "dataman.h"
+#include "pyloader.h"
 
 
 class CProcessFeatureReq : public Protocol
@@ -56,16 +58,23 @@ class CProcessFeatureReq : public Protocol
 		feature.id = _id;
 		BuildLeafFeature(feature);
 
+		PyObject* pLeafGradeIns = CASD::DataMan::GetInstance().GetLeafGradeInstance();
+		if(!pLeafGradeIns)
+		{
+			// 学习/分类器不存在
+			NotifyError(server, ctx, 4);
+			return;
+		}
+		Py_INCREF(pLeafGradeIns);
+
 		if(state == CASD::Channel::ST_LEARN)
 		{
 			// 学习
 			// 调用Learn来进行学习, 得到学习的结果，更新redis, 内存中的数据更新由算法类负责
-			//TODO: 
-			feature.Group = 1;
-			feature.Grade = 2;
+			CallMethod(pLeafGradeIns, "LearnOne", feature);
 			SaveToSamples(feature);
 
-			client_rep._level = 1;
+			client_rep._level = feature.Group;
 			client_rep._result = 0;
 			client_rep._data = "learn test";
 		}
@@ -73,13 +82,16 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 分选
 			// 调用Class来进行分选，得到分选结果，存到redis，设置生命周期
-			client_rep._level = 2;
+			CallMethod(pLeafGradeIns, "ClassifyOne", feature);
+
+			client_rep._level = feature.Group;
 			client_rep._result = 0;
 			client_rep._data = "class test";
 		}
 		else
 		{
 			// 无效状态，不可能出现
+			Py_DECREF(pLeafGradeIns);
 			return;
 		}
 
@@ -91,6 +103,7 @@ class CProcessFeatureReq : public Protocol
 			// 向客户端发送处理结果
 			server->_send(client_rep.Marshal(), client_ctx);
 		}
+		Py_DECREF(pLeafGradeIns);
 	}
 
 private:
@@ -122,9 +135,33 @@ private:
 
 	void SaveToSamples(LeafFeature& feature)
 	{
+		std::string json_str = GetFeatureJson(feature);
+		redisAsyncCommand(c, NULL, NULL, "HSET samples %s %s", feature.id.c_str(), json_str.c_str());
+	}
+
+	std::string GetFeatureJson(LeafFeature& feature)
+    {
 		Json::Value value;
 		DataMan::GetInstance().LeafFeature2Json(feature, value);
-		redisAsyncCommand(c, NULL, NULL, "HSET samples %s %s", feature.id.c_str(), value.toStyledString().c_str()));
+		return value.toStyledString();
+	}
+
+	void CallMethod(PyObject* pIns, const char * methodName, LeafFeature& feature)
+	{
+		PyObject* pArgs = PyTuple_New(1);
+		std::string samples_json = GetFeatureJson(feature);
+		PyTuple_SetItem(pArgs, 0, Py_BuildValue("s",samples_json.c_str()));
+		PyObject* pRes = PyLoader::GetInstance().CallInstanceMethod(pIns, methodName, pArgs);
+		if(pRes)
+		{
+			if(strcmp(methodName, "ClassifyOne") == 0)
+			{
+				PyArg_ParseTuple(pRes, "ii", &feature.Group, &feature.Grade);
+			}
+			Py_DECREF(pRes);
+			pRes = NULL;
+		}
+		Py_DECREF(pArgs);
 	}
 };
 
