@@ -17,6 +17,7 @@
 #include "csetprocessstatereq.hpp"
 #include "configfile.h"
 #include "channel.h"
+#include "dataman.h"
 
 
 int main (int argc, char **argv) 
@@ -40,11 +41,14 @@ int main (int argc, char **argv)
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
 
 	// 初始化
-	PyLoader::GetInstance().Init();
-    PyLoader::GetInstance().Load("leafgrade");
+	CASD::PyLoader::GetInstance().Init();
+    CASD::PyLoader::GetInstance().Load("leafgrade");
+	PyObject* pLeafGradeIns = CASD::PyLoader::GetInstance().CreateClassInstance("leafgrade", "LeafGrade");
+	CASD::DataMan::GetInstance().SetLeafGradeInstance(pLeafGradeIns);
 
 	UVNET::TCPServer server(0xF0,0x0F);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
+	// 注册协议
 	server.AddProtocol(PROTOCOL_ID_CREGISTERCPSDREQ, new CRegisterCpsdReq());
 	server.AddProtocol(PROTOCOL_ID_CREGISTERCLIENTREQ, new CRegisterClientReq());
 	server.AddProtocol(PROTOCOL_ID_CPROCESSFEATUREREQ, new CProcessFeatureReq());
