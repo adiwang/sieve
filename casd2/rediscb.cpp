@@ -1,3 +1,4 @@
+#include "pyloader.h"
 #include "rediscb.h"
 #include "stdio.h"
 #include "tcpserver.h"
@@ -35,7 +36,22 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 	{
 		DataMan::GetInstance().AddSample(reply->element[i].str);
 	}
-	//TODO: 这里调用处理类加载数据
+	//调用处理类加载数据
+	using namespace CASD;
+	PyObject* pIns = DataMan::GetInstance().GetLeafGradeInstance();
+	if(!pIns) return;
+	Py_INCREF(pIns);
+	std::string samples_json = DataMan::GetInstance().GetSamplesJson();
+	PyObject* pArgs = PyTuple_New(1);
+	PyTuple_SetItem(pArgs, 0, Py_BuildValue("s",samples_json.c_str()));
+	PyObject* pRes = PyLoader::GetInstance().CallInstanceMethod(pIns, "Load", pArgs);
+	if(pRes)
+	{
+		Py_DECREF(pRes);
+		pRes = NULL;
+	}
+	Py_DECREF(pArgs);
+	Py_DECREF(pIns);
 }
 
 
