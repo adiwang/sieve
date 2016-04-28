@@ -1,5 +1,6 @@
 #ifndef _CASD_DATAMAN_H
 #define _CASD_DATAMAN_H
+#include <Python.h>
 #include <vector>
 #include <map>
 #include "common_def.h"
@@ -26,11 +27,12 @@ public:
     }
 
 private:
-    GroupRankMap _samples;   // 样本数据存储结构
+    GroupRankMap _samples;					// 样本数据存储结构
+	PyObject*	_leafgrade_instance;		// python脚本中提供的用来学习和分类的类的实例
 
 
 private:
-    DataMan() {}
+    DataMan() : _leafgrade_instance(NULL) {}
 
 public:
     std::string GroupRankMap2Json(GroupRankMap& group2rank);
@@ -38,6 +40,9 @@ public:
     void LeafFeature2Json(LeafFeature& feature, Json::Value& value);
     void Json2LeafFeature(Json::Value& value, LeafFeature& feature);
 	void AddSample(std::string jsonstr);
+	void SetLeafGradeInstance(PyObject* instance);
+	PyObject* GetLeafGradeInstance();
+	std::string GetSamplesJson();
 };
 
 

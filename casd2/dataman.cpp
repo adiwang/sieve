@@ -11,6 +11,12 @@ DataMan::~DataMan()
 {
     // 清除样本库
     _samples.clear();
+	// 释放python中类的实例
+	if(_leafgrade_instance)
+	{
+		Py_DECREF(_leafgrade_instance);
+		_leafgrade_instance = NULL;
+	}
 }
 
 std::string DataMan::GroupRankMap2Json(GroupRankMap& group2rank)
@@ -158,6 +164,25 @@ void DataMan::AddSample(std::string jsonstr)
 	LeafFeature feature;
 	Json2LeafFeature(value, feature);
 	rit->second.push_back(feature);
+}
+
+void DataMan::SetLeafGradeInstance(PyObject* instance)
+{
+	if(_leafgrade_instance)
+	{
+		Py_DECREF(_leafgrade_instance);
+	}
+	_leafgrade_instance = instance;
+}
+
+PyObject* DataMan::GetLeafGradeInstance()
+{
+	return _leafgrade_instance;
+}
+
+std::string DataMan::GetSamplesJson()
+{
+	return GroupRankMap2Json(_samples);
 }
 
 }   // end of namespace CASD
