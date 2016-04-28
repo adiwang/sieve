@@ -34,7 +34,7 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 	size_t sample_count = reply->elements;
 	for(size_t i = 0; i < sample_count; ++i)
 	{
-		DataMan::GetInstance().AddSample(reply->element[i].str);
+		DataMan::GetInstance().AddSample(reply->element[i]->str);
 	}
 	//调用处理类加载数据
 	using namespace CASD;
@@ -52,6 +52,7 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 	}
 	Py_DECREF(pArgs);
 	Py_DECREF(pIns);
+	freeReplyObject(reply);
 }
 
 
