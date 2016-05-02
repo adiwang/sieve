@@ -1,7 +1,7 @@
+#include "dataman.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "dataman.h"
 #include <json/json.h>
 
 using namespace CASD;

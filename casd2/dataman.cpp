@@ -145,8 +145,8 @@ void DataMan::AddSample(std::string jsonstr)
 		std::cerr << "DataMan::AddSample parse error!\n" << jsonstr << std::endl;
 		return;
 	}
-	int group = value["group"];
-	int grade = value["grade"];
+	int group = value["group"].asInt();
+	int grade = value["grade"].asInt();
 	GroupRankMapIter git = _samples.find(group);
 	if(git == _samples.end())
 	{

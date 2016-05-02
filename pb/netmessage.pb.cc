@@ -291,7 +291,8 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FValidatePosReqpProto, _internal_metadata_),
       -1);
   CProcessFeatureReqProto_descriptor_ = file->message_type(13);
-  static const int CProcessFeatureReqProto_offsets_[14] = {
+  static const int CProcessFeatureReqProto_offsets_[15] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CProcessFeatureReqProto, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CProcessFeatureReqProto, avgsaturation_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CProcessFeatureReqProto, avghue_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CProcessFeatureReqProto, avgintensity_),
@@ -494,20 +495,20 @@ void protobuf_AddDesc_netmessage_2eproto() {
     "RegisterClientReqProto\022\013\n\003seq\030\001 \002(\r\")\n\027S"
     "RegisterClientRepProto\022\016\n\006result\030\001 \002(\r\";"
     "\n\025FValidatePosReqpProto\022\016\n\006result\030\001 \002(\r\022"
-    "\022\n\nimage_path\030\002 \002(\t\"\273\002\n\027CProcessFeatureR"
-    "eqProto\022\025\n\rAvgSaturation\030\001 \002(\001\022\016\n\006AvgHue"
-    "\030\002 \002(\001\022\024\n\014AvgIntensity\030\003 \002(\001\022\033\n\023Deviatio"
-    "nSaturation\030\004 \002(\001\022\024\n\014DeviationHue\030\005 \002(\001\022"
-    "\032\n\022DeviationIntensity\030\006 \002(\001\022\016\n\006Length\030\007 "
-    "\002(\001\022\r\n\005Width\030\010 \002(\001\022\030\n\020WidthLengthRatio\030\t"
-    " \002(\001\022\021\n\tApexAngle\030\n \002(\001\022\023\n\013Circularity\030\013"
-    " \002(\001\022\014\n\004Area\030\014 \002(\001\022\021\n\tThickMean\030\r \002(\001\022\022\n"
-    "\nDefectRate\030\016 \002(\001\")\n\027SProcessFeatureRepP"
-    "roto\022\016\n\006result\030\001 \002(\r\"B\n\023SProcessResultPr"
-    "oto\022\016\n\006result\030\001 \002(\r\022\r\n\005level\030\002 \002(\005\022\014\n\004da"
-    "ta\030\003 \002(\014\")\n\030CSetProcessStateReqProto\022\r\n\005"
-    "state\030\001 \002(\005\"*\n\030SSetProcessStateRepProto\022"
-    "\016\n\006result\030\001 \002(\r", 1175);
+    "\022\n\nimage_path\030\002 \002(\t\"\307\002\n\027CProcessFeatureR"
+    "eqProto\022\n\n\002id\030\001 \002(\t\022\025\n\rAvgSaturation\030\002 \002"
+    "(\001\022\016\n\006AvgHue\030\003 \002(\001\022\024\n\014AvgIntensity\030\004 \002(\001"
+    "\022\033\n\023DeviationSaturation\030\005 \002(\001\022\024\n\014Deviati"
+    "onHue\030\006 \002(\001\022\032\n\022DeviationIntensity\030\007 \002(\001\022"
+    "\016\n\006Length\030\010 \002(\001\022\r\n\005Width\030\t \002(\001\022\030\n\020WidthL"
+    "engthRatio\030\n \002(\001\022\021\n\tApexAngle\030\013 \002(\001\022\023\n\013C"
+    "ircularity\030\014 \002(\001\022\014\n\004Area\030\r \002(\001\022\021\n\tThickM"
+    "ean\030\016 \002(\001\022\022\n\nDefectRate\030\017 \002(\001\")\n\027SProces"
+    "sFeatureRepProto\022\016\n\006result\030\001 \002(\r\"B\n\023SPro"
+    "cessResultProto\022\016\n\006result\030\001 \002(\r\022\r\n\005level"
+    "\030\002 \002(\005\022\014\n\004data\030\003 \002(\014\")\n\030CSetProcessState"
+    "ReqProto\022\r\n\005state\030\001 \002(\005\"*\n\030SSetProcessSt"
+    "ateRepProto\022\016\n\006result\030\001 \002(\r", 1187);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
   CProto::default_instance_ = new CProto();
@@ -5285,6 +5286,7 @@ void FValidatePosReqpProto::clear_image_path() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CProcessFeatureReqProto::kIdFieldNumber;
 const int CProcessFeatureReqProto::kAvgSaturationFieldNumber;
 const int CProcessFeatureReqProto::kAvgHueFieldNumber;
 const int CProcessFeatureReqProto::kAvgIntensityFieldNumber;
@@ -5319,7 +5321,9 @@ CProcessFeatureReqProto::CProcessFeatureReqProto(const CProcessFeatureReqProto& 
 }
 
 void CProcessFeatureReqProto::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   avgsaturation_ = 0;
   avghue_ = 0;
   avgintensity_ = 0;
@@ -5343,6 +5347,7 @@ CProcessFeatureReqProto::~CProcessFeatureReqProto() {
 }
 
 void CProcessFeatureReqProto::SharedDtor() {
+  id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -5382,10 +5387,13 @@ void CProcessFeatureReqProto::Clear() {
 } while (0)
 
   if (_has_bits_[0 / 32] & 255u) {
-    ZR_(avgsaturation_, width_);
+    ZR_(avgsaturation_, length_);
+    if (has_id()) {
+      id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
   }
-  if (_has_bits_[8 / 32] & 16128u) {
-    ZR_(widthlengthratio_, defectrate_);
+  if (_has_bits_[8 / 32] & 32512u) {
+    ZR_(width_, defectrate_);
   }
 
 #undef ZR_HELPER_
@@ -5407,9 +5415,26 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double AvgSaturation = 1;
+      // required string id = 1;
       case 1: {
-        if (tag == 9) {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_id()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->id().data(), this->id().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "CProcessFeatureReqProto.id");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(17)) goto parse_AvgSaturation;
+        break;
+      }
+
+      // required double AvgSaturation = 2;
+      case 2: {
+        if (tag == 17) {
+         parse_AvgSaturation:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &avgsaturation_)));
@@ -5417,13 +5442,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(17)) goto parse_AvgHue;
+        if (input->ExpectTag(25)) goto parse_AvgHue;
         break;
       }
 
-      // required double AvgHue = 2;
-      case 2: {
-        if (tag == 17) {
+      // required double AvgHue = 3;
+      case 3: {
+        if (tag == 25) {
          parse_AvgHue:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5432,13 +5457,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(25)) goto parse_AvgIntensity;
+        if (input->ExpectTag(33)) goto parse_AvgIntensity;
         break;
       }
 
-      // required double AvgIntensity = 3;
-      case 3: {
-        if (tag == 25) {
+      // required double AvgIntensity = 4;
+      case 4: {
+        if (tag == 33) {
          parse_AvgIntensity:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5447,13 +5472,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(33)) goto parse_DeviationSaturation;
+        if (input->ExpectTag(41)) goto parse_DeviationSaturation;
         break;
       }
 
-      // required double DeviationSaturation = 4;
-      case 4: {
-        if (tag == 33) {
+      // required double DeviationSaturation = 5;
+      case 5: {
+        if (tag == 41) {
          parse_DeviationSaturation:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5462,13 +5487,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(41)) goto parse_DeviationHue;
+        if (input->ExpectTag(49)) goto parse_DeviationHue;
         break;
       }
 
-      // required double DeviationHue = 5;
-      case 5: {
-        if (tag == 41) {
+      // required double DeviationHue = 6;
+      case 6: {
+        if (tag == 49) {
          parse_DeviationHue:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5477,13 +5502,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(49)) goto parse_DeviationIntensity;
+        if (input->ExpectTag(57)) goto parse_DeviationIntensity;
         break;
       }
 
-      // required double DeviationIntensity = 6;
-      case 6: {
-        if (tag == 49) {
+      // required double DeviationIntensity = 7;
+      case 7: {
+        if (tag == 57) {
          parse_DeviationIntensity:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5492,13 +5517,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(57)) goto parse_Length;
+        if (input->ExpectTag(65)) goto parse_Length;
         break;
       }
 
-      // required double Length = 7;
-      case 7: {
-        if (tag == 57) {
+      // required double Length = 8;
+      case 8: {
+        if (tag == 65) {
          parse_Length:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5507,13 +5532,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(65)) goto parse_Width;
+        if (input->ExpectTag(73)) goto parse_Width;
         break;
       }
 
-      // required double Width = 8;
-      case 8: {
-        if (tag == 65) {
+      // required double Width = 9;
+      case 9: {
+        if (tag == 73) {
          parse_Width:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5522,13 +5547,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(73)) goto parse_WidthLengthRatio;
+        if (input->ExpectTag(81)) goto parse_WidthLengthRatio;
         break;
       }
 
-      // required double WidthLengthRatio = 9;
-      case 9: {
-        if (tag == 73) {
+      // required double WidthLengthRatio = 10;
+      case 10: {
+        if (tag == 81) {
          parse_WidthLengthRatio:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5537,13 +5562,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(81)) goto parse_ApexAngle;
+        if (input->ExpectTag(89)) goto parse_ApexAngle;
         break;
       }
 
-      // required double ApexAngle = 10;
-      case 10: {
-        if (tag == 81) {
+      // required double ApexAngle = 11;
+      case 11: {
+        if (tag == 89) {
          parse_ApexAngle:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5552,13 +5577,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(89)) goto parse_Circularity;
+        if (input->ExpectTag(97)) goto parse_Circularity;
         break;
       }
 
-      // required double Circularity = 11;
-      case 11: {
-        if (tag == 89) {
+      // required double Circularity = 12;
+      case 12: {
+        if (tag == 97) {
          parse_Circularity:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5567,13 +5592,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(97)) goto parse_Area;
+        if (input->ExpectTag(105)) goto parse_Area;
         break;
       }
 
-      // required double Area = 12;
-      case 12: {
-        if (tag == 97) {
+      // required double Area = 13;
+      case 13: {
+        if (tag == 105) {
          parse_Area:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5582,13 +5607,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(105)) goto parse_ThickMean;
+        if (input->ExpectTag(113)) goto parse_ThickMean;
         break;
       }
 
-      // required double ThickMean = 13;
-      case 13: {
-        if (tag == 105) {
+      // required double ThickMean = 14;
+      case 14: {
+        if (tag == 113) {
          parse_ThickMean:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5597,13 +5622,13 @@ bool CProcessFeatureReqProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(113)) goto parse_DefectRate;
+        if (input->ExpectTag(121)) goto parse_DefectRate;
         break;
       }
 
-      // required double DefectRate = 14;
-      case 14: {
-        if (tag == 113) {
+      // required double DefectRate = 15;
+      case 15: {
+        if (tag == 121) {
          parse_DefectRate:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -5641,74 +5666,84 @@ failure:
 void CProcessFeatureReqProto::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:CProcessFeatureReqProto)
-  // required double AvgSaturation = 1;
+  // required string id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->id().data(), this->id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "CProcessFeatureReqProto.id");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->id(), output);
+  }
+
+  // required double AvgSaturation = 2;
   if (has_avgsaturation()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->avgsaturation(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->avgsaturation(), output);
   }
 
-  // required double AvgHue = 2;
+  // required double AvgHue = 3;
   if (has_avghue()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->avghue(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->avghue(), output);
   }
 
-  // required double AvgIntensity = 3;
+  // required double AvgIntensity = 4;
   if (has_avgintensity()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->avgintensity(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->avgintensity(), output);
   }
 
-  // required double DeviationSaturation = 4;
+  // required double DeviationSaturation = 5;
   if (has_deviationsaturation()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->deviationsaturation(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->deviationsaturation(), output);
   }
 
-  // required double DeviationHue = 5;
+  // required double DeviationHue = 6;
   if (has_deviationhue()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->deviationhue(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->deviationhue(), output);
   }
 
-  // required double DeviationIntensity = 6;
+  // required double DeviationIntensity = 7;
   if (has_deviationintensity()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->deviationintensity(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->deviationintensity(), output);
   }
 
-  // required double Length = 7;
+  // required double Length = 8;
   if (has_length()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->length(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->length(), output);
   }
 
-  // required double Width = 8;
+  // required double Width = 9;
   if (has_width()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->width(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->width(), output);
   }
 
-  // required double WidthLengthRatio = 9;
+  // required double WidthLengthRatio = 10;
   if (has_widthlengthratio()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->widthlengthratio(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(10, this->widthlengthratio(), output);
   }
 
-  // required double ApexAngle = 10;
+  // required double ApexAngle = 11;
   if (has_apexangle()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(10, this->apexangle(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(11, this->apexangle(), output);
   }
 
-  // required double Circularity = 11;
+  // required double Circularity = 12;
   if (has_circularity()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(11, this->circularity(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(12, this->circularity(), output);
   }
 
-  // required double Area = 12;
+  // required double Area = 13;
   if (has_area()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(12, this->area(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(13, this->area(), output);
   }
 
-  // required double ThickMean = 13;
+  // required double ThickMean = 14;
   if (has_thickmean()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(13, this->thickmean(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(14, this->thickmean(), output);
   }
 
-  // required double DefectRate = 14;
+  // required double DefectRate = 15;
   if (has_defectrate()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(14, this->defectrate(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(15, this->defectrate(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5721,74 +5756,85 @@ void CProcessFeatureReqProto::SerializeWithCachedSizes(
 ::google::protobuf::uint8* CProcessFeatureReqProto::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:CProcessFeatureReqProto)
-  // required double AvgSaturation = 1;
+  // required string id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->id().data(), this->id().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "CProcessFeatureReqProto.id");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->id(), target);
+  }
+
+  // required double AvgSaturation = 2;
   if (has_avgsaturation()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->avgsaturation(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->avgsaturation(), target);
   }
 
-  // required double AvgHue = 2;
+  // required double AvgHue = 3;
   if (has_avghue()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->avghue(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->avghue(), target);
   }
 
-  // required double AvgIntensity = 3;
+  // required double AvgIntensity = 4;
   if (has_avgintensity()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->avgintensity(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->avgintensity(), target);
   }
 
-  // required double DeviationSaturation = 4;
+  // required double DeviationSaturation = 5;
   if (has_deviationsaturation()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->deviationsaturation(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->deviationsaturation(), target);
   }
 
-  // required double DeviationHue = 5;
+  // required double DeviationHue = 6;
   if (has_deviationhue()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->deviationhue(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->deviationhue(), target);
   }
 
-  // required double DeviationIntensity = 6;
+  // required double DeviationIntensity = 7;
   if (has_deviationintensity()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->deviationintensity(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->deviationintensity(), target);
   }
 
-  // required double Length = 7;
+  // required double Length = 8;
   if (has_length()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->length(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->length(), target);
   }
 
-  // required double Width = 8;
+  // required double Width = 9;
   if (has_width()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->width(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->width(), target);
   }
 
-  // required double WidthLengthRatio = 9;
+  // required double WidthLengthRatio = 10;
   if (has_widthlengthratio()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->widthlengthratio(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(10, this->widthlengthratio(), target);
   }
 
-  // required double ApexAngle = 10;
+  // required double ApexAngle = 11;
   if (has_apexangle()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(10, this->apexangle(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(11, this->apexangle(), target);
   }
 
-  // required double Circularity = 11;
+  // required double Circularity = 12;
   if (has_circularity()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(11, this->circularity(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(12, this->circularity(), target);
   }
 
-  // required double Area = 12;
+  // required double Area = 13;
   if (has_area()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(12, this->area(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(13, this->area(), target);
   }
 
-  // required double ThickMean = 13;
+  // required double ThickMean = 14;
   if (has_thickmean()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(13, this->thickmean(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(14, this->thickmean(), target);
   }
 
-  // required double DefectRate = 14;
+  // required double DefectRate = 15;
   if (has_defectrate()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(14, this->defectrate(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(15, this->defectrate(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5802,73 +5848,80 @@ void CProcessFeatureReqProto::SerializeWithCachedSizes(
 int CProcessFeatureReqProto::RequiredFieldsByteSizeFallback() const {
   int total_size = 0;
 
+  if (has_id()) {
+    // required string id = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->id());
+  }
+
   if (has_avgsaturation()) {
-    // required double AvgSaturation = 1;
+    // required double AvgSaturation = 2;
     total_size += 1 + 8;
   }
 
   if (has_avghue()) {
-    // required double AvgHue = 2;
+    // required double AvgHue = 3;
     total_size += 1 + 8;
   }
 
   if (has_avgintensity()) {
-    // required double AvgIntensity = 3;
+    // required double AvgIntensity = 4;
     total_size += 1 + 8;
   }
 
   if (has_deviationsaturation()) {
-    // required double DeviationSaturation = 4;
+    // required double DeviationSaturation = 5;
     total_size += 1 + 8;
   }
 
   if (has_deviationhue()) {
-    // required double DeviationHue = 5;
+    // required double DeviationHue = 6;
     total_size += 1 + 8;
   }
 
   if (has_deviationintensity()) {
-    // required double DeviationIntensity = 6;
+    // required double DeviationIntensity = 7;
     total_size += 1 + 8;
   }
 
   if (has_length()) {
-    // required double Length = 7;
+    // required double Length = 8;
     total_size += 1 + 8;
   }
 
   if (has_width()) {
-    // required double Width = 8;
+    // required double Width = 9;
     total_size += 1 + 8;
   }
 
   if (has_widthlengthratio()) {
-    // required double WidthLengthRatio = 9;
+    // required double WidthLengthRatio = 10;
     total_size += 1 + 8;
   }
 
   if (has_apexangle()) {
-    // required double ApexAngle = 10;
+    // required double ApexAngle = 11;
     total_size += 1 + 8;
   }
 
   if (has_circularity()) {
-    // required double Circularity = 11;
+    // required double Circularity = 12;
     total_size += 1 + 8;
   }
 
   if (has_area()) {
-    // required double Area = 12;
+    // required double Area = 13;
     total_size += 1 + 8;
   }
 
   if (has_thickmean()) {
-    // required double ThickMean = 13;
+    // required double ThickMean = 14;
     total_size += 1 + 8;
   }
 
   if (has_defectrate()) {
-    // required double DefectRate = 14;
+    // required double DefectRate = 15;
     total_size += 1 + 8;
   }
 
@@ -5877,47 +5930,52 @@ int CProcessFeatureReqProto::RequiredFieldsByteSizeFallback() const {
 int CProcessFeatureReqProto::ByteSize() const {
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00003fff) ^ 0x00003fff) == 0) {  // All required fields are present.
-    // required double AvgSaturation = 1;
+  if (((_has_bits_[0] & 0x00007fff) ^ 0x00007fff) == 0) {  // All required fields are present.
+    // required string id = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->id());
+
+    // required double AvgSaturation = 2;
     total_size += 1 + 8;
 
-    // required double AvgHue = 2;
+    // required double AvgHue = 3;
     total_size += 1 + 8;
 
-    // required double AvgIntensity = 3;
+    // required double AvgIntensity = 4;
     total_size += 1 + 8;
 
-    // required double DeviationSaturation = 4;
+    // required double DeviationSaturation = 5;
     total_size += 1 + 8;
 
-    // required double DeviationHue = 5;
+    // required double DeviationHue = 6;
     total_size += 1 + 8;
 
-    // required double DeviationIntensity = 6;
+    // required double DeviationIntensity = 7;
     total_size += 1 + 8;
 
-    // required double Length = 7;
+    // required double Length = 8;
     total_size += 1 + 8;
 
-    // required double Width = 8;
+    // required double Width = 9;
     total_size += 1 + 8;
 
-    // required double WidthLengthRatio = 9;
+    // required double WidthLengthRatio = 10;
     total_size += 1 + 8;
 
-    // required double ApexAngle = 10;
+    // required double ApexAngle = 11;
     total_size += 1 + 8;
 
-    // required double Circularity = 11;
+    // required double Circularity = 12;
     total_size += 1 + 8;
 
-    // required double Area = 12;
+    // required double Area = 13;
     total_size += 1 + 8;
 
-    // required double ThickMean = 13;
+    // required double ThickMean = 14;
     total_size += 1 + 8;
 
-    // required double DefectRate = 14;
+    // required double DefectRate = 15;
     total_size += 1 + 8;
 
   } else {
@@ -5949,6 +6007,10 @@ void CProcessFeatureReqProto::MergeFrom(const ::google::protobuf::Message& from)
 void CProcessFeatureReqProto::MergeFrom(const CProcessFeatureReqProto& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_has_id();
+      id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
+    }
     if (from.has_avgsaturation()) {
       set_avgsaturation(from.avgsaturation());
     }
@@ -5970,11 +6032,11 @@ void CProcessFeatureReqProto::MergeFrom(const CProcessFeatureReqProto& from) {
     if (from.has_length()) {
       set_length(from.length());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_width()) {
       set_width(from.width());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_widthlengthratio()) {
       set_widthlengthratio(from.widthlengthratio());
     }
@@ -6012,7 +6074,7 @@ void CProcessFeatureReqProto::CopyFrom(const CProcessFeatureReqProto& from) {
 }
 
 bool CProcessFeatureReqProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00003fff) != 0x00003fff) return false;
+  if ((_has_bits_[0] & 0x00007fff) != 0x00007fff) return false;
 
   return true;
 }
@@ -6022,6 +6084,7 @@ void CProcessFeatureReqProto::Swap(CProcessFeatureReqProto* other) {
   InternalSwap(other);
 }
 void CProcessFeatureReqProto::InternalSwap(CProcessFeatureReqProto* other) {
+  id_.Swap(&other->id_);
   std::swap(avgsaturation_, other->avgsaturation_);
   std::swap(avghue_, other->avghue_);
   std::swap(avgintensity_, other->avgintensity_);
@@ -6052,15 +6115,68 @@ void CProcessFeatureReqProto::InternalSwap(CProcessFeatureReqProto* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // CProcessFeatureReqProto
 
-// required double AvgSaturation = 1;
-bool CProcessFeatureReqProto::has_avgsaturation() const {
+// required string id = 1;
+bool CProcessFeatureReqProto::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-void CProcessFeatureReqProto::set_has_avgsaturation() {
+void CProcessFeatureReqProto::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-void CProcessFeatureReqProto::clear_has_avgsaturation() {
+void CProcessFeatureReqProto::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
+}
+void CProcessFeatureReqProto::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_id();
+}
+ const ::std::string& CProcessFeatureReqProto::id() const {
+  // @@protoc_insertion_point(field_get:CProcessFeatureReqProto.id)
+  return id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CProcessFeatureReqProto::set_id(const ::std::string& value) {
+  set_has_id();
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.id)
+}
+ void CProcessFeatureReqProto::set_id(const char* value) {
+  set_has_id();
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:CProcessFeatureReqProto.id)
+}
+ void CProcessFeatureReqProto::set_id(const char* value, size_t size) {
+  set_has_id();
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:CProcessFeatureReqProto.id)
+}
+ ::std::string* CProcessFeatureReqProto::mutable_id() {
+  set_has_id();
+  // @@protoc_insertion_point(field_mutable:CProcessFeatureReqProto.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CProcessFeatureReqProto::release_id() {
+  clear_has_id();
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CProcessFeatureReqProto::set_allocated_id(::std::string* id) {
+  if (id != NULL) {
+    set_has_id();
+  } else {
+    clear_has_id();
+  }
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:CProcessFeatureReqProto.id)
+}
+
+// required double AvgSaturation = 2;
+bool CProcessFeatureReqProto::has_avgsaturation() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void CProcessFeatureReqProto::set_has_avgsaturation() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void CProcessFeatureReqProto::clear_has_avgsaturation() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 void CProcessFeatureReqProto::clear_avgsaturation() {
   avgsaturation_ = 0;
@@ -6076,15 +6192,15 @@ void CProcessFeatureReqProto::clear_avgsaturation() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.AvgSaturation)
 }
 
-// required double AvgHue = 2;
+// required double AvgHue = 3;
 bool CProcessFeatureReqProto::has_avghue() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 void CProcessFeatureReqProto::set_has_avghue() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 void CProcessFeatureReqProto::clear_has_avghue() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 void CProcessFeatureReqProto::clear_avghue() {
   avghue_ = 0;
@@ -6100,15 +6216,15 @@ void CProcessFeatureReqProto::clear_avghue() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.AvgHue)
 }
 
-// required double AvgIntensity = 3;
+// required double AvgIntensity = 4;
 bool CProcessFeatureReqProto::has_avgintensity() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 void CProcessFeatureReqProto::set_has_avgintensity() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 void CProcessFeatureReqProto::clear_has_avgintensity() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 void CProcessFeatureReqProto::clear_avgintensity() {
   avgintensity_ = 0;
@@ -6124,15 +6240,15 @@ void CProcessFeatureReqProto::clear_avgintensity() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.AvgIntensity)
 }
 
-// required double DeviationSaturation = 4;
+// required double DeviationSaturation = 5;
 bool CProcessFeatureReqProto::has_deviationsaturation() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 void CProcessFeatureReqProto::set_has_deviationsaturation() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 void CProcessFeatureReqProto::clear_has_deviationsaturation() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 void CProcessFeatureReqProto::clear_deviationsaturation() {
   deviationsaturation_ = 0;
@@ -6148,15 +6264,15 @@ void CProcessFeatureReqProto::clear_deviationsaturation() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DeviationSaturation)
 }
 
-// required double DeviationHue = 5;
+// required double DeviationHue = 6;
 bool CProcessFeatureReqProto::has_deviationhue() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 void CProcessFeatureReqProto::set_has_deviationhue() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 void CProcessFeatureReqProto::clear_has_deviationhue() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 void CProcessFeatureReqProto::clear_deviationhue() {
   deviationhue_ = 0;
@@ -6172,15 +6288,15 @@ void CProcessFeatureReqProto::clear_deviationhue() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DeviationHue)
 }
 
-// required double DeviationIntensity = 6;
+// required double DeviationIntensity = 7;
 bool CProcessFeatureReqProto::has_deviationintensity() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 void CProcessFeatureReqProto::set_has_deviationintensity() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
 }
 void CProcessFeatureReqProto::clear_has_deviationintensity() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 void CProcessFeatureReqProto::clear_deviationintensity() {
   deviationintensity_ = 0;
@@ -6196,15 +6312,15 @@ void CProcessFeatureReqProto::clear_deviationintensity() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.DeviationIntensity)
 }
 
-// required double Length = 7;
+// required double Length = 8;
 bool CProcessFeatureReqProto::has_length() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 void CProcessFeatureReqProto::set_has_length() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 void CProcessFeatureReqProto::clear_has_length() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 void CProcessFeatureReqProto::clear_length() {
   length_ = 0;
@@ -6220,15 +6336,15 @@ void CProcessFeatureReqProto::clear_length() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Length)
 }
 
-// required double Width = 8;
+// required double Width = 9;
 bool CProcessFeatureReqProto::has_width() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 void CProcessFeatureReqProto::set_has_width() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
 }
 void CProcessFeatureReqProto::clear_has_width() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 void CProcessFeatureReqProto::clear_width() {
   width_ = 0;
@@ -6244,15 +6360,15 @@ void CProcessFeatureReqProto::clear_width() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Width)
 }
 
-// required double WidthLengthRatio = 9;
+// required double WidthLengthRatio = 10;
 bool CProcessFeatureReqProto::has_widthlengthratio() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 void CProcessFeatureReqProto::set_has_widthlengthratio() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 void CProcessFeatureReqProto::clear_has_widthlengthratio() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 void CProcessFeatureReqProto::clear_widthlengthratio() {
   widthlengthratio_ = 0;
@@ -6268,15 +6384,15 @@ void CProcessFeatureReqProto::clear_widthlengthratio() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.WidthLengthRatio)
 }
 
-// required double ApexAngle = 10;
+// required double ApexAngle = 11;
 bool CProcessFeatureReqProto::has_apexangle() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 void CProcessFeatureReqProto::set_has_apexangle() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
 }
 void CProcessFeatureReqProto::clear_has_apexangle() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 void CProcessFeatureReqProto::clear_apexangle() {
   apexangle_ = 0;
@@ -6292,15 +6408,15 @@ void CProcessFeatureReqProto::clear_apexangle() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.ApexAngle)
 }
 
-// required double Circularity = 11;
+// required double Circularity = 12;
 bool CProcessFeatureReqProto::has_circularity() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 void CProcessFeatureReqProto::set_has_circularity() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000800u;
 }
 void CProcessFeatureReqProto::clear_has_circularity() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 void CProcessFeatureReqProto::clear_circularity() {
   circularity_ = 0;
@@ -6316,15 +6432,15 @@ void CProcessFeatureReqProto::clear_circularity() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Circularity)
 }
 
-// required double Area = 12;
+// required double Area = 13;
 bool CProcessFeatureReqProto::has_area() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 void CProcessFeatureReqProto::set_has_area() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00001000u;
 }
 void CProcessFeatureReqProto::clear_has_area() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 void CProcessFeatureReqProto::clear_area() {
   area_ = 0;
@@ -6340,15 +6456,15 @@ void CProcessFeatureReqProto::clear_area() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.Area)
 }
 
-// required double ThickMean = 13;
+// required double ThickMean = 14;
 bool CProcessFeatureReqProto::has_thickmean() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 void CProcessFeatureReqProto::set_has_thickmean() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00002000u;
 }
 void CProcessFeatureReqProto::clear_has_thickmean() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 void CProcessFeatureReqProto::clear_thickmean() {
   thickmean_ = 0;
@@ -6364,15 +6480,15 @@ void CProcessFeatureReqProto::clear_thickmean() {
   // @@protoc_insertion_point(field_set:CProcessFeatureReqProto.ThickMean)
 }
 
-// required double DefectRate = 14;
+// required double DefectRate = 15;
 bool CProcessFeatureReqProto::has_defectrate() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 void CProcessFeatureReqProto::set_has_defectrate() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 void CProcessFeatureReqProto::clear_has_defectrate() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 void CProcessFeatureReqProto::clear_defectrate() {
   defectrate_ = 0;
