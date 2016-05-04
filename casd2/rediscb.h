@@ -8,6 +8,7 @@
 
 void OnConnect(const redisAsyncContext *c, int status); 
 void OnDisconnect(const redisAsyncContext *c, int status);
+void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata);
 
 extern redisAsyncContext* redis_context;
 

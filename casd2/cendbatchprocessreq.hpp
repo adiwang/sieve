@@ -47,7 +47,7 @@ class CEndBatchProcessReq : public Protocol
 			NotifyError(server, ctx, 3);
 			return;
 		}
-		SEndBatchProcessStateRep rep;
+		SEndBatchProcessRep rep;
 		int state = pChannel->GetState();
 		if(state == CASD::Channel::ST_LEARN)
 		{

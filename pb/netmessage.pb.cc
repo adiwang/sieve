@@ -73,6 +73,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* SSetProcessStateRepProto_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   SSetProcessStateRepProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* CEndBatchProcessReqProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  CEndBatchProcessReqProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* SEndBatchProcessRepProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  SEndBatchProcessRepProto_reflection_ = NULL;
 
 }  // namespace
 
@@ -381,6 +387,36 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       sizeof(SSetProcessStateRepProto),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SSetProcessStateRepProto, _internal_metadata_),
       -1);
+  CEndBatchProcessReqProto_descriptor_ = file->message_type(18);
+  static const int CEndBatchProcessReqProto_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CEndBatchProcessReqProto, state_),
+  };
+  CEndBatchProcessReqProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      CEndBatchProcessReqProto_descriptor_,
+      CEndBatchProcessReqProto::default_instance_,
+      CEndBatchProcessReqProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CEndBatchProcessReqProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(CEndBatchProcessReqProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CEndBatchProcessReqProto, _internal_metadata_),
+      -1);
+  SEndBatchProcessRepProto_descriptor_ = file->message_type(19);
+  static const int SEndBatchProcessRepProto_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SEndBatchProcessRepProto, result_),
+  };
+  SEndBatchProcessRepProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      SEndBatchProcessRepProto_descriptor_,
+      SEndBatchProcessRepProto::default_instance_,
+      SEndBatchProcessRepProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SEndBatchProcessRepProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(SEndBatchProcessRepProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SEndBatchProcessRepProto, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -429,6 +465,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
       CSetProcessStateReqProto_descriptor_, &CSetProcessStateReqProto::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       SSetProcessStateRepProto_descriptor_, &SSetProcessStateRepProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      CEndBatchProcessReqProto_descriptor_, &CEndBatchProcessReqProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      SEndBatchProcessRepProto_descriptor_, &SEndBatchProcessRepProto::default_instance());
 }
 
 }  // namespace
@@ -470,6 +510,10 @@ void protobuf_ShutdownFile_netmessage_2eproto() {
   delete CSetProcessStateReqProto_reflection_;
   delete SSetProcessStateRepProto::default_instance_;
   delete SSetProcessStateRepProto_reflection_;
+  delete CEndBatchProcessReqProto::default_instance_;
+  delete CEndBatchProcessReqProto_reflection_;
+  delete SEndBatchProcessRepProto::default_instance_;
+  delete SEndBatchProcessRepProto_reflection_;
 }
 
 void protobuf_AddDesc_netmessage_2eproto() {
@@ -508,7 +552,9 @@ void protobuf_AddDesc_netmessage_2eproto() {
     "cessResultProto\022\016\n\006result\030\001 \002(\r\022\r\n\005level"
     "\030\002 \002(\005\022\014\n\004data\030\003 \002(\014\")\n\030CSetProcessState"
     "ReqProto\022\r\n\005state\030\001 \002(\005\"*\n\030SSetProcessSt"
-    "ateRepProto\022\016\n\006result\030\001 \002(\r", 1187);
+    "ateRepProto\022\016\n\006result\030\001 \002(\r\")\n\030CEndBatch"
+    "ProcessReqProto\022\r\n\005state\030\001 \002(\005\"*\n\030SEndBa"
+    "tchProcessRepProto\022\016\n\006result\030\001 \002(\r", 1274);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
   CProto::default_instance_ = new CProto();
@@ -529,6 +575,8 @@ void protobuf_AddDesc_netmessage_2eproto() {
   SProcessResultProto::default_instance_ = new SProcessResultProto();
   CSetProcessStateReqProto::default_instance_ = new CSetProcessStateReqProto();
   SSetProcessStateRepProto::default_instance_ = new SSetProcessStateRepProto();
+  CEndBatchProcessReqProto::default_instance_ = new CEndBatchProcessReqProto();
+  SEndBatchProcessRepProto::default_instance_ = new SEndBatchProcessRepProto();
   CProto::default_instance_->InitAsDefaultInstance();
   CP1::default_instance_->InitAsDefaultInstance();
   CP2::default_instance_->InitAsDefaultInstance();
@@ -547,6 +595,8 @@ void protobuf_AddDesc_netmessage_2eproto() {
   SProcessResultProto::default_instance_->InitAsDefaultInstance();
   CSetProcessStateReqProto::default_instance_->InitAsDefaultInstance();
   SSetProcessStateRepProto::default_instance_->InitAsDefaultInstance();
+  CEndBatchProcessReqProto::default_instance_->InitAsDefaultInstance();
+  SEndBatchProcessRepProto::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_netmessage_2eproto);
 }
 
@@ -7737,6 +7787,524 @@ void SSetProcessStateRepProto::clear_result() {
   set_has_result();
   result_ = value;
   // @@protoc_insertion_point(field_set:SSetProcessStateRepProto.result)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CEndBatchProcessReqProto::kStateFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CEndBatchProcessReqProto::CEndBatchProcessReqProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:CEndBatchProcessReqProto)
+}
+
+void CEndBatchProcessReqProto::InitAsDefaultInstance() {
+}
+
+CEndBatchProcessReqProto::CEndBatchProcessReqProto(const CEndBatchProcessReqProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:CEndBatchProcessReqProto)
+}
+
+void CEndBatchProcessReqProto::SharedCtor() {
+  _cached_size_ = 0;
+  state_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+CEndBatchProcessReqProto::~CEndBatchProcessReqProto() {
+  // @@protoc_insertion_point(destructor:CEndBatchProcessReqProto)
+  SharedDtor();
+}
+
+void CEndBatchProcessReqProto::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void CEndBatchProcessReqProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CEndBatchProcessReqProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CEndBatchProcessReqProto_descriptor_;
+}
+
+const CEndBatchProcessReqProto& CEndBatchProcessReqProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+CEndBatchProcessReqProto* CEndBatchProcessReqProto::default_instance_ = NULL;
+
+CEndBatchProcessReqProto* CEndBatchProcessReqProto::New(::google::protobuf::Arena* arena) const {
+  CEndBatchProcessReqProto* n = new CEndBatchProcessReqProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void CEndBatchProcessReqProto::Clear() {
+  state_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool CEndBatchProcessReqProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:CEndBatchProcessReqProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 state = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &state_)));
+          set_has_state();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:CEndBatchProcessReqProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:CEndBatchProcessReqProto)
+  return false;
+#undef DO_
+}
+
+void CEndBatchProcessReqProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:CEndBatchProcessReqProto)
+  // required int32 state = 1;
+  if (has_state()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->state(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:CEndBatchProcessReqProto)
+}
+
+::google::protobuf::uint8* CEndBatchProcessReqProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:CEndBatchProcessReqProto)
+  // required int32 state = 1;
+  if (has_state()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->state(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:CEndBatchProcessReqProto)
+  return target;
+}
+
+int CEndBatchProcessReqProto::ByteSize() const {
+  int total_size = 0;
+
+  // required int32 state = 1;
+  if (has_state()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->state());
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CEndBatchProcessReqProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const CEndBatchProcessReqProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const CEndBatchProcessReqProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void CEndBatchProcessReqProto::MergeFrom(const CEndBatchProcessReqProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_state()) {
+      set_state(from.state());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void CEndBatchProcessReqProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CEndBatchProcessReqProto::CopyFrom(const CEndBatchProcessReqProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CEndBatchProcessReqProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void CEndBatchProcessReqProto::Swap(CEndBatchProcessReqProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CEndBatchProcessReqProto::InternalSwap(CEndBatchProcessReqProto* other) {
+  std::swap(state_, other->state_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata CEndBatchProcessReqProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = CEndBatchProcessReqProto_descriptor_;
+  metadata.reflection = CEndBatchProcessReqProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// CEndBatchProcessReqProto
+
+// required int32 state = 1;
+bool CEndBatchProcessReqProto::has_state() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void CEndBatchProcessReqProto::set_has_state() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void CEndBatchProcessReqProto::clear_has_state() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void CEndBatchProcessReqProto::clear_state() {
+  state_ = 0;
+  clear_has_state();
+}
+ ::google::protobuf::int32 CEndBatchProcessReqProto::state() const {
+  // @@protoc_insertion_point(field_get:CEndBatchProcessReqProto.state)
+  return state_;
+}
+ void CEndBatchProcessReqProto::set_state(::google::protobuf::int32 value) {
+  set_has_state();
+  state_ = value;
+  // @@protoc_insertion_point(field_set:CEndBatchProcessReqProto.state)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SEndBatchProcessRepProto::kResultFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+SEndBatchProcessRepProto::SEndBatchProcessRepProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:SEndBatchProcessRepProto)
+}
+
+void SEndBatchProcessRepProto::InitAsDefaultInstance() {
+}
+
+SEndBatchProcessRepProto::SEndBatchProcessRepProto(const SEndBatchProcessRepProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SEndBatchProcessRepProto)
+}
+
+void SEndBatchProcessRepProto::SharedCtor() {
+  _cached_size_ = 0;
+  result_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SEndBatchProcessRepProto::~SEndBatchProcessRepProto() {
+  // @@protoc_insertion_point(destructor:SEndBatchProcessRepProto)
+  SharedDtor();
+}
+
+void SEndBatchProcessRepProto::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SEndBatchProcessRepProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SEndBatchProcessRepProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SEndBatchProcessRepProto_descriptor_;
+}
+
+const SEndBatchProcessRepProto& SEndBatchProcessRepProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+SEndBatchProcessRepProto* SEndBatchProcessRepProto::default_instance_ = NULL;
+
+SEndBatchProcessRepProto* SEndBatchProcessRepProto::New(::google::protobuf::Arena* arena) const {
+  SEndBatchProcessRepProto* n = new SEndBatchProcessRepProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void SEndBatchProcessRepProto::Clear() {
+  result_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool SEndBatchProcessRepProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:SEndBatchProcessRepProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 result = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &result_)));
+          set_has_result();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:SEndBatchProcessRepProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SEndBatchProcessRepProto)
+  return false;
+#undef DO_
+}
+
+void SEndBatchProcessRepProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SEndBatchProcessRepProto)
+  // required uint32 result = 1;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:SEndBatchProcessRepProto)
+}
+
+::google::protobuf::uint8* SEndBatchProcessRepProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SEndBatchProcessRepProto)
+  // required uint32 result = 1;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->result(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:SEndBatchProcessRepProto)
+  return target;
+}
+
+int SEndBatchProcessRepProto::ByteSize() const {
+  int total_size = 0;
+
+  // required uint32 result = 1;
+  if (has_result()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->result());
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SEndBatchProcessRepProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const SEndBatchProcessRepProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const SEndBatchProcessRepProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SEndBatchProcessRepProto::MergeFrom(const SEndBatchProcessRepProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void SEndBatchProcessRepProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SEndBatchProcessRepProto::CopyFrom(const SEndBatchProcessRepProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SEndBatchProcessRepProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void SEndBatchProcessRepProto::Swap(SEndBatchProcessRepProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void SEndBatchProcessRepProto::InternalSwap(SEndBatchProcessRepProto* other) {
+  std::swap(result_, other->result_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata SEndBatchProcessRepProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SEndBatchProcessRepProto_descriptor_;
+  metadata.reflection = SEndBatchProcessRepProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// SEndBatchProcessRepProto
+
+// required uint32 result = 1;
+bool SEndBatchProcessRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void SEndBatchProcessRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void SEndBatchProcessRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void SEndBatchProcessRepProto::clear_result() {
+  result_ = 0u;
+  clear_has_result();
+}
+ ::google::protobuf::uint32 SEndBatchProcessRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SEndBatchProcessRepProto.result)
+  return result_;
+}
+ void SEndBatchProcessRepProto::set_result(::google::protobuf::uint32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SEndBatchProcessRepProto.result)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

@@ -34,6 +34,7 @@ void protobuf_AddDesc_netmessage_2eproto();
 void protobuf_AssignDesc_netmessage_2eproto();
 void protobuf_ShutdownFile_netmessage_2eproto();
 
+class CEndBatchProcessReqProto;
 class CP1;
 class CP2;
 class CProcessFeatureReqProto;
@@ -45,6 +46,7 @@ class CSetCamaraSeqReqProto;
 class CSetProcessStateReqProto;
 class EchoProto;
 class FValidatePosReqpProto;
+class SEndBatchProcessRepProto;
 class SProcessFeatureRepProto;
 class SProcessResultProto;
 class SRegisterClientRepProto;
@@ -2014,6 +2016,184 @@ class SSetProcessStateRepProto : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static SSetProcessStateRepProto* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class CEndBatchProcessReqProto : public ::google::protobuf::Message {
+ public:
+  CEndBatchProcessReqProto();
+  virtual ~CEndBatchProcessReqProto();
+
+  CEndBatchProcessReqProto(const CEndBatchProcessReqProto& from);
+
+  inline CEndBatchProcessReqProto& operator=(const CEndBatchProcessReqProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CEndBatchProcessReqProto& default_instance();
+
+  void Swap(CEndBatchProcessReqProto* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CEndBatchProcessReqProto* New() const { return New(NULL); }
+
+  CEndBatchProcessReqProto* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CEndBatchProcessReqProto& from);
+  void MergeFrom(const CEndBatchProcessReqProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(CEndBatchProcessReqProto* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 state = 1;
+  bool has_state() const;
+  void clear_state();
+  static const int kStateFieldNumber = 1;
+  ::google::protobuf::int32 state() const;
+  void set_state(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CEndBatchProcessReqProto)
+ private:
+  inline void set_has_state();
+  inline void clear_has_state();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 state_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CEndBatchProcessReqProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SEndBatchProcessRepProto : public ::google::protobuf::Message {
+ public:
+  SEndBatchProcessRepProto();
+  virtual ~SEndBatchProcessRepProto();
+
+  SEndBatchProcessRepProto(const SEndBatchProcessRepProto& from);
+
+  inline SEndBatchProcessRepProto& operator=(const SEndBatchProcessRepProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SEndBatchProcessRepProto& default_instance();
+
+  void Swap(SEndBatchProcessRepProto* other);
+
+  // implements Message ----------------------------------------------
+
+  inline SEndBatchProcessRepProto* New() const { return New(NULL); }
+
+  SEndBatchProcessRepProto* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SEndBatchProcessRepProto& from);
+  void MergeFrom(const SEndBatchProcessRepProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(SEndBatchProcessRepProto* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 result = 1;
+  bool has_result() const;
+  void clear_result();
+  static const int kResultFieldNumber = 1;
+  ::google::protobuf::uint32 result() const;
+  void set_result(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:SEndBatchProcessRepProto)
+ private:
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 result_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static SEndBatchProcessRepProto* default_instance_;
+};
 // ===================================================================
 
 
@@ -3513,7 +3693,67 @@ inline void SSetProcessStateRepProto::set_result(::google::protobuf::uint32 valu
   // @@protoc_insertion_point(field_set:SSetProcessStateRepProto.result)
 }
 
+// -------------------------------------------------------------------
+
+// CEndBatchProcessReqProto
+
+// required int32 state = 1;
+inline bool CEndBatchProcessReqProto::has_state() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CEndBatchProcessReqProto::set_has_state() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CEndBatchProcessReqProto::clear_has_state() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CEndBatchProcessReqProto::clear_state() {
+  state_ = 0;
+  clear_has_state();
+}
+inline ::google::protobuf::int32 CEndBatchProcessReqProto::state() const {
+  // @@protoc_insertion_point(field_get:CEndBatchProcessReqProto.state)
+  return state_;
+}
+inline void CEndBatchProcessReqProto::set_state(::google::protobuf::int32 value) {
+  set_has_state();
+  state_ = value;
+  // @@protoc_insertion_point(field_set:CEndBatchProcessReqProto.state)
+}
+
+// -------------------------------------------------------------------
+
+// SEndBatchProcessRepProto
+
+// required uint32 result = 1;
+inline bool SEndBatchProcessRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SEndBatchProcessRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SEndBatchProcessRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SEndBatchProcessRepProto::clear_result() {
+  result_ = 0u;
+  clear_has_result();
+}
+inline ::google::protobuf::uint32 SEndBatchProcessRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SEndBatchProcessRepProto.result)
+  return result_;
+}
+inline void SEndBatchProcessRepProto::set_result(::google::protobuf::uint32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SEndBatchProcessRepProto.result)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

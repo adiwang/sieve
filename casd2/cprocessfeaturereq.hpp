@@ -136,13 +136,13 @@ private:
 	void SaveToSamples(LeafFeature& feature)
 	{
 		std::string json_str = GetFeatureJson(feature);
-		redisAsyncCommand(c, NULL, NULL, "HSET samples %s %s", feature.id.c_str(), json_str.c_str());
+		redisAsyncCommand(redis_context, NULL, NULL, "HSET samples %s %s", feature.id.c_str(), json_str.c_str());
 	}
 
 	std::string GetFeatureJson(LeafFeature& feature)
     {
 		Json::Value value;
-		DataMan::GetInstance().LeafFeature2Json(feature, value);
+        CASD::DataMan::GetInstance().LeafFeature2Json(feature, value);
 		return value.toStyledString();
 	}
 

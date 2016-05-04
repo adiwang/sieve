@@ -15,7 +15,7 @@ void OnConnect(const redisAsyncContext *c, int status)
     }
     printf("Connected...\n");
 	// 加载数据, 获取样本库所有数据
-	redisAsyncCommand(c, GetSamplesCB, NULL, "HVALS samples");
+	redisAsyncCommand(const_cast<redisAsyncContext *>(c), GetSamplesCB, NULL, "HVALS samples");
 }
 
 void OnDisconnect(const redisAsyncContext *c, int status)
@@ -29,15 +29,15 @@ void OnDisconnect(const redisAsyncContext *c, int status)
 
 void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 {
-	redisReply *reply = r;
+	redisReply *reply = (redisReply *)r;
 	if(reply == NULL) return;
 	size_t sample_count = reply->elements;
+	using namespace CASD;
 	for(size_t i = 0; i < sample_count; ++i)
 	{
-		DataMan::GetInstance().AddSample(reply->element[i]->str);
+        DataMan::GetInstance().AddSample(reply->element[i]->str);
 	}
 	//调用处理类加载数据
-	using namespace CASD;
 	PyObject* pIns = DataMan::GetInstance().GetLeafGradeInstance();
 	if(!pIns) return;
 	Py_INCREF(pIns);
