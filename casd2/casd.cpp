@@ -15,10 +15,29 @@
 #include "cprocessfeaturereq.hpp"
 #include "fvalidateposreqp.hpp"
 #include "csetprocessstatereq.hpp"
+#include "cendbatchprocessreq.hpp"
 #include "configfile.h"
 #include "channel.h"
 #include "dataman.h"
 
+
+void Initialize()
+{
+	CASD::PyLoader::GetInstance().Init();
+    CASD::PyLoader::GetInstance().Load("leafgrade");
+	PyObject* pLeafGradeIns = CASD::PyLoader::GetInstance().CreateClassInstance("leafgrade", "LeafGrade");
+	CASD::DataMan::GetInstance().SetLeafGradeInstance(pLeafGradeIns);
+}
+
+void RegisterProtocol(UVNET::TCPServer& server)
+{
+	server.AddProtocol(PROTOCOL_ID_CREGISTERCPSDREQ, new CRegisterCpsdReq());
+	server.AddProtocol(PROTOCOL_ID_CREGISTERCLIENTREQ, new CRegisterClientReq());
+	server.AddProtocol(PROTOCOL_ID_CPROCESSFEATUREREQ, new CProcessFeatureReq());
+	server.AddProtocol(PROTOCOL_ID_FVALIDATEPOSREQP, new FValidatePosReqp());
+	server.AddProtocol(PROTOCOL_ID_CSETPROCESSSTATEREQ, new CSetProcessStateReq());
+	server.AddProtocol(PROTOCOL_ID_CENDBATCHPROCESSREQ, new CEndBatchProcessReq());
+}
 
 int main (int argc, char **argv) 
 {
@@ -41,19 +60,12 @@ int main (int argc, char **argv)
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
 
 	// 初始化
-	CASD::PyLoader::GetInstance().Init();
-    CASD::PyLoader::GetInstance().Load("leafgrade");
-	PyObject* pLeafGradeIns = CASD::PyLoader::GetInstance().CreateClassInstance("leafgrade", "LeafGrade");
-	CASD::DataMan::GetInstance().SetLeafGradeInstance(pLeafGradeIns);
+	Initialize();
 
 	UVNET::TCPServer server(0xF0,0x0F);
 	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
 	// 注册协议
-	server.AddProtocol(PROTOCOL_ID_CREGISTERCPSDREQ, new CRegisterCpsdReq());
-	server.AddProtocol(PROTOCOL_ID_CREGISTERCLIENTREQ, new CRegisterClientReq());
-	server.AddProtocol(PROTOCOL_ID_CPROCESSFEATUREREQ, new CProcessFeatureReq());
-	server.AddProtocol(PROTOCOL_ID_FVALIDATEPOSREQP, new FValidatePosReqp());
-	server.AddProtocol(PROTOCOL_ID_CSETPROCESSSTATEREQ, new CSetProcessStateReq());
+	RegisterProtocol(server);
 
 	if(!server.Start(ip.c_str(), atoi(port.c_str()))) 
 	{

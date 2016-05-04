@@ -130,3 +130,15 @@ message SSetProcessStateRepProto
 {
 	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
 }
+
+// 客户端向casd发送的结束批次处理的协议
+message CEndBatchProcessReqProto
+{
+	required int32 state = 1;		// 状态: 0:学习状态, 1: 分选状态
+}
+
+// casd返回给客户端结束批次处理的响应协议
+message SEndBatchProcessRepProto
+{
+	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+}

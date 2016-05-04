@@ -1,0 +1,46 @@
+public:
+	int _state;
+	std::string _marshal_data;
+
+public:
+	enum
+	{
+		PROTOCOL_ID = PROTOCOL_ID_CENDBATCHPROCESSREQ,
+	};
+	
+	CEndBatchProcessReq() : _state(0) {}
+	CEndBatchProcessReq(int state) : _state(state) {}
+	~CEndBatchProcessReq() {}
+
+	virtual const std::string& Marshal()
+	{
+		// 1. 设置协议具体子段
+		CEndBatchProcessReqProto proto;
+		proto.set_state(_state);
+		// 2. 给协议wrap一层，添加protocol id
+		CProto cproto;
+		cproto.set_id(PROTOCOL_ID);
+		cproto.set_body(proto.SerializeAsString());
+		std::string data;
+		cproto.SerializeToString(&data);
+		// 3. 封包
+		NetPacket packet;
+		packet.header = 0xF0;
+		packet.tail = 0x0F;
+		packet.type = 1;
+		packet.datalen = data.size();
+		_marshal_data = PacketData(packet, data.c_str());
+		return _marshal_data;
+	}
+
+	virtual void UnMarshal(const char* buf, int length)
+	{
+		CEndBatchProcessReqProto proto;
+		proto.ParseFromString(std::string(buf, length));
+		_state = proto.state();
+	}
+
+    virtual Protocol* Clone()
+    {
+        return new CEndBatchProcessReq();
+    }

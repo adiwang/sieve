@@ -151,7 +151,7 @@ private:
 		PyObject* pArgs = PyTuple_New(1);
 		std::string samples_json = GetFeatureJson(feature);
 		PyTuple_SetItem(pArgs, 0, Py_BuildValue("s",samples_json.c_str()));
-		PyObject* pRes = PyLoader::GetInstance().CallInstanceMethod(pIns, methodName, pArgs);
+		PyObject* pRes = CASD::PyLoader::GetInstance().CallInstanceMethod(pIns, methodName, pArgs);
 		if(pRes)
 		{
 			if(strcmp(methodName, "ClassifyOne") == 0)
