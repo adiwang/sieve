@@ -1,8 +1,7 @@
-noinst_PROGRAMS = casd
+noinst_PROGRAMS = casd test_dataman
 casd_SOURCES = casd.cpp rediscb.cpp channel.cpp pyloader.cpp dataman.cpp
 casd_LDADD = $(top_srcdir)/common/tcpserver.o $(top_srcdir)/common/log.o $(top_srcdir)/pb/netmessage.pb.o $(top_srcdir)/common/configfile.o $(top_srcdir)/common/json/json_value.o $(top_srcdir)/common/json/json_reader.o $(top_srcdir)/common/json/json_writer.o
 casd_LDFLAGS = -L/usr/local/lib -L$(top_srcdir)/lib -L/usr/lib64/python2.7 -D_GNU_SOURCE -luv -lpthread -lssl -lcrypto -lprotobuf -lhiredis -lpython2.7
-noinst_PROGRAMS = test_dataman
 test_dataman_SOURCES = dataman.cpp test_dataman.cpp
 test_dataman_LDADD = $(top_srcdir)/common/tcpserver.o $(top_srcdir)/common/log.o $(top_srcdir)/pb/netmessage.pb.o $(top_srcdir)/common/configfile.o $(top_srcdir)/common/json/json_value.o $(top_srcdir)/common/json/json_reader.o $(top_srcdir)/common/json/json_writer.o
 test_dataman_LDFLAGS = -L/usr/local/lib -L$(top_srcdir)/lib -L/usr/lib64/python2.7 -D_GNU_SOURCE -luv -lpthread -lssl -lcrypto -lprotobuf -lpython2.7
