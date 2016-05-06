@@ -1,5 +1,6 @@
 public:
 	uint32_t _result;
+	std::vector<LeafGradeCount> _leaf_grade_counts;
 	std::string _marshal_data;
 
 public:
@@ -16,6 +17,16 @@ public:
 		// 1. 设置协议具体子段
 		SEndBatchProcessRepProto proto;
 		proto.set_result(_result);
+		for(std::vector<LeafGradeCount>::iterator it = _leaf_grade_counts.begin();
+		    it != _leaf_grade_counts.end();
+		    ++it)
+		{
+			LeafGradeCount* lgc = proto.add_leaf_grade_counts();
+			lgc->set_group(it->group());
+			lgc->set_rank(it->rank());
+			lgc->set_count(it->count());
+		}
+
 		// 2. 给协议wrap一层，添加protocol id
 		CProto cproto;
 		cproto.set_id(PROTOCOL_ID);
@@ -37,6 +48,11 @@ public:
 		SEndBatchProcessRepProto proto;
 		proto.ParseFromString(std::string(buf, length));
 		_result = proto.result();
+		for(int i = 0; i < proto.leaf_grade_counts_size(); ++i)
+		{
+			LeafGradeCount& lgc = proto.leaf_grade_counts(i);
+			_leaf_grade_counts.push_back(lgc);
+		}
 	}
 
     virtual Protocol* Clone()

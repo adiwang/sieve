@@ -137,8 +137,16 @@ message CEndBatchProcessReqProto
 	required int32 state = 1;		// 状态: 0:学习状态, 1: 分选状态
 }
 
+message LeafGradeCount
+{
+	required int32 group = 1;		// 分组
+	required int32 rank = 2;		// 分级
+	required int32 count = 3;		// 数量
+}
+
 // casd返回给客户端结束批次处理的响应协议
 message SEndBatchProcessRepProto
 {
-	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+	required uint32 result = 1;					// 0: 代表成功, 否则: 失败
+	required repeated LeafGradeCount leaf_grade_counts = 2;		// 叶片分组分级数量(目前只在学习状态下有效)
 }
