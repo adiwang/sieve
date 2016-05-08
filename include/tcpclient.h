@@ -7,6 +7,7 @@
 #include "packet_sync.h"
 #include "pod_circularbuffer.h"
 #include "protocol.h"
+#include "log.h"
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE (1024 * 10)
@@ -44,6 +45,7 @@ public:
 	virtual ~TCPClient();
 
 public:
+	static bool StartLog(LogLevel log_level, const char* module_name, const char* log_dir);
 	void SetRecvCB(ClientRecvCB cb, void* userdata);
 	void SetCloseCB(TcpCloseCB cb, void* userdata);
 	void SetConnectCB(ConnectCB cb, void* userdata);

@@ -151,6 +151,18 @@ namespace UVNET
 		return true;
 	}
 
+    /**
+    **	调用Clog的init
+    **  @log_level: 日志级别
+    **  @module_name: 模块名
+    **	@log_dir: 日志目录
+    **  @return: true, 成功; false, 失败
+    */
+    bool TCPClient::StartLog(LogLevel log_level, const char* module_name, const char* log_dir)
+    {
+    	return log_init(log_level, module_name, log_dir);
+    }
+    
 	/**
 	**	真正的关闭函数
 	*/
