@@ -1,0 +1,49 @@
+public:
+	int _group;
+    int _rank;
+	std::string _marshal_data;
+
+public:
+	enum
+	{
+		PROTOCOL_ID = PROTOCOL_ID_CLEARNSAMPLEREQ,
+	};
+	
+	CLearnSampleReq() : _group(0), _rank(0) {}
+	CLearnSampleReq(int group, int rank) : _group(group), _rank(rank) {}
+	~CLearnSampleReq() {}
+
+	virtual const std::string& Marshal()
+	{
+		// 1. 设置协议具体子段
+		CLearnSampleReqProto proto;
+        proto.set_group(_group);
+        proto.set_rank(_rank);
+		// 2. 给协议wrap一层，添加protocol id
+		CProto cproto;
+		cproto.set_id(PROTOCOL_ID);
+		cproto.set_body(proto.SerializeAsString());
+		std::string data;
+		cproto.SerializeToString(&data);
+		// 3. 封包
+		NetPacket packet;
+		packet.header = 0xF0;
+		packet.tail = 0x0F;
+		packet.type = 1;
+		packet.datalen = data.size();
+		_marshal_data = PacketData(packet, data.c_str());
+		return _marshal_data;
+	}
+
+	virtual void UnMarshal(const char* buf, int length)
+	{
+		CLearnSampleReqProto proto;
+		proto.ParseFromString(std::string(buf, length));
+        _group = proto.group();
+        _rank = proto.rank();
+	}
+
+    virtual Protocol* Clone()
+    {
+        return new CLearnSampleReq();
+    }
