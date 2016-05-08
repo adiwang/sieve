@@ -1,7 +1,7 @@
 public:
 	uint32_t _result;
-	int _level;
-	std::string _data;
+    int _group;
+    int _rank;
 	std::string _marshal_data;
 
 public:
@@ -9,9 +9,9 @@ public:
 	{
 		PROTOCOL_ID = PROTOCOL_ID_SPROCESSRESULT,
 	};
-	SProcessResult() : _result(0), _level(0){}
-	SProcessResult(uint32_t result, int level, std::string data) 
-		: _result(result), _level(level), _data(data) 
+	SProcessResult() : _result(0), _group(0), _rank(0){}
+	SProcessResult(uint32_t result, int group, int rank) 
+		: _result(result), _group(group), _rank(rank) 
 	{
 	}
 	~SProcessResult() {}
@@ -21,8 +21,8 @@ public:
 		// 1. 设置协议具体子段
 		SProcessResultProto proto;
 		proto.set_result(_result);
-		proto.set_level(_level);
-		proto.set_data(_data);
+		proto.set_group(_group);
+        proto.set_rank(_rank);
 		// 2. 给协议wrap一层，添加protocol id
 		CProto cproto;
 		cproto.set_id(PROTOCOL_ID);
@@ -44,8 +44,8 @@ public:
 		SProcessResultProto proto;
 		proto.ParseFromString(std::string(buf, length));
 		_result = proto.result();
-		_level = proto.level();
-		_data = proto.data();
+        _group = proto.group();
+        _rank = proto.rank();
 	}
 
     virtual Protocol* Clone()
