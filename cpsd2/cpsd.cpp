@@ -61,6 +61,9 @@ public:
             return;
         }
 
+	    ConfigFile& cf = ConfigFile::GetInstance();
+	    std::string image_root = cf.Value("Global", "ImageRootDir", "/tmp");
+
         uint32_t image_seq = gCurImageSeq;
         LeafAnalysis& analysor = LeafAnalysis::GetInstance();
         CImageFormatConverter converter;
@@ -68,12 +71,13 @@ public:
         converter.OutputBitAlignment = OutputBitAlignment_MsbAligned;
         CPylonImage image_BGR8;
         converter.Convert(image_BGR8, ptrGrabResult);
+
         if(gCurImageSeq == 0)
         {
             // 当前图片序号是0说明这一张图片是物体的第一张图片，被用来校验摆放是否正确
             GenerateID();
 			char image_path[256] = {0};
-			snprintf(image_path, sizeof(image_path), "../images/%s/%2d.png", gCurID.c_str(), gCurImageSeq);
+			snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
 			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
 
             gGrabImages.clear();
@@ -99,7 +103,7 @@ public:
         {
             // 图片数目未达到足够的数量，保存图片数据到vector中
 			char image_path[256] = {0};
-			snprintf(image_path, sizeof(image_path), "/tmp/%s/%2d.png", gCurID.c_str(), gCurImageSeq);
+			snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
 			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
             gGrabImages.push_back(image_BGR8);
             ++gCurImageSeq;
