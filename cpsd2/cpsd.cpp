@@ -17,6 +17,7 @@
 #include "leafanalysis.h"
 #include <time.h>
 #include <pylon/PylonIncludes.h>
+#include <pylon/gige/PylonGigEIncludes.h>
 
 using namespace Pylon;
 using namespace std;
@@ -158,7 +159,7 @@ int main (int argc, char **argv)
     std::string ip = cf.Value("CasdConfig", "Address", "127.0.0.1");
     std::string port = cf.Value("CasdConfig", "Port", "12345");
     gImagesNumPerObj = atoi(cf.Value("Global", "ImageNumPerObj", "10").c_str());
-    std::string serialnum = cf.Value("Global", "CamaraSerialNumber", "20399956");
+    std::string camara_address = cf.Value("Global", "CamaraAddress", "127.0.0.1");
 
     casd_client.AddProtocol(PROTOCOL_ID_SREGISTERCPSDREP, new SRegisterCpsdRep());
     casd_client.AddProtocol(PROTOCOL_ID_SPROCESSFEATUREREP, new SProcessFeatureRep());
@@ -180,9 +181,8 @@ int main (int argc, char **argv)
     try
     {
         CTlFactory& TlFactory = CTlFactory::GetInstance();
-        CDeviceInfo di;
-        di.SetSerialNumber( GenICam::gcstring(serialnum.c_str()) );
-        di.SetDeviceClass( BaslerGigEDeviceClass );
+        CBaslerGigEDeviceInfo di;
+        di.SetIpAddress( GenICam::gcstring(camara_address.c_str()));
         IPylonDevice* device = TlFactory.CreateDevice( di );
         // Create an instant camera object for the camera device found first.
         // CInstantCamera camera( CTlFactory::GetInstance().CreateFirstDevice());
