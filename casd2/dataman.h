@@ -5,6 +5,7 @@
 #include <map>
 #include "common_def.h"
 #include <json/json.h>
+#include "pb/netmessage.pb.h"
 
 namespace CASD
 {
@@ -40,9 +41,12 @@ public:
     void LeafFeature2Json(LeafFeature& feature, Json::Value& value);
     void Json2LeafFeature(Json::Value& value, LeafFeature& feature);
 	void AddSample(std::string jsonstr);
+	void AddSample(LeafFeature& feature);
 	void SetLeafGradeInstance(PyObject* instance);
 	PyObject* GetLeafGradeInstance();
 	std::string GetSamplesJson();
+    void StatisticsSamples(std::vector<LeafGradeCount>& leaf_grade_counts);
+    int GetSamplesCount();
 };
 
 

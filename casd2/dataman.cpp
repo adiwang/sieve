@@ -166,6 +166,25 @@ void DataMan::AddSample(std::string jsonstr)
 	rit->second.push_back(feature);
 }
 
+void DataMan::AddSample(LeafFeature& feature)
+{
+	GroupRankMapIter git = _samples.find(feature.Group);
+	if(git == _samples.end())
+	{
+		RankFeatureListMap r2fl;
+		_samples.insert(std::make_pair(feature.Group, r2fl));
+		git = _samples.find(feature.Group);
+	}
+	RankFeatureListMapIter rit = git->second.find(feature.Rank);
+	if(rit == git->second.end())
+	{
+		FeatureList fl;
+		git->second.insert(std::make_pair(feature.Rank, fl));
+		rit = git->second.find(feature.Rank);
+	}
+	rit->second.push_back(feature);
+}
+
 void DataMan::SetLeafGradeInstance(PyObject* instance)
 {
 	if(_leafgrade_instance)
@@ -185,4 +204,33 @@ std::string DataMan::GetSamplesJson()
 	return GroupRankMap2Json(_samples);
 }
 
+void DataMan::StatisticsSamples(std::vector<LeafGradeCount>& leaf_grade_counts)
+{
+    leaf_grade_counts.clear();
+    for(GroupRankMapIter git = _samples.begin(); git != _samples.end(); ++git)
+    {
+        for(RankFeatureListMapIter rit = git->second.begin(); rit != git->second.end(); ++rit)
+        {
+            LeafGradeCount lgc;
+            lgc.set_group(git->first);
+            lgc.set_rank(rit->first);
+            lgc.set_count(rit->second.size());
+            leaf_grade_counts.push_back(lgc);
+        }
+    }
+}
+
+int DataMan::GetSamplesCount()
+{
+    int res = 0;
+    for(GroupRankMapIter git = _samples.begin(); git != _samples.end(); ++git)
+    {
+        for(RankFeatureListMapIter rit = git->second.begin(); rit != git->second.end(); ++rit)
+        {
+            res += rit->second.size();
+        }       
+    }
+    return res;
 }   // end of namespace CASD
+
+}
