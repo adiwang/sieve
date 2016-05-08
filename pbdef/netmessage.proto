@@ -116,8 +116,8 @@ message SProcessFeatureRepProto
 message SProcessResultProto
 {
 	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
-	required int32	level = 2;		// 等级
-	required bytes data = 3;		// 其它数据
+    required int32 group = 2;       // 分组
+    required int32 rank = 3;        // 分级
 }
 
 // 客户端向casd发送的设置状态的协议
@@ -150,5 +150,20 @@ message SEndBatchProcessRepProto
 {
 	required uint32 result = 1;					                // 0: 代表成功, 否则: 失败
 	repeated LeafGradeCount leaf_grade_counts = 2;		        // 叶片分组分级数量(目前只在学习状态下有效)
+}
+
+// 客户端向casd发送的学习样本的协议, 仅设置了当前客户端所连通道的学习样本
+message CLearnSampleReqProto
+{
+    required int32 group = 1;       // 分组
+    required int32 rank = 2;        // 分级
+}
+
+// casd返回给客户端的学习样本的协议
+message SLearnSampleRepProto
+{
+    required uint32 result = 1;     // 0: 代表成功，否则: 失败
+    required int32 group = 2;       // 分组
+    required int32 rank = 3;        // 分级
 }
 

@@ -35,6 +35,7 @@ void protobuf_AssignDesc_netmessage_2eproto();
 void protobuf_ShutdownFile_netmessage_2eproto();
 
 class CEndBatchProcessReqProto;
+class CLearnSampleReqProto;
 class CP1;
 class CP2;
 class CProcessFeatureReqProto;
@@ -48,6 +49,7 @@ class EchoProto;
 class FValidatePosReqpProto;
 class LeafGradeCount;
 class SEndBatchProcessRepProto;
+class SLearnSampleRepProto;
 class SProcessFeatureRepProto;
 class SProcessResultProto;
 class SRegisterClientRepProto;
@@ -1808,33 +1810,28 @@ class SProcessResultProto : public ::google::protobuf::Message {
   ::google::protobuf::uint32 result() const;
   void set_result(::google::protobuf::uint32 value);
 
-  // required int32 level = 2;
-  bool has_level() const;
-  void clear_level();
-  static const int kLevelFieldNumber = 2;
-  ::google::protobuf::int32 level() const;
-  void set_level(::google::protobuf::int32 value);
+  // required int32 group = 2;
+  bool has_group() const;
+  void clear_group();
+  static const int kGroupFieldNumber = 2;
+  ::google::protobuf::int32 group() const;
+  void set_group(::google::protobuf::int32 value);
 
-  // required bytes data = 3;
-  bool has_data() const;
-  void clear_data();
-  static const int kDataFieldNumber = 3;
-  const ::std::string& data() const;
-  void set_data(const ::std::string& value);
-  void set_data(const char* value);
-  void set_data(const void* value, size_t size);
-  ::std::string* mutable_data();
-  ::std::string* release_data();
-  void set_allocated_data(::std::string* data);
+  // required int32 rank = 3;
+  bool has_rank() const;
+  void clear_rank();
+  static const int kRankFieldNumber = 3;
+  ::google::protobuf::int32 rank() const;
+  void set_rank(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:SProcessResultProto)
  private:
   inline void set_has_result();
   inline void clear_has_result();
-  inline void set_has_level();
-  inline void clear_has_level();
-  inline void set_has_data();
-  inline void clear_has_data();
+  inline void set_has_group();
+  inline void clear_has_group();
+  inline void set_has_rank();
+  inline void clear_has_rank();
 
   // helper for ByteSize()
   int RequiredFieldsByteSizeFallback() const;
@@ -1843,8 +1840,8 @@ class SProcessResultProto : public ::google::protobuf::Message {
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::google::protobuf::uint32 result_;
-  ::google::protobuf::int32 level_;
-  ::google::protobuf::internal::ArenaStringPtr data_;
+  ::google::protobuf::int32 group_;
+  ::google::protobuf::int32 rank_;
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
   friend void protobuf_ShutdownFile_netmessage_2eproto();
@@ -2332,6 +2329,220 @@ class SEndBatchProcessRepProto : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static SEndBatchProcessRepProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CLearnSampleReqProto : public ::google::protobuf::Message {
+ public:
+  CLearnSampleReqProto();
+  virtual ~CLearnSampleReqProto();
+
+  CLearnSampleReqProto(const CLearnSampleReqProto& from);
+
+  inline CLearnSampleReqProto& operator=(const CLearnSampleReqProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CLearnSampleReqProto& default_instance();
+
+  void Swap(CLearnSampleReqProto* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CLearnSampleReqProto* New() const { return New(NULL); }
+
+  CLearnSampleReqProto* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CLearnSampleReqProto& from);
+  void MergeFrom(const CLearnSampleReqProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(CLearnSampleReqProto* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 group = 1;
+  bool has_group() const;
+  void clear_group();
+  static const int kGroupFieldNumber = 1;
+  ::google::protobuf::int32 group() const;
+  void set_group(::google::protobuf::int32 value);
+
+  // required int32 rank = 2;
+  bool has_rank() const;
+  void clear_rank();
+  static const int kRankFieldNumber = 2;
+  ::google::protobuf::int32 rank() const;
+  void set_rank(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CLearnSampleReqProto)
+ private:
+  inline void set_has_group();
+  inline void clear_has_group();
+  inline void set_has_rank();
+  inline void clear_has_rank();
+
+  // helper for ByteSize()
+  int RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 group_;
+  ::google::protobuf::int32 rank_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CLearnSampleReqProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SLearnSampleRepProto : public ::google::protobuf::Message {
+ public:
+  SLearnSampleRepProto();
+  virtual ~SLearnSampleRepProto();
+
+  SLearnSampleRepProto(const SLearnSampleRepProto& from);
+
+  inline SLearnSampleRepProto& operator=(const SLearnSampleRepProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SLearnSampleRepProto& default_instance();
+
+  void Swap(SLearnSampleRepProto* other);
+
+  // implements Message ----------------------------------------------
+
+  inline SLearnSampleRepProto* New() const { return New(NULL); }
+
+  SLearnSampleRepProto* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SLearnSampleRepProto& from);
+  void MergeFrom(const SLearnSampleRepProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(SLearnSampleRepProto* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 result = 1;
+  bool has_result() const;
+  void clear_result();
+  static const int kResultFieldNumber = 1;
+  ::google::protobuf::uint32 result() const;
+  void set_result(::google::protobuf::uint32 value);
+
+  // required int32 group = 2;
+  bool has_group() const;
+  void clear_group();
+  static const int kGroupFieldNumber = 2;
+  ::google::protobuf::int32 group() const;
+  void set_group(::google::protobuf::int32 value);
+
+  // required int32 rank = 3;
+  bool has_rank() const;
+  void clear_rank();
+  static const int kRankFieldNumber = 3;
+  ::google::protobuf::int32 rank() const;
+  void set_rank(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:SLearnSampleRepProto)
+ private:
+  inline void set_has_result();
+  inline void clear_has_result();
+  inline void set_has_group();
+  inline void clear_has_group();
+  inline void set_has_rank();
+  inline void clear_has_rank();
+
+  // helper for ByteSize()
+  int RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 result_;
+  ::google::protobuf::int32 group_;
+  ::google::protobuf::int32 rank_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static SLearnSampleRepProto* default_instance_;
 };
 // ===================================================================
 
@@ -3723,81 +3934,52 @@ inline void SProcessResultProto::set_result(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:SProcessResultProto.result)
 }
 
-// required int32 level = 2;
-inline bool SProcessResultProto::has_level() const {
+// required int32 group = 2;
+inline bool SProcessResultProto::has_group() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void SProcessResultProto::set_has_level() {
+inline void SProcessResultProto::set_has_group() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void SProcessResultProto::clear_has_level() {
+inline void SProcessResultProto::clear_has_group() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void SProcessResultProto::clear_level() {
-  level_ = 0;
-  clear_has_level();
+inline void SProcessResultProto::clear_group() {
+  group_ = 0;
+  clear_has_group();
 }
-inline ::google::protobuf::int32 SProcessResultProto::level() const {
-  // @@protoc_insertion_point(field_get:SProcessResultProto.level)
-  return level_;
+inline ::google::protobuf::int32 SProcessResultProto::group() const {
+  // @@protoc_insertion_point(field_get:SProcessResultProto.group)
+  return group_;
 }
-inline void SProcessResultProto::set_level(::google::protobuf::int32 value) {
-  set_has_level();
-  level_ = value;
-  // @@protoc_insertion_point(field_set:SProcessResultProto.level)
+inline void SProcessResultProto::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:SProcessResultProto.group)
 }
 
-// required bytes data = 3;
-inline bool SProcessResultProto::has_data() const {
+// required int32 rank = 3;
+inline bool SProcessResultProto::has_rank() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void SProcessResultProto::set_has_data() {
+inline void SProcessResultProto::set_has_rank() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void SProcessResultProto::clear_has_data() {
+inline void SProcessResultProto::clear_has_rank() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void SProcessResultProto::clear_data() {
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_data();
+inline void SProcessResultProto::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
 }
-inline const ::std::string& SProcessResultProto::data() const {
-  // @@protoc_insertion_point(field_get:SProcessResultProto.data)
-  return data_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::google::protobuf::int32 SProcessResultProto::rank() const {
+  // @@protoc_insertion_point(field_get:SProcessResultProto.rank)
+  return rank_;
 }
-inline void SProcessResultProto::set_data(const ::std::string& value) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:SProcessResultProto.data)
-}
-inline void SProcessResultProto::set_data(const char* value) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:SProcessResultProto.data)
-}
-inline void SProcessResultProto::set_data(const void* value, size_t size) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:SProcessResultProto.data)
-}
-inline ::std::string* SProcessResultProto::mutable_data() {
-  set_has_data();
-  // @@protoc_insertion_point(field_mutable:SProcessResultProto.data)
-  return data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* SProcessResultProto::release_data() {
-  clear_has_data();
-  return data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void SProcessResultProto::set_allocated_data(::std::string* data) {
-  if (data != NULL) {
-    set_has_data();
-  } else {
-    clear_has_data();
-  }
-  data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
-  // @@protoc_insertion_point(field_set_allocated:SProcessResultProto.data)
+inline void SProcessResultProto::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:SProcessResultProto.rank)
 }
 
 // -------------------------------------------------------------------
@@ -4018,7 +4200,139 @@ SEndBatchProcessRepProto::leaf_grade_counts() const {
   return leaf_grade_counts_;
 }
 
+// -------------------------------------------------------------------
+
+// CLearnSampleReqProto
+
+// required int32 group = 1;
+inline bool CLearnSampleReqProto::has_group() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CLearnSampleReqProto::set_has_group() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CLearnSampleReqProto::clear_has_group() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CLearnSampleReqProto::clear_group() {
+  group_ = 0;
+  clear_has_group();
+}
+inline ::google::protobuf::int32 CLearnSampleReqProto::group() const {
+  // @@protoc_insertion_point(field_get:CLearnSampleReqProto.group)
+  return group_;
+}
+inline void CLearnSampleReqProto::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:CLearnSampleReqProto.group)
+}
+
+// required int32 rank = 2;
+inline bool CLearnSampleReqProto::has_rank() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CLearnSampleReqProto::set_has_rank() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CLearnSampleReqProto::clear_has_rank() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CLearnSampleReqProto::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
+}
+inline ::google::protobuf::int32 CLearnSampleReqProto::rank() const {
+  // @@protoc_insertion_point(field_get:CLearnSampleReqProto.rank)
+  return rank_;
+}
+inline void CLearnSampleReqProto::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:CLearnSampleReqProto.rank)
+}
+
+// -------------------------------------------------------------------
+
+// SLearnSampleRepProto
+
+// required uint32 result = 1;
+inline bool SLearnSampleRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SLearnSampleRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SLearnSampleRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SLearnSampleRepProto::clear_result() {
+  result_ = 0u;
+  clear_has_result();
+}
+inline ::google::protobuf::uint32 SLearnSampleRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SLearnSampleRepProto.result)
+  return result_;
+}
+inline void SLearnSampleRepProto::set_result(::google::protobuf::uint32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SLearnSampleRepProto.result)
+}
+
+// required int32 group = 2;
+inline bool SLearnSampleRepProto::has_group() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SLearnSampleRepProto::set_has_group() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SLearnSampleRepProto::clear_has_group() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SLearnSampleRepProto::clear_group() {
+  group_ = 0;
+  clear_has_group();
+}
+inline ::google::protobuf::int32 SLearnSampleRepProto::group() const {
+  // @@protoc_insertion_point(field_get:SLearnSampleRepProto.group)
+  return group_;
+}
+inline void SLearnSampleRepProto::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:SLearnSampleRepProto.group)
+}
+
+// required int32 rank = 3;
+inline bool SLearnSampleRepProto::has_rank() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void SLearnSampleRepProto::set_has_rank() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void SLearnSampleRepProto::clear_has_rank() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void SLearnSampleRepProto::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
+}
+inline ::google::protobuf::int32 SLearnSampleRepProto::rank() const {
+  // @@protoc_insertion_point(field_get:SLearnSampleRepProto.rank)
+  return rank_;
+}
+inline void SLearnSampleRepProto::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:SLearnSampleRepProto.rank)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

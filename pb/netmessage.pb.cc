@@ -82,6 +82,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* SEndBatchProcessRepProto_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   SEndBatchProcessRepProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* CLearnSampleReqProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  CLearnSampleReqProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* SLearnSampleRepProto_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  SLearnSampleRepProto_reflection_ = NULL;
 
 }  // namespace
 
@@ -347,8 +353,8 @@ void protobuf_AssignDesc_netmessage_2eproto() {
   SProcessResultProto_descriptor_ = file->message_type(15);
   static const int SProcessResultProto_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SProcessResultProto, result_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SProcessResultProto, level_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SProcessResultProto, data_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SProcessResultProto, group_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SProcessResultProto, rank_),
   };
   SProcessResultProto_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -439,6 +445,39 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       sizeof(SEndBatchProcessRepProto),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SEndBatchProcessRepProto, _internal_metadata_),
       -1);
+  CLearnSampleReqProto_descriptor_ = file->message_type(21);
+  static const int CLearnSampleReqProto_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CLearnSampleReqProto, group_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CLearnSampleReqProto, rank_),
+  };
+  CLearnSampleReqProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      CLearnSampleReqProto_descriptor_,
+      CLearnSampleReqProto::default_instance_,
+      CLearnSampleReqProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CLearnSampleReqProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(CLearnSampleReqProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CLearnSampleReqProto, _internal_metadata_),
+      -1);
+  SLearnSampleRepProto_descriptor_ = file->message_type(22);
+  static const int SLearnSampleRepProto_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SLearnSampleRepProto, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SLearnSampleRepProto, group_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SLearnSampleRepProto, rank_),
+  };
+  SLearnSampleRepProto_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      SLearnSampleRepProto_descriptor_,
+      SLearnSampleRepProto::default_instance_,
+      SLearnSampleRepProto_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SLearnSampleRepProto, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(SLearnSampleRepProto),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SLearnSampleRepProto, _internal_metadata_),
+      -1);
 }
 
 namespace {
@@ -493,6 +532,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
       LeafGradeCount_descriptor_, &LeafGradeCount::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       SEndBatchProcessRepProto_descriptor_, &SEndBatchProcessRepProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      CLearnSampleReqProto_descriptor_, &CLearnSampleReqProto::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      SLearnSampleRepProto_descriptor_, &SLearnSampleRepProto::default_instance());
 }
 
 }  // namespace
@@ -540,6 +583,10 @@ void protobuf_ShutdownFile_netmessage_2eproto() {
   delete LeafGradeCount_reflection_;
   delete SEndBatchProcessRepProto::default_instance_;
   delete SEndBatchProcessRepProto_reflection_;
+  delete CLearnSampleReqProto::default_instance_;
+  delete CLearnSampleReqProto_reflection_;
+  delete SLearnSampleRepProto::default_instance_;
+  delete SLearnSampleRepProto_reflection_;
 }
 
 void protobuf_AddDesc_netmessage_2eproto() {
@@ -576,15 +623,18 @@ void protobuf_AddDesc_netmessage_2eproto() {
     "\014\n\004Area\030\r \002(\001\022\021\n\tThickMean\030\016 \002(\001\022\022\n\nDefe"
     "ctRate\030\017 \002(\001\")\n\027SProcessFeatureRepProto\022"
     "\016\n\006result\030\001 \002(\r\"B\n\023SProcessResultProto\022\016"
-    "\n\006result\030\001 \002(\r\022\r\n\005level\030\002 \002(\005\022\014\n\004data\030\003 "
-    "\002(\014\")\n\030CSetProcessStateReqProto\022\r\n\005state"
+    "\n\006result\030\001 \002(\r\022\r\n\005group\030\002 \002(\005\022\014\n\004rank\030\003 "
+    "\002(\005\")\n\030CSetProcessStateReqProto\022\r\n\005state"
     "\030\001 \002(\005\"*\n\030SSetProcessStateRepProto\022\016\n\006re"
     "sult\030\001 \002(\r\")\n\030CEndBatchProcessReqProto\022\r"
     "\n\005state\030\001 \002(\005\"<\n\016LeafGradeCount\022\r\n\005group"
     "\030\001 \002(\005\022\014\n\004rank\030\002 \002(\005\022\r\n\005count\030\003 \002(\005\"V\n\030S"
     "EndBatchProcessRepProto\022\016\n\006result\030\001 \002(\r\022"
     "*\n\021leaf_grade_counts\030\002 \003(\0132\017.LeafGradeCo"
-    "unt", 1403);
+    "unt\"3\n\024CLearnSampleReqProto\022\r\n\005group\030\001 \002"
+    "(\005\022\014\n\004rank\030\002 \002(\005\"C\n\024SLearnSampleRepProto"
+    "\022\016\n\006result\030\001 \002(\r\022\r\n\005group\030\002 \002(\005\022\014\n\004rank\030"
+    "\003 \002(\005", 1525);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
   CProto::default_instance_ = new CProto();
@@ -608,6 +658,8 @@ void protobuf_AddDesc_netmessage_2eproto() {
   CEndBatchProcessReqProto::default_instance_ = new CEndBatchProcessReqProto();
   LeafGradeCount::default_instance_ = new LeafGradeCount();
   SEndBatchProcessRepProto::default_instance_ = new SEndBatchProcessRepProto();
+  CLearnSampleReqProto::default_instance_ = new CLearnSampleReqProto();
+  SLearnSampleRepProto::default_instance_ = new SLearnSampleRepProto();
   CProto::default_instance_->InitAsDefaultInstance();
   CP1::default_instance_->InitAsDefaultInstance();
   CP2::default_instance_->InitAsDefaultInstance();
@@ -629,6 +681,8 @@ void protobuf_AddDesc_netmessage_2eproto() {
   CEndBatchProcessReqProto::default_instance_->InitAsDefaultInstance();
   LeafGradeCount::default_instance_->InitAsDefaultInstance();
   SEndBatchProcessRepProto::default_instance_->InitAsDefaultInstance();
+  CLearnSampleReqProto::default_instance_->InitAsDefaultInstance();
+  SLearnSampleRepProto::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_netmessage_2eproto);
 }
 
@@ -6945,8 +6999,8 @@ void SProcessFeatureRepProto::clear_result() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int SProcessResultProto::kResultFieldNumber;
-const int SProcessResultProto::kLevelFieldNumber;
-const int SProcessResultProto::kDataFieldNumber;
+const int SProcessResultProto::kGroupFieldNumber;
+const int SProcessResultProto::kRankFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SProcessResultProto::SProcessResultProto()
@@ -6967,11 +7021,10 @@ SProcessResultProto::SProcessResultProto(const SProcessResultProto& from)
 }
 
 void SProcessResultProto::SharedCtor() {
-  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   result_ = 0u;
-  level_ = 0;
-  data_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  group_ = 0;
+  rank_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6981,7 +7034,6 @@ SProcessResultProto::~SProcessResultProto() {
 }
 
 void SProcessResultProto::SharedDtor() {
-  data_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -7020,12 +7072,7 @@ void SProcessResultProto::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 7u) {
-    ZR_(result_, level_);
-    if (has_data()) {
-      data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    }
-  }
+  ZR_(result_, rank_);
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -7056,31 +7103,33 @@ bool SProcessResultProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_level;
+        if (input->ExpectTag(16)) goto parse_group;
         break;
       }
 
-      // required int32 level = 2;
+      // required int32 group = 2;
       case 2: {
         if (tag == 16) {
-         parse_level:
+         parse_group:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &level_)));
-          set_has_level();
+                 input, &group_)));
+          set_has_group();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_data;
+        if (input->ExpectTag(24)) goto parse_rank;
         break;
       }
 
-      // required bytes data = 3;
+      // required int32 rank = 3;
       case 3: {
-        if (tag == 26) {
-         parse_data:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_data()));
+        if (tag == 24) {
+         parse_rank:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &rank_)));
+          set_has_rank();
         } else {
           goto handle_unusual;
         }
@@ -7118,15 +7167,14 @@ void SProcessResultProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result(), output);
   }
 
-  // required int32 level = 2;
-  if (has_level()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->level(), output);
+  // required int32 group = 2;
+  if (has_group()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->group(), output);
   }
 
-  // required bytes data = 3;
-  if (has_data()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->data(), output);
+  // required int32 rank = 3;
+  if (has_rank()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->rank(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7144,16 +7192,14 @@ void SProcessResultProto::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->result(), target);
   }
 
-  // required int32 level = 2;
-  if (has_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->level(), target);
+  // required int32 group = 2;
+  if (has_group()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->group(), target);
   }
 
-  // required bytes data = 3;
-  if (has_data()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->data(), target);
+  // required int32 rank = 3;
+  if (has_rank()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->rank(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7174,18 +7220,18 @@ int SProcessResultProto::RequiredFieldsByteSizeFallback() const {
         this->result());
   }
 
-  if (has_level()) {
-    // required int32 level = 2;
+  if (has_group()) {
+    // required int32 group = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->level());
+        this->group());
   }
 
-  if (has_data()) {
-    // required bytes data = 3;
+  if (has_rank()) {
+    // required int32 rank = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->data());
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
   }
 
   return total_size;
@@ -7199,15 +7245,15 @@ int SProcessResultProto::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->result());
 
-    // required int32 level = 2;
+    // required int32 group = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->level());
+        this->group());
 
-    // required bytes data = 3;
+    // required int32 rank = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->data());
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -7241,12 +7287,11 @@ void SProcessResultProto::MergeFrom(const SProcessResultProto& from) {
     if (from.has_result()) {
       set_result(from.result());
     }
-    if (from.has_level()) {
-      set_level(from.level());
+    if (from.has_group()) {
+      set_group(from.group());
     }
-    if (from.has_data()) {
-      set_has_data();
-      data_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.data_);
+    if (from.has_rank()) {
+      set_rank(from.rank());
     }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
@@ -7278,8 +7323,8 @@ void SProcessResultProto::Swap(SProcessResultProto* other) {
 }
 void SProcessResultProto::InternalSwap(SProcessResultProto* other) {
   std::swap(result_, other->result_);
-  std::swap(level_, other->level_);
-  data_.Swap(&other->data_);
+  std::swap(group_, other->group_);
+  std::swap(rank_, other->rank_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -7320,81 +7365,52 @@ void SProcessResultProto::clear_result() {
   // @@protoc_insertion_point(field_set:SProcessResultProto.result)
 }
 
-// required int32 level = 2;
-bool SProcessResultProto::has_level() const {
+// required int32 group = 2;
+bool SProcessResultProto::has_group() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-void SProcessResultProto::set_has_level() {
+void SProcessResultProto::set_has_group() {
   _has_bits_[0] |= 0x00000002u;
 }
-void SProcessResultProto::clear_has_level() {
+void SProcessResultProto::clear_has_group() {
   _has_bits_[0] &= ~0x00000002u;
 }
-void SProcessResultProto::clear_level() {
-  level_ = 0;
-  clear_has_level();
+void SProcessResultProto::clear_group() {
+  group_ = 0;
+  clear_has_group();
 }
- ::google::protobuf::int32 SProcessResultProto::level() const {
-  // @@protoc_insertion_point(field_get:SProcessResultProto.level)
-  return level_;
+ ::google::protobuf::int32 SProcessResultProto::group() const {
+  // @@protoc_insertion_point(field_get:SProcessResultProto.group)
+  return group_;
 }
- void SProcessResultProto::set_level(::google::protobuf::int32 value) {
-  set_has_level();
-  level_ = value;
-  // @@protoc_insertion_point(field_set:SProcessResultProto.level)
+ void SProcessResultProto::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:SProcessResultProto.group)
 }
 
-// required bytes data = 3;
-bool SProcessResultProto::has_data() const {
+// required int32 rank = 3;
+bool SProcessResultProto::has_rank() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-void SProcessResultProto::set_has_data() {
+void SProcessResultProto::set_has_rank() {
   _has_bits_[0] |= 0x00000004u;
 }
-void SProcessResultProto::clear_has_data() {
+void SProcessResultProto::clear_has_rank() {
   _has_bits_[0] &= ~0x00000004u;
 }
-void SProcessResultProto::clear_data() {
-  data_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_data();
+void SProcessResultProto::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
 }
- const ::std::string& SProcessResultProto::data() const {
-  // @@protoc_insertion_point(field_get:SProcessResultProto.data)
-  return data_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+ ::google::protobuf::int32 SProcessResultProto::rank() const {
+  // @@protoc_insertion_point(field_get:SProcessResultProto.rank)
+  return rank_;
 }
- void SProcessResultProto::set_data(const ::std::string& value) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:SProcessResultProto.data)
-}
- void SProcessResultProto::set_data(const char* value) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:SProcessResultProto.data)
-}
- void SProcessResultProto::set_data(const void* value, size_t size) {
-  set_has_data();
-  data_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:SProcessResultProto.data)
-}
- ::std::string* SProcessResultProto::mutable_data() {
-  set_has_data();
-  // @@protoc_insertion_point(field_mutable:SProcessResultProto.data)
-  return data_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- ::std::string* SProcessResultProto::release_data() {
-  clear_has_data();
-  return data_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void SProcessResultProto::set_allocated_data(::std::string* data) {
-  if (data != NULL) {
-    set_has_data();
-  } else {
-    clear_has_data();
-  }
-  data_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data);
-  // @@protoc_insertion_point(field_set_allocated:SProcessResultProto.data)
+ void SProcessResultProto::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:SProcessResultProto.rank)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -8924,6 +8940,779 @@ const ::google::protobuf::RepeatedPtrField< ::LeafGradeCount >&
 SEndBatchProcessRepProto::leaf_grade_counts() const {
   // @@protoc_insertion_point(field_list:SEndBatchProcessRepProto.leaf_grade_counts)
   return leaf_grade_counts_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CLearnSampleReqProto::kGroupFieldNumber;
+const int CLearnSampleReqProto::kRankFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CLearnSampleReqProto::CLearnSampleReqProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:CLearnSampleReqProto)
+}
+
+void CLearnSampleReqProto::InitAsDefaultInstance() {
+}
+
+CLearnSampleReqProto::CLearnSampleReqProto(const CLearnSampleReqProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:CLearnSampleReqProto)
+}
+
+void CLearnSampleReqProto::SharedCtor() {
+  _cached_size_ = 0;
+  group_ = 0;
+  rank_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+CLearnSampleReqProto::~CLearnSampleReqProto() {
+  // @@protoc_insertion_point(destructor:CLearnSampleReqProto)
+  SharedDtor();
+}
+
+void CLearnSampleReqProto::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void CLearnSampleReqProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CLearnSampleReqProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CLearnSampleReqProto_descriptor_;
+}
+
+const CLearnSampleReqProto& CLearnSampleReqProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+CLearnSampleReqProto* CLearnSampleReqProto::default_instance_ = NULL;
+
+CLearnSampleReqProto* CLearnSampleReqProto::New(::google::protobuf::Arena* arena) const {
+  CLearnSampleReqProto* n = new CLearnSampleReqProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void CLearnSampleReqProto::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<CLearnSampleReqProto*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(group_, rank_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool CLearnSampleReqProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:CLearnSampleReqProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 group = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &group_)));
+          set_has_group();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_rank;
+        break;
+      }
+
+      // required int32 rank = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_rank:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &rank_)));
+          set_has_rank();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:CLearnSampleReqProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:CLearnSampleReqProto)
+  return false;
+#undef DO_
+}
+
+void CLearnSampleReqProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:CLearnSampleReqProto)
+  // required int32 group = 1;
+  if (has_group()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->group(), output);
+  }
+
+  // required int32 rank = 2;
+  if (has_rank()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->rank(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:CLearnSampleReqProto)
+}
+
+::google::protobuf::uint8* CLearnSampleReqProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:CLearnSampleReqProto)
+  // required int32 group = 1;
+  if (has_group()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->group(), target);
+  }
+
+  // required int32 rank = 2;
+  if (has_rank()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->rank(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:CLearnSampleReqProto)
+  return target;
+}
+
+int CLearnSampleReqProto::RequiredFieldsByteSizeFallback() const {
+  int total_size = 0;
+
+  if (has_group()) {
+    // required int32 group = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->group());
+  }
+
+  if (has_rank()) {
+    // required int32 rank = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
+  }
+
+  return total_size;
+}
+int CLearnSampleReqProto::ByteSize() const {
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required int32 group = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->group());
+
+    // required int32 rank = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CLearnSampleReqProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const CLearnSampleReqProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const CLearnSampleReqProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void CLearnSampleReqProto::MergeFrom(const CLearnSampleReqProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_group()) {
+      set_group(from.group());
+    }
+    if (from.has_rank()) {
+      set_rank(from.rank());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void CLearnSampleReqProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CLearnSampleReqProto::CopyFrom(const CLearnSampleReqProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CLearnSampleReqProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void CLearnSampleReqProto::Swap(CLearnSampleReqProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CLearnSampleReqProto::InternalSwap(CLearnSampleReqProto* other) {
+  std::swap(group_, other->group_);
+  std::swap(rank_, other->rank_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata CLearnSampleReqProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = CLearnSampleReqProto_descriptor_;
+  metadata.reflection = CLearnSampleReqProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// CLearnSampleReqProto
+
+// required int32 group = 1;
+bool CLearnSampleReqProto::has_group() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void CLearnSampleReqProto::set_has_group() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void CLearnSampleReqProto::clear_has_group() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void CLearnSampleReqProto::clear_group() {
+  group_ = 0;
+  clear_has_group();
+}
+ ::google::protobuf::int32 CLearnSampleReqProto::group() const {
+  // @@protoc_insertion_point(field_get:CLearnSampleReqProto.group)
+  return group_;
+}
+ void CLearnSampleReqProto::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:CLearnSampleReqProto.group)
+}
+
+// required int32 rank = 2;
+bool CLearnSampleReqProto::has_rank() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void CLearnSampleReqProto::set_has_rank() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void CLearnSampleReqProto::clear_has_rank() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void CLearnSampleReqProto::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
+}
+ ::google::protobuf::int32 CLearnSampleReqProto::rank() const {
+  // @@protoc_insertion_point(field_get:CLearnSampleReqProto.rank)
+  return rank_;
+}
+ void CLearnSampleReqProto::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:CLearnSampleReqProto.rank)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SLearnSampleRepProto::kResultFieldNumber;
+const int SLearnSampleRepProto::kGroupFieldNumber;
+const int SLearnSampleRepProto::kRankFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+SLearnSampleRepProto::SLearnSampleRepProto()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:SLearnSampleRepProto)
+}
+
+void SLearnSampleRepProto::InitAsDefaultInstance() {
+}
+
+SLearnSampleRepProto::SLearnSampleRepProto(const SLearnSampleRepProto& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:SLearnSampleRepProto)
+}
+
+void SLearnSampleRepProto::SharedCtor() {
+  _cached_size_ = 0;
+  result_ = 0u;
+  group_ = 0;
+  rank_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SLearnSampleRepProto::~SLearnSampleRepProto() {
+  // @@protoc_insertion_point(destructor:SLearnSampleRepProto)
+  SharedDtor();
+}
+
+void SLearnSampleRepProto::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SLearnSampleRepProto::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SLearnSampleRepProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SLearnSampleRepProto_descriptor_;
+}
+
+const SLearnSampleRepProto& SLearnSampleRepProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+SLearnSampleRepProto* SLearnSampleRepProto::default_instance_ = NULL;
+
+SLearnSampleRepProto* SLearnSampleRepProto::New(::google::protobuf::Arena* arena) const {
+  SLearnSampleRepProto* n = new SLearnSampleRepProto;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void SLearnSampleRepProto::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<SLearnSampleRepProto*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(result_, rank_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool SLearnSampleRepProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:SLearnSampleRepProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 result = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &result_)));
+          set_has_result();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_group;
+        break;
+      }
+
+      // required int32 group = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_group:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &group_)));
+          set_has_group();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_rank;
+        break;
+      }
+
+      // required int32 rank = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_rank:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &rank_)));
+          set_has_rank();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:SLearnSampleRepProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:SLearnSampleRepProto)
+  return false;
+#undef DO_
+}
+
+void SLearnSampleRepProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:SLearnSampleRepProto)
+  // required uint32 result = 1;
+  if (has_result()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result(), output);
+  }
+
+  // required int32 group = 2;
+  if (has_group()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->group(), output);
+  }
+
+  // required int32 rank = 3;
+  if (has_rank()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->rank(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:SLearnSampleRepProto)
+}
+
+::google::protobuf::uint8* SLearnSampleRepProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:SLearnSampleRepProto)
+  // required uint32 result = 1;
+  if (has_result()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->result(), target);
+  }
+
+  // required int32 group = 2;
+  if (has_group()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->group(), target);
+  }
+
+  // required int32 rank = 3;
+  if (has_rank()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->rank(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:SLearnSampleRepProto)
+  return target;
+}
+
+int SLearnSampleRepProto::RequiredFieldsByteSizeFallback() const {
+  int total_size = 0;
+
+  if (has_result()) {
+    // required uint32 result = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->result());
+  }
+
+  if (has_group()) {
+    // required int32 group = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->group());
+  }
+
+  if (has_rank()) {
+    // required int32 rank = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
+  }
+
+  return total_size;
+}
+int SLearnSampleRepProto::ByteSize() const {
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
+    // required uint32 result = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->result());
+
+    // required int32 group = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->group());
+
+    // required int32 rank = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SLearnSampleRepProto::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const SLearnSampleRepProto* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const SLearnSampleRepProto>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SLearnSampleRepProto::MergeFrom(const SLearnSampleRepProto& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_result()) {
+      set_result(from.result());
+    }
+    if (from.has_group()) {
+      set_group(from.group());
+    }
+    if (from.has_rank()) {
+      set_rank(from.rank());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void SLearnSampleRepProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SLearnSampleRepProto::CopyFrom(const SLearnSampleRepProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SLearnSampleRepProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void SLearnSampleRepProto::Swap(SLearnSampleRepProto* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void SLearnSampleRepProto::InternalSwap(SLearnSampleRepProto* other) {
+  std::swap(result_, other->result_);
+  std::swap(group_, other->group_);
+  std::swap(rank_, other->rank_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata SLearnSampleRepProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SLearnSampleRepProto_descriptor_;
+  metadata.reflection = SLearnSampleRepProto_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// SLearnSampleRepProto
+
+// required uint32 result = 1;
+bool SLearnSampleRepProto::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void SLearnSampleRepProto::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void SLearnSampleRepProto::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void SLearnSampleRepProto::clear_result() {
+  result_ = 0u;
+  clear_has_result();
+}
+ ::google::protobuf::uint32 SLearnSampleRepProto::result() const {
+  // @@protoc_insertion_point(field_get:SLearnSampleRepProto.result)
+  return result_;
+}
+ void SLearnSampleRepProto::set_result(::google::protobuf::uint32 value) {
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:SLearnSampleRepProto.result)
+}
+
+// required int32 group = 2;
+bool SLearnSampleRepProto::has_group() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void SLearnSampleRepProto::set_has_group() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void SLearnSampleRepProto::clear_has_group() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void SLearnSampleRepProto::clear_group() {
+  group_ = 0;
+  clear_has_group();
+}
+ ::google::protobuf::int32 SLearnSampleRepProto::group() const {
+  // @@protoc_insertion_point(field_get:SLearnSampleRepProto.group)
+  return group_;
+}
+ void SLearnSampleRepProto::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:SLearnSampleRepProto.group)
+}
+
+// required int32 rank = 3;
+bool SLearnSampleRepProto::has_rank() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void SLearnSampleRepProto::set_has_rank() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void SLearnSampleRepProto::clear_has_rank() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void SLearnSampleRepProto::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
+}
+ ::google::protobuf::int32 SLearnSampleRepProto::rank() const {
+  // @@protoc_insertion_point(field_get:SLearnSampleRepProto.rank)
+  return rank_;
+}
+ void SLearnSampleRepProto::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:SLearnSampleRepProto.rank)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
