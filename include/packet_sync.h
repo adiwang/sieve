@@ -159,6 +159,7 @@ public:
                 MD5_Update(&md5, thread_packetdata.base, theNexPacket.datalen); //包数据的校验值
                 MD5_Final(md5str, &md5);
             }
+            /*
             if (memcmp(theNexPacket.check, md5str, MD5_DIGEST_LENGTH) != 0) {
                 fprintf(stdout, "读取%d数据, 校验码不合法\n", NET_PACKAGE_HEADLEN + theNexPacket.datalen + 2);
                 if (truepacketlen - headpos - 1 - NET_PACKAGE_HEADLEN >= theNexPacket.datalen + 1) {//thread_readdata数据足够
@@ -177,6 +178,7 @@ public:
                 parsetype = PARSE_NOTHING;//重头再来
                 continue;
             }
+            */
             if (truepacketlen - headpos - 1 - NET_PACKAGE_HEADLEN >= theNexPacket.datalen + 1) {//thread_readdata数据足够
                 memmove(thread_readdata.base, thread_readdata.base + headpos + NET_PACKAGE_HEADLEN + theNexPacket.datalen + 2,
                         truepacketlen - (headpos + NET_PACKAGE_HEADLEN + theNexPacket.datalen + 2)); //2.4
