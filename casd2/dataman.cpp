@@ -102,6 +102,9 @@ int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
 
 void DataMan::LeafFeature2Json(LeafFeature& feature, Json::Value& value)
 {
+    value["id"] = feature.id;
+    value["group"] = feature.Group;
+    value["rank"] = feature.Rank;
     value["avg_saturation"] = feature.AvgSaturation;
     value["avg_hue"] = feature.AvgHue;
     value["avg_intensity"] = feature.AvgIntensity;
@@ -120,6 +123,9 @@ void DataMan::LeafFeature2Json(LeafFeature& feature, Json::Value& value)
 
 void DataMan::Json2LeafFeature(Json::Value& value, LeafFeature& feature)
 {
+    feature.id = value["id"].asString();
+    feature.Group = value["group"].asInt();
+    feature.Rank = value["rank"].asInt();
     feature.AvgSaturation = value["avg_saturation"].asDouble();                 
     feature.AvgHue = value["avg_hue"].asDouble();                 
     feature.AvgIntensity = value["avg_intensity"].asDouble();                 
