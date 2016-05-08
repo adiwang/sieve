@@ -54,7 +54,7 @@ int main (int argc, char **argv)
 	}
 	// 加载配置
 	std::string logfile = cf.Value("Global", "LogFile", "./log");
-	std::string ip = cf.Value("Gloabal", "Address", "127.0.0.1");
+	std::string ip = cf.Value("Global", "Address", "127.0.0.1");
 	std::string port = cf.Value("Global", "Port", "12345");
 	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
