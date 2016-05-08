@@ -18,6 +18,7 @@
 #include <time.h>
 #include <pylon/PylonIncludes.h>
 #include <pylon/gige/PylonGigEIncludes.h>
+#include <sstream>
 
 using namespace Pylon;
 using namespace std;
@@ -72,7 +73,7 @@ public:
             // 当前图片序号是0说明这一张图片是物体的第一张图片，被用来校验摆放是否正确
             GenerateID();
 			char image_path[256] = {0};
-			snprintf(image_path, sizeof(image_path), "/tmp/%s/%2d.png", gCurID.c_str(), gCurImageSeq);
+			snprintf(image_path, sizeof(image_path), "../images/%s/%2d.png", gCurID.c_str(), gCurImageSeq);
 			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
 
             gGrabImages.clear();
@@ -80,7 +81,9 @@ public:
             FValidatePosReqp validate_proto;
             validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
             validate_proto._result = 0;
-            validate_proto._image_path = std::string(image_path);
+            std::stringstream ss;
+            ss << gCurID << "/" << gCurImageSeq << ".png";
+            validate_proto._image_path = ss.str();
             validate_proto.Marshal();
             if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
             {
