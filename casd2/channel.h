@@ -23,7 +23,7 @@ public:
 		ST_MAX,
 	};
 
-	Channel() : _seq(0), _cpsd_sid(0), _client_sid(0), _state(ST_LEARN){}
+	Channel() : _seq(0), _cpsd_sid(0), _client_sid(0), _state(ST_LEARN), _group(0), _rank(0) {}
 	~Channel()
 	{
 	}
@@ -33,16 +33,22 @@ public:
 	void SetCpsdSid(int sid);
 	void SetClientSid(int sid);
 	void SetState(int state);
+    void SetGroup(int group);
+    void SetRank(int rank);
 	uint32_t GetSeq();
 	int GetCpsdSid();
 	int GetClientSid();
 	int GetState();
+    int GetGroup();
+    int GetRank();
 
 private:
 	uint32_t _seq;								// 当前通道序号
 	int		 _cpsd_sid;							// cpsd的session id
 	int		 _client_sid;						// 客户端的session id
 	int		 _state;							// 通道当前的状态
+    int      _group;                            // 仅在state为学习状态时有效，为当前待学习样本的分组
+    int      _rank;                             // 仅在state为学习状态时有效，为当前待学习样本的分级
 };
 
 

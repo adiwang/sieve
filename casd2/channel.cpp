@@ -44,6 +44,24 @@ void Channel::SetState(int state)
 }
 
 /**
+**	设置通道当前待学习样本的分组
+**  @group: 分组
+*/
+void Channel::SetGroup(int group)
+{
+    _group = group;
+}
+
+/**
+**	设置通道当前待学习样本的分级
+**  @group: 分级
+*/
+void Channel::SetRank(int rank)
+{
+   _rank = rank;
+}
+
+/**
 **	获取通道序号
 **  @return: 序号
 */
@@ -77,6 +95,24 @@ int Channel::GetClientSid()
 int Channel::GetState()
 {
 	return _state;
+}
+
+/**
+**	获取通道的待学习样本的分组信息
+**  @return: 分组信息
+*/
+int Channel::GetGroup()
+{
+    return _group;
+}
+
+/**
+**	获取通道的待学习样本的分级信息
+**  @return: 分级信息
+*/
+int Channel::GetRank()
+{
+    return _rank;
 }
 
 /*
