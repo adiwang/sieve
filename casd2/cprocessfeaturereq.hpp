@@ -135,6 +135,7 @@ private:
 
 	void SaveToSamples(LeafFeature& feature)
 	{
+        CASD::DataMan::GetInstance().AddSample(feature);
 		std::string json_str = GetFeatureJson(feature);
 		redisAsyncCommand(redis_context, NULL, NULL, "HSET samples %s %s", feature.id.c_str(), json_str.c_str());
 	}
@@ -156,7 +157,7 @@ private:
 		{
 			if(strcmp(methodName, "ClassifyOne") == 0)
 			{
-				PyArg_ParseTuple(pRes, "ii", &feature.Group, &feature.Grade);
+				PyArg_ParseTuple(pRes, "ii", &feature.Group, &feature.Rank);
 			}
 			Py_DECREF(pRes);
 			pRes = NULL;

@@ -9,6 +9,7 @@
 #include "channel.h"
 #include "tcpserver.h"
 #include "sregisterclientrep.hpp"
+#include "dataman.h"
 
 
 class CRegisterClientReq : public Protocol
@@ -55,6 +56,7 @@ class CRegisterClientReq : public Protocol
 			}
 			manager._sid2seq.insert(std::make_pair(ctx->sid, _seq));
 			rep._result = 0;
+            rep._samples_count = CASD::DataMan::GetInstance().GetSamplesCount();
 		}	// end of if _seq > 0
 		else
 		{

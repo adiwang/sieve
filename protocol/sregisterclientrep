@@ -1,5 +1,6 @@
 public:
 	uint32_t _result;
+    int _samples_count;
 	std::string _marshal_data;
 
 public:
@@ -7,8 +8,8 @@ public:
 	{
 		PROTOCOL_ID = PROTOCOL_ID_SREGISTERCLIENTREP,
 	};
-	SRegisterClientRep() : _result(0) {}
-	SRegisterClientRep(uint32_t result) : _result(result) {}
+	SRegisterClientRep() : _result(0), _samples_count(0) {}
+	SRegisterClientRep(uint32_t result, int samples_count) : _result(result), _samples_count(samples_count) {}
 	~SRegisterClientRep() {}
 
 	virtual const std::string& Marshal()
@@ -16,6 +17,7 @@ public:
 		// 1. 设置协议具体子段
 		SRegisterClientRepProto proto;
 		proto.set_result(_result);
+        proto.set_samples_count(_samples_count);
 		// 2. 给协议wrap一层，添加protocol id
 		CProto cproto;
 		cproto.set_id(PROTOCOL_ID);
@@ -37,6 +39,7 @@ public:
 		SRegisterClientRepProto proto;
 		proto.ParseFromString(std::string(buf, length));
 		_result = proto.result();
+        _samples_count = proto.samples_count();
 	}
 
     virtual Protocol* Clone()

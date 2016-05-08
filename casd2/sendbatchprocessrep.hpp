@@ -9,6 +9,7 @@
 #include "pb/netmessage.pb.h"
 #include "channel.h"
 #include "tcpserver.h"
+#include <vector>
 
 class SEndBatchProcessRep : public Protocol
 {

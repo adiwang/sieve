@@ -67,6 +67,7 @@ class CEndBatchProcessReq : public Protocol
 			}
 			Py_DECREF(pLeafGradeIns);
 			pLeafGradeIns = NULL;
+            CASD::DataMan::GetInstance().StatisticsSamples(rep._leaf_grade_counts);
 		}
 		rep._result = 0;
 		rep.Marshal();
