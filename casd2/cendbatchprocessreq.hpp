@@ -24,6 +24,8 @@ class CEndBatchProcessReq : public Protocol
 		UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 
+        LOG_TRACE("CEndBatchProcessReq|sid=%d, state=%d", ctx->sid, _state);
+
 		CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 		std::map<int, uint32_t>::iterator it = manager._sid2seq.find(ctx->sid);
 		
@@ -31,12 +33,14 @@ class CEndBatchProcessReq : public Protocol
 		{
 			// 找不到该客户端的sid对应的通道序号
 			NotifyError(server, ctx, 1);
+            LOG_TRACE("CEndBatchProcessReq|failed|can not find channel seq|sid=%d, state=%d", ctx->sid, _state);
 			return;
 		}
 		int channel_seq = it->second;
 		if(channel_seq <= 0)
 		{
 			// 通道序号不正确
+            LOG_TRACE("CEndBatchProcessReq|failed|channel seq invalid|sid=%d, state=%d, channel_seq=%d", ctx->sid, _state, channel_seq);
 			NotifyError(server, ctx, 2);
 			return;
 		}
@@ -45,6 +49,7 @@ class CEndBatchProcessReq : public Protocol
 		{
 			// 通道不存在
 			NotifyError(server, ctx, 3);
+            LOG_TRACE("CEndBatchProcessReq|failed|channel not exists|sid=%d, state=%d, channel_seq=%d", ctx->sid, _state, channel_seq);
 			return;
 		}
 		SEndBatchProcessRep rep;
@@ -56,6 +61,7 @@ class CEndBatchProcessReq : public Protocol
 			{
 				// 学习/分类器不存在
 				NotifyError(server, ctx, 4);
+                LOG_TRACE("CEndBatchProcessReq|failed|Learn|classifior not exists|sid=%d, state=%d, channel_seq=%d", ctx->sid, _state, channel_seq);
 				return;
 			}
 			Py_INCREF(pLeafGradeIns);
@@ -68,6 +74,7 @@ class CEndBatchProcessReq : public Protocol
 			Py_DECREF(pLeafGradeIns);
 			pLeafGradeIns = NULL;
             CASD::DataMan::GetInstance().StatisticsSamples(rep._leaf_grade_counts);
+            LOG_TRACE("CEndBatchProcessReq|ok|Learn|sid=%d, state=%d, channel_seq=%d", ctx->sid, _state, channel_seq);
 		}
 		rep._result = 0;
 		rep.Marshal();

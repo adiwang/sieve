@@ -28,6 +28,8 @@ class CProcessFeatureReq : public Protocol
 		UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 
+        LOG_TRACE("CProcessFeatureReq|sid=%d", ctx->sid);
+
 		CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 		std::map<int, uint32_t>::iterator it = manager._sid2seq.find(ctx->sid);
 		
@@ -35,6 +37,7 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 找不到该cpsd的sid对应的通道序号
 			NotifyError(server, ctx, 1);
+            LOG_TRACE("CProcessFeatureReq|failed|channel seq not exists|sid=%d", ctx->sid);
 			return;
 		}
 		int channel_seq = it->second;
@@ -42,6 +45,7 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 通道序号不正确
 			NotifyError(server, ctx, 2);
+            LOG_TRACE("CProcessFeatureReq|failed|channel seq invalid|sid=%d, channel_seq=%d", ctx->sid, channel_seq);
 			return;
 		}
 		CASD::Channel* pChannel = manager.GetChannel(channel_seq);
@@ -49,6 +53,7 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 通道不存在
 			NotifyError(server, ctx, 3);
+            LOG_TRACE("CProcessFeatureReq|failed|channel not exists|sid=%d, channel_seq=%d", ctx->sid, channel_seq);
 			return;
 		}
 		SProcessResult client_rep;
@@ -63,6 +68,7 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 学习/分类器不存在
 			NotifyError(server, ctx, 4);
+            LOG_TRACE("CProcessFeatureReq|failed|classifior not exists|sid=%d, channel_seq=%d", ctx->sid, channel_seq);
 			return;
 		}
 		Py_INCREF(pLeafGradeIns);
@@ -71,12 +77,15 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 学习
 			// 调用Learn来进行学习, 得到学习的结果，更新redis, 内存中的数据更新由算法类负责
+            feature.Group = pChannel->GetGroup();
+            feature.Rank = pChannel->GetRank();
 			CallMethod(pLeafGradeIns, "LearnOne", feature);
 			SaveToSamples(feature);
 
-			client_rep._level = feature.Group;
 			client_rep._result = 0;
-			client_rep._data = "learn test";
+            client_rep._group = feature.Group;
+            client_rep._rank = feature.Rank;
+            LOG_TRACE("CProcessFeatureReq|OK|Learn|sid=%d, channel_seq=%d, group=%d, rank=%d", ctx->sid, channel_seq, feature.Group, feature.Rank);
 		}
 		else if(state == CASD::Channel::ST_CLASS)
 		{
@@ -84,14 +93,16 @@ class CProcessFeatureReq : public Protocol
 			// 调用Class来进行分选，得到分选结果，存到redis，设置生命周期
 			CallMethod(pLeafGradeIns, "ClassifyOne", feature);
 
-			client_rep._level = feature.Group;
 			client_rep._result = 0;
-			client_rep._data = "class test";
+            client_rep._group = feature.Group;
+            client_rep._rank = feature.Rank;
+            LOG_TRACE("CProcessFeatureReq|OK|Classify|sid=%d, channel_seq=%d, group=%d, rank=%d", ctx->sid, channel_seq, feature.Group, feature.Rank);
 		}
 		else
 		{
 			// 无效状态，不可能出现
 			Py_DECREF(pLeafGradeIns);
+            LOG_TRACE("CProcessFeatureReq|failed|state invalid|sid=%d, channel_seq=%d, state=%d", ctx->sid, channel_seq, state);
 			return;
 		}
 

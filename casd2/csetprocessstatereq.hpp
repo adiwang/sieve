@@ -22,6 +22,8 @@ class CSetProcessStateReq : public Protocol
 		UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 
+        LOG_TRACE("CSetProcessStateReq|sid=%d, state=%d", ctx->sid, _state);
+
 		CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 		std::map<int, uint32_t>::iterator it = manager._sid2seq.find(ctx->sid);
 		
@@ -29,6 +31,7 @@ class CSetProcessStateReq : public Protocol
 		{
 			// 找不到该客户端的sid对应的通道序号
 			NotifyError(server, ctx, 1);
+            LOG_TRACE("CSetProcessStateReq|failed|can not find the channel seq|sid=%d, state=%d", ctx->sid, _state);
 			return;
 		}
 		int channel_seq = it->second;
@@ -36,6 +39,7 @@ class CSetProcessStateReq : public Protocol
 		{
 			// 通道序号不正确
 			NotifyError(server, ctx, 2);
+            LOG_TRACE("CSetProcessStateReq|failed|channel seq invalid|sid=%d, state=%d, seq=%d", ctx->sid, _state, channel_seq);
 			return;
 		}
 		CASD::Channel* pChannel = manager.GetChannel(channel_seq);
@@ -43,6 +47,7 @@ class CSetProcessStateReq : public Protocol
 		{
 			// 通道不存在
 			NotifyError(server, ctx, 3);
+            LOG_TRACE("CSetProcessStateReq|failed|channel not exists|sid=%d, state=%d, seq=%d", ctx->sid, _state, channel_seq);
 			return;
 		}
 		int cpsd_sid = pChannel->GetCpsdSid();
@@ -51,6 +56,7 @@ class CSetProcessStateReq : public Protocol
 		{
 			// 通道的cpsd不存在
 			NotifyError(server, ctx, 4);
+            LOG_TRACE("CSetProcessStateReq|failed|channel cpsd not exists|sid=%d, state=%d, seq=%d", ctx->sid, _state, channel_seq);
 			return;
 		}
 		// 向cpsd转发此协议，目的是为了让cpsd能重置计数
@@ -61,11 +67,13 @@ class CSetProcessStateReq : public Protocol
 		if(_state < 0 || _state >= 2)
 		{
 			rep._result = 5;
+            LOG_TRACE("CSetProcessStateReq|failed|state invalid|sid=%d, state=%d, seq=%d", ctx->sid, _state, channel_seq);
 		}
 		else
 		{
 			pChannel->SetState(_state);
 			rep._result = 0;
+            LOG_TRACE("CSetProcessStateReq|ok|sid=%d, state=%d, seq=%d", ctx->sid, _state, channel_seq);
 		}
 		rep.Marshal();
 		server->_send(rep._marshal_data, ctx);

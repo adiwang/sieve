@@ -20,6 +20,8 @@ class CRegisterCpsdReq : public Protocol
 		UnMarshal(buf, length);
 	    UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
+        
+        LOG_TRACE("CRegisterCpsdReq|sid=%d, seq=%d", ctx->sid, _seq);
 
 		SRegisterCpsdRep rep;
 		if(_seq > 0)
@@ -56,6 +58,7 @@ class CRegisterCpsdReq : public Protocol
 			}
 			manager._sid2seq.insert(std::make_pair(ctx->sid, _seq));
 			rep._result = 0;
+            LOG_TRACE("CRegisterCpsdReq|OK|sid=%d, seq=%d", ctx->sid, _seq);
 		}	// end of if _seq > 0
 		else
 		{

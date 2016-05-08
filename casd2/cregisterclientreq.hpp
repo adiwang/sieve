@@ -10,6 +10,7 @@
 #include "tcpserver.h"
 #include "sregisterclientrep.hpp"
 #include "dataman.h"
+#include "log.h"
 
 
 class CRegisterClientReq : public Protocol
@@ -21,6 +22,8 @@ class CRegisterClientReq : public Protocol
 		UnMarshal(buf, length);
 		UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
+
+        LOG_TRACE("CRegisterClientReq|sid=%d, seq=%d", ctx->sid, _seq);
 
 		SRegisterClientRep rep;
 		if(_seq > 0)
@@ -57,6 +60,7 @@ class CRegisterClientReq : public Protocol
 			manager._sid2seq.insert(std::make_pair(ctx->sid, _seq));
 			rep._result = 0;
             rep._samples_count = CASD::DataMan::GetInstance().GetSamplesCount();
+            LOG_TRACE("CRegisterClientReq|OK|sid=%d, seq=%d, samples_count=%d", ctx->sid, _seq, rep._samples_count);
 		}	// end of if _seq > 0
 		else
 		{
