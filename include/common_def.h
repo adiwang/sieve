@@ -10,7 +10,7 @@ enum LeafPosture {
 struct LeafFeature {
 	std::string id;		// id	产地-MachineID-YYmmddHHMMDD
 	int Group;			// 分组
-	int Grade;			// 分级
+	int Rank;			// 分级
 
 	//平均饱和度、平均色调、平均亮度；饱和度标准差、色度标准差、亮度标准差
 	double AvgSaturation;
