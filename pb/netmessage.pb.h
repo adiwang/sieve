@@ -46,6 +46,7 @@ class CSetCamaraSeqReqProto;
 class CSetProcessStateReqProto;
 class EchoProto;
 class FValidatePosReqpProto;
+class LeafGradeCount;
 class SEndBatchProcessRepProto;
 class SProcessFeatureRepProto;
 class SProcessResultProto;
@@ -1272,15 +1273,28 @@ class SRegisterClientRepProto : public ::google::protobuf::Message {
   ::google::protobuf::uint32 result() const;
   void set_result(::google::protobuf::uint32 value);
 
+  // required int32 samples_count = 2;
+  bool has_samples_count() const;
+  void clear_samples_count();
+  static const int kSamplesCountFieldNumber = 2;
+  ::google::protobuf::int32 samples_count() const;
+  void set_samples_count(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:SRegisterClientRepProto)
  private:
   inline void set_has_result();
   inline void clear_has_result();
+  inline void set_has_samples_count();
+  inline void clear_has_samples_count();
+
+  // helper for ByteSize()
+  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::google::protobuf::uint32 result_;
+  ::google::protobuf::int32 samples_count_;
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
   friend void protobuf_ShutdownFile_netmessage_2eproto();
@@ -2107,6 +2121,118 @@ class CEndBatchProcessReqProto : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class LeafGradeCount : public ::google::protobuf::Message {
+ public:
+  LeafGradeCount();
+  virtual ~LeafGradeCount();
+
+  LeafGradeCount(const LeafGradeCount& from);
+
+  inline LeafGradeCount& operator=(const LeafGradeCount& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LeafGradeCount& default_instance();
+
+  void Swap(LeafGradeCount* other);
+
+  // implements Message ----------------------------------------------
+
+  inline LeafGradeCount* New() const { return New(NULL); }
+
+  LeafGradeCount* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LeafGradeCount& from);
+  void MergeFrom(const LeafGradeCount& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(LeafGradeCount* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 group = 1;
+  bool has_group() const;
+  void clear_group();
+  static const int kGroupFieldNumber = 1;
+  ::google::protobuf::int32 group() const;
+  void set_group(::google::protobuf::int32 value);
+
+  // required int32 rank = 2;
+  bool has_rank() const;
+  void clear_rank();
+  static const int kRankFieldNumber = 2;
+  ::google::protobuf::int32 rank() const;
+  void set_rank(::google::protobuf::int32 value);
+
+  // required int32 count = 3;
+  bool has_count() const;
+  void clear_count();
+  static const int kCountFieldNumber = 3;
+  ::google::protobuf::int32 count() const;
+  void set_count(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:LeafGradeCount)
+ private:
+  inline void set_has_group();
+  inline void clear_has_group();
+  inline void set_has_rank();
+  inline void clear_has_rank();
+  inline void set_has_count();
+  inline void clear_has_count();
+
+  // helper for ByteSize()
+  int RequiredFieldsByteSizeFallback() const;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 group_;
+  ::google::protobuf::int32 rank_;
+  ::google::protobuf::int32 count_;
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static LeafGradeCount* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class SEndBatchProcessRepProto : public ::google::protobuf::Message {
  public:
   SEndBatchProcessRepProto();
@@ -2178,6 +2304,18 @@ class SEndBatchProcessRepProto : public ::google::protobuf::Message {
   ::google::protobuf::uint32 result() const;
   void set_result(::google::protobuf::uint32 value);
 
+  // repeated .LeafGradeCount leaf_grade_counts = 2;
+  int leaf_grade_counts_size() const;
+  void clear_leaf_grade_counts();
+  static const int kLeafGradeCountsFieldNumber = 2;
+  const ::LeafGradeCount& leaf_grade_counts(int index) const;
+  ::LeafGradeCount* mutable_leaf_grade_counts(int index);
+  ::LeafGradeCount* add_leaf_grade_counts();
+  ::google::protobuf::RepeatedPtrField< ::LeafGradeCount >*
+      mutable_leaf_grade_counts();
+  const ::google::protobuf::RepeatedPtrField< ::LeafGradeCount >&
+      leaf_grade_counts() const;
+
   // @@protoc_insertion_point(class_scope:SEndBatchProcessRepProto)
  private:
   inline void set_has_result();
@@ -2186,6 +2324,7 @@ class SEndBatchProcessRepProto : public ::google::protobuf::Message {
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::LeafGradeCount > leaf_grade_counts_;
   ::google::protobuf::uint32 result_;
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
@@ -3030,6 +3169,30 @@ inline void SRegisterClientRepProto::set_result(::google::protobuf::uint32 value
   // @@protoc_insertion_point(field_set:SRegisterClientRepProto.result)
 }
 
+// required int32 samples_count = 2;
+inline bool SRegisterClientRepProto::has_samples_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SRegisterClientRepProto::set_has_samples_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SRegisterClientRepProto::clear_has_samples_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SRegisterClientRepProto::clear_samples_count() {
+  samples_count_ = 0;
+  clear_has_samples_count();
+}
+inline ::google::protobuf::int32 SRegisterClientRepProto::samples_count() const {
+  // @@protoc_insertion_point(field_get:SRegisterClientRepProto.samples_count)
+  return samples_count_;
+}
+inline void SRegisterClientRepProto::set_samples_count(::google::protobuf::int32 value) {
+  set_has_samples_count();
+  samples_count_ = value;
+  // @@protoc_insertion_point(field_set:SRegisterClientRepProto.samples_count)
+}
+
 // -------------------------------------------------------------------
 
 // FValidatePosReqpProto
@@ -3723,6 +3886,82 @@ inline void CEndBatchProcessReqProto::set_state(::google::protobuf::int32 value)
 
 // -------------------------------------------------------------------
 
+// LeafGradeCount
+
+// required int32 group = 1;
+inline bool LeafGradeCount::has_group() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void LeafGradeCount::set_has_group() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void LeafGradeCount::clear_has_group() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void LeafGradeCount::clear_group() {
+  group_ = 0;
+  clear_has_group();
+}
+inline ::google::protobuf::int32 LeafGradeCount::group() const {
+  // @@protoc_insertion_point(field_get:LeafGradeCount.group)
+  return group_;
+}
+inline void LeafGradeCount::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:LeafGradeCount.group)
+}
+
+// required int32 rank = 2;
+inline bool LeafGradeCount::has_rank() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void LeafGradeCount::set_has_rank() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void LeafGradeCount::clear_has_rank() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void LeafGradeCount::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
+}
+inline ::google::protobuf::int32 LeafGradeCount::rank() const {
+  // @@protoc_insertion_point(field_get:LeafGradeCount.rank)
+  return rank_;
+}
+inline void LeafGradeCount::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:LeafGradeCount.rank)
+}
+
+// required int32 count = 3;
+inline bool LeafGradeCount::has_count() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void LeafGradeCount::set_has_count() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void LeafGradeCount::clear_has_count() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void LeafGradeCount::clear_count() {
+  count_ = 0;
+  clear_has_count();
+}
+inline ::google::protobuf::int32 LeafGradeCount::count() const {
+  // @@protoc_insertion_point(field_get:LeafGradeCount.count)
+  return count_;
+}
+inline void LeafGradeCount::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
+  // @@protoc_insertion_point(field_set:LeafGradeCount.count)
+}
+
+// -------------------------------------------------------------------
+
 // SEndBatchProcessRepProto
 
 // required uint32 result = 1;
@@ -3749,7 +3988,39 @@ inline void SEndBatchProcessRepProto::set_result(::google::protobuf::uint32 valu
   // @@protoc_insertion_point(field_set:SEndBatchProcessRepProto.result)
 }
 
+// repeated .LeafGradeCount leaf_grade_counts = 2;
+inline int SEndBatchProcessRepProto::leaf_grade_counts_size() const {
+  return leaf_grade_counts_.size();
+}
+inline void SEndBatchProcessRepProto::clear_leaf_grade_counts() {
+  leaf_grade_counts_.Clear();
+}
+inline const ::LeafGradeCount& SEndBatchProcessRepProto::leaf_grade_counts(int index) const {
+  // @@protoc_insertion_point(field_get:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_.Get(index);
+}
+inline ::LeafGradeCount* SEndBatchProcessRepProto::mutable_leaf_grade_counts(int index) {
+  // @@protoc_insertion_point(field_mutable:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_.Mutable(index);
+}
+inline ::LeafGradeCount* SEndBatchProcessRepProto::add_leaf_grade_counts() {
+  // @@protoc_insertion_point(field_add:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::LeafGradeCount >*
+SEndBatchProcessRepProto::mutable_leaf_grade_counts() {
+  // @@protoc_insertion_point(field_mutable_list:SEndBatchProcessRepProto.leaf_grade_counts)
+  return &leaf_grade_counts_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::LeafGradeCount >&
+SEndBatchProcessRepProto::leaf_grade_counts() const {
+  // @@protoc_insertion_point(field_list:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_;
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

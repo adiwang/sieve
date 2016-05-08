@@ -76,6 +76,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* CEndBatchProcessReqProto_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CEndBatchProcessReqProto_reflection_ = NULL;
+const ::google::protobuf::Descriptor* LeafGradeCount_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  LeafGradeCount_reflection_ = NULL;
 const ::google::protobuf::Descriptor* SEndBatchProcessRepProto_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   SEndBatchProcessRepProto_reflection_ = NULL;
@@ -266,8 +269,9 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CRegisterClientReqProto, _internal_metadata_),
       -1);
   SRegisterClientRepProto_descriptor_ = file->message_type(11);
-  static const int SRegisterClientRepProto_offsets_[1] = {
+  static const int SRegisterClientRepProto_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SRegisterClientRepProto, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SRegisterClientRepProto, samples_count_),
   };
   SRegisterClientRepProto_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -402,9 +406,27 @@ void protobuf_AssignDesc_netmessage_2eproto() {
       sizeof(CEndBatchProcessReqProto),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CEndBatchProcessReqProto, _internal_metadata_),
       -1);
-  SEndBatchProcessRepProto_descriptor_ = file->message_type(19);
-  static const int SEndBatchProcessRepProto_offsets_[1] = {
+  LeafGradeCount_descriptor_ = file->message_type(19);
+  static const int LeafGradeCount_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeafGradeCount, group_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeafGradeCount, rank_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeafGradeCount, count_),
+  };
+  LeafGradeCount_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      LeafGradeCount_descriptor_,
+      LeafGradeCount::default_instance_,
+      LeafGradeCount_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeafGradeCount, _has_bits_[0]),
+      -1,
+      -1,
+      sizeof(LeafGradeCount),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LeafGradeCount, _internal_metadata_),
+      -1);
+  SEndBatchProcessRepProto_descriptor_ = file->message_type(20);
+  static const int SEndBatchProcessRepProto_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SEndBatchProcessRepProto, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SEndBatchProcessRepProto, leaf_grade_counts_),
   };
   SEndBatchProcessRepProto_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -468,6 +490,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       CEndBatchProcessReqProto_descriptor_, &CEndBatchProcessReqProto::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      LeafGradeCount_descriptor_, &LeafGradeCount::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       SEndBatchProcessRepProto_descriptor_, &SEndBatchProcessRepProto::default_instance());
 }
 
@@ -512,6 +536,8 @@ void protobuf_ShutdownFile_netmessage_2eproto() {
   delete SSetProcessStateRepProto_reflection_;
   delete CEndBatchProcessReqProto::default_instance_;
   delete CEndBatchProcessReqProto_reflection_;
+  delete LeafGradeCount::default_instance_;
+  delete LeafGradeCount_reflection_;
   delete SEndBatchProcessRepProto::default_instance_;
   delete SEndBatchProcessRepProto_reflection_;
 }
@@ -536,25 +562,29 @@ void protobuf_AddDesc_netmessage_2eproto() {
     "\t\022\021\n\timage_seq\030\002 \002(\005\022\016\n\006result\030\003 \002(\005\"$\n\025"
     "CRegisterCpsdReqProto\022\013\n\003seq\030\001 \002(\r\"\'\n\025SR"
     "egisterCpsdRepProto\022\016\n\006result\030\001 \002(\r\"&\n\027C"
-    "RegisterClientReqProto\022\013\n\003seq\030\001 \002(\r\")\n\027S"
-    "RegisterClientRepProto\022\016\n\006result\030\001 \002(\r\";"
-    "\n\025FValidatePosReqpProto\022\016\n\006result\030\001 \002(\r\022"
-    "\022\n\nimage_path\030\002 \002(\t\"\307\002\n\027CProcessFeatureR"
-    "eqProto\022\n\n\002id\030\001 \002(\t\022\025\n\rAvgSaturation\030\002 \002"
-    "(\001\022\016\n\006AvgHue\030\003 \002(\001\022\024\n\014AvgIntensity\030\004 \002(\001"
-    "\022\033\n\023DeviationSaturation\030\005 \002(\001\022\024\n\014Deviati"
-    "onHue\030\006 \002(\001\022\032\n\022DeviationIntensity\030\007 \002(\001\022"
-    "\016\n\006Length\030\010 \002(\001\022\r\n\005Width\030\t \002(\001\022\030\n\020WidthL"
-    "engthRatio\030\n \002(\001\022\021\n\tApexAngle\030\013 \002(\001\022\023\n\013C"
-    "ircularity\030\014 \002(\001\022\014\n\004Area\030\r \002(\001\022\021\n\tThickM"
-    "ean\030\016 \002(\001\022\022\n\nDefectRate\030\017 \002(\001\")\n\027SProces"
-    "sFeatureRepProto\022\016\n\006result\030\001 \002(\r\"B\n\023SPro"
-    "cessResultProto\022\016\n\006result\030\001 \002(\r\022\r\n\005level"
-    "\030\002 \002(\005\022\014\n\004data\030\003 \002(\014\")\n\030CSetProcessState"
-    "ReqProto\022\r\n\005state\030\001 \002(\005\"*\n\030SSetProcessSt"
-    "ateRepProto\022\016\n\006result\030\001 \002(\r\")\n\030CEndBatch"
-    "ProcessReqProto\022\r\n\005state\030\001 \002(\005\"*\n\030SEndBa"
-    "tchProcessRepProto\022\016\n\006result\030\001 \002(\r", 1274);
+    "RegisterClientReqProto\022\013\n\003seq\030\001 \002(\r\"@\n\027S"
+    "RegisterClientRepProto\022\016\n\006result\030\001 \002(\r\022\025"
+    "\n\rsamples_count\030\002 \002(\005\";\n\025FValidatePosReq"
+    "pProto\022\016\n\006result\030\001 \002(\r\022\022\n\nimage_path\030\002 \002"
+    "(\t\"\307\002\n\027CProcessFeatureReqProto\022\n\n\002id\030\001 \002"
+    "(\t\022\025\n\rAvgSaturation\030\002 \002(\001\022\016\n\006AvgHue\030\003 \002("
+    "\001\022\024\n\014AvgIntensity\030\004 \002(\001\022\033\n\023DeviationSatu"
+    "ration\030\005 \002(\001\022\024\n\014DeviationHue\030\006 \002(\001\022\032\n\022De"
+    "viationIntensity\030\007 \002(\001\022\016\n\006Length\030\010 \002(\001\022\r"
+    "\n\005Width\030\t \002(\001\022\030\n\020WidthLengthRatio\030\n \002(\001\022"
+    "\021\n\tApexAngle\030\013 \002(\001\022\023\n\013Circularity\030\014 \002(\001\022"
+    "\014\n\004Area\030\r \002(\001\022\021\n\tThickMean\030\016 \002(\001\022\022\n\nDefe"
+    "ctRate\030\017 \002(\001\")\n\027SProcessFeatureRepProto\022"
+    "\016\n\006result\030\001 \002(\r\"B\n\023SProcessResultProto\022\016"
+    "\n\006result\030\001 \002(\r\022\r\n\005level\030\002 \002(\005\022\014\n\004data\030\003 "
+    "\002(\014\")\n\030CSetProcessStateReqProto\022\r\n\005state"
+    "\030\001 \002(\005\"*\n\030SSetProcessStateRepProto\022\016\n\006re"
+    "sult\030\001 \002(\r\")\n\030CEndBatchProcessReqProto\022\r"
+    "\n\005state\030\001 \002(\005\"<\n\016LeafGradeCount\022\r\n\005group"
+    "\030\001 \002(\005\022\014\n\004rank\030\002 \002(\005\022\r\n\005count\030\003 \002(\005\"V\n\030S"
+    "EndBatchProcessRepProto\022\016\n\006result\030\001 \002(\r\022"
+    "*\n\021leaf_grade_counts\030\002 \003(\0132\017.LeafGradeCo"
+    "unt", 1403);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
   CProto::default_instance_ = new CProto();
@@ -576,6 +606,7 @@ void protobuf_AddDesc_netmessage_2eproto() {
   CSetProcessStateReqProto::default_instance_ = new CSetProcessStateReqProto();
   SSetProcessStateRepProto::default_instance_ = new SSetProcessStateRepProto();
   CEndBatchProcessReqProto::default_instance_ = new CEndBatchProcessReqProto();
+  LeafGradeCount::default_instance_ = new LeafGradeCount();
   SEndBatchProcessRepProto::default_instance_ = new SEndBatchProcessRepProto();
   CProto::default_instance_->InitAsDefaultInstance();
   CP1::default_instance_->InitAsDefaultInstance();
@@ -596,6 +627,7 @@ void protobuf_AddDesc_netmessage_2eproto() {
   CSetProcessStateReqProto::default_instance_->InitAsDefaultInstance();
   SSetProcessStateRepProto::default_instance_->InitAsDefaultInstance();
   CEndBatchProcessReqProto::default_instance_->InitAsDefaultInstance();
+  LeafGradeCount::default_instance_->InitAsDefaultInstance();
   SEndBatchProcessRepProto::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_netmessage_2eproto);
 }
@@ -4687,6 +4719,7 @@ void CRegisterClientReqProto::clear_seq() {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int SRegisterClientRepProto::kResultFieldNumber;
+const int SRegisterClientRepProto::kSamplesCountFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SRegisterClientRepProto::SRegisterClientRepProto()
@@ -4709,6 +4742,7 @@ SRegisterClientRepProto::SRegisterClientRepProto(const SRegisterClientRepProto& 
 void SRegisterClientRepProto::SharedCtor() {
   _cached_size_ = 0;
   result_ = 0u;
+  samples_count_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -4748,7 +4782,19 @@ SRegisterClientRepProto* SRegisterClientRepProto::New(::google::protobuf::Arena*
 }
 
 void SRegisterClientRepProto::Clear() {
-  result_ = 0u;
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<SRegisterClientRepProto*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(result_, samples_count_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   if (_internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->Clear();
@@ -4772,6 +4818,21 @@ bool SRegisterClientRepProto::MergePartialFromCodedStream(
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &result_)));
           set_has_result();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_samples_count;
+        break;
+      }
+
+      // required int32 samples_count = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_samples_count:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &samples_count_)));
+          set_has_samples_count();
         } else {
           goto handle_unusual;
         }
@@ -4809,6 +4870,11 @@ void SRegisterClientRepProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result(), output);
   }
 
+  // required int32 samples_count = 2;
+  if (has_samples_count()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->samples_count(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -4824,6 +4890,11 @@ void SRegisterClientRepProto::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->result(), target);
   }
 
+  // required int32 samples_count = 2;
+  if (has_samples_count()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->samples_count(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -4832,14 +4903,41 @@ void SRegisterClientRepProto::SerializeWithCachedSizes(
   return target;
 }
 
-int SRegisterClientRepProto::ByteSize() const {
+int SRegisterClientRepProto::RequiredFieldsByteSizeFallback() const {
   int total_size = 0;
 
-  // required uint32 result = 1;
   if (has_result()) {
+    // required uint32 result = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->result());
+  }
+
+  if (has_samples_count()) {
+    // required int32 samples_count = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->samples_count());
+  }
+
+  return total_size;
+}
+int SRegisterClientRepProto::ByteSize() const {
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required uint32 result = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->result());
+
+    // required int32 samples_count = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->samples_count());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
   }
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
@@ -4870,6 +4968,9 @@ void SRegisterClientRepProto::MergeFrom(const SRegisterClientRepProto& from) {
     if (from.has_result()) {
       set_result(from.result());
     }
+    if (from.has_samples_count()) {
+      set_samples_count(from.samples_count());
+    }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -4889,7 +4990,7 @@ void SRegisterClientRepProto::CopyFrom(const SRegisterClientRepProto& from) {
 }
 
 bool SRegisterClientRepProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -4900,6 +5001,7 @@ void SRegisterClientRepProto::Swap(SRegisterClientRepProto* other) {
 }
 void SRegisterClientRepProto::InternalSwap(SRegisterClientRepProto* other) {
   std::swap(result_, other->result_);
+  std::swap(samples_count_, other->samples_count_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -4938,6 +5040,30 @@ void SRegisterClientRepProto::clear_result() {
   set_has_result();
   result_ = value;
   // @@protoc_insertion_point(field_set:SRegisterClientRepProto.result)
+}
+
+// required int32 samples_count = 2;
+bool SRegisterClientRepProto::has_samples_count() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void SRegisterClientRepProto::set_has_samples_count() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void SRegisterClientRepProto::clear_has_samples_count() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void SRegisterClientRepProto::clear_samples_count() {
+  samples_count_ = 0;
+  clear_has_samples_count();
+}
+ ::google::protobuf::int32 SRegisterClientRepProto::samples_count() const {
+  // @@protoc_insertion_point(field_get:SRegisterClientRepProto.samples_count)
+  return samples_count_;
+}
+ void SRegisterClientRepProto::set_samples_count(::google::protobuf::int32 value) {
+  set_has_samples_count();
+  samples_count_ = value;
+  // @@protoc_insertion_point(field_set:SRegisterClientRepProto.samples_count)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -8053,7 +8179,428 @@ void CEndBatchProcessReqProto::clear_state() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int LeafGradeCount::kGroupFieldNumber;
+const int LeafGradeCount::kRankFieldNumber;
+const int LeafGradeCount::kCountFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+LeafGradeCount::LeafGradeCount()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:LeafGradeCount)
+}
+
+void LeafGradeCount::InitAsDefaultInstance() {
+}
+
+LeafGradeCount::LeafGradeCount(const LeafGradeCount& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:LeafGradeCount)
+}
+
+void LeafGradeCount::SharedCtor() {
+  _cached_size_ = 0;
+  group_ = 0;
+  rank_ = 0;
+  count_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+LeafGradeCount::~LeafGradeCount() {
+  // @@protoc_insertion_point(destructor:LeafGradeCount)
+  SharedDtor();
+}
+
+void LeafGradeCount::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void LeafGradeCount::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* LeafGradeCount::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LeafGradeCount_descriptor_;
+}
+
+const LeafGradeCount& LeafGradeCount::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();
+  return *default_instance_;
+}
+
+LeafGradeCount* LeafGradeCount::default_instance_ = NULL;
+
+LeafGradeCount* LeafGradeCount::New(::google::protobuf::Arena* arena) const {
+  LeafGradeCount* n = new LeafGradeCount;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void LeafGradeCount::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<LeafGradeCount*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(group_, count_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
+}
+
+bool LeafGradeCount::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:LeafGradeCount)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 group = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &group_)));
+          set_has_group();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_rank;
+        break;
+      }
+
+      // required int32 rank = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_rank:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &rank_)));
+          set_has_rank();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_count;
+        break;
+      }
+
+      // required int32 count = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_count:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &count_)));
+          set_has_count();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:LeafGradeCount)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:LeafGradeCount)
+  return false;
+#undef DO_
+}
+
+void LeafGradeCount::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:LeafGradeCount)
+  // required int32 group = 1;
+  if (has_group()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->group(), output);
+  }
+
+  // required int32 rank = 2;
+  if (has_rank()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->rank(), output);
+  }
+
+  // required int32 count = 3;
+  if (has_count()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->count(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:LeafGradeCount)
+}
+
+::google::protobuf::uint8* LeafGradeCount::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:LeafGradeCount)
+  // required int32 group = 1;
+  if (has_group()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->group(), target);
+  }
+
+  // required int32 rank = 2;
+  if (has_rank()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->rank(), target);
+  }
+
+  // required int32 count = 3;
+  if (has_count()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->count(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:LeafGradeCount)
+  return target;
+}
+
+int LeafGradeCount::RequiredFieldsByteSizeFallback() const {
+  int total_size = 0;
+
+  if (has_group()) {
+    // required int32 group = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->group());
+  }
+
+  if (has_rank()) {
+    // required int32 rank = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
+  }
+
+  if (has_count()) {
+    // required int32 count = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->count());
+  }
+
+  return total_size;
+}
+int LeafGradeCount::ByteSize() const {
+  int total_size = 0;
+
+  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
+    // required int32 group = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->group());
+
+    // required int32 rank = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->rank());
+
+    // required int32 count = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->count());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
+  }
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LeafGradeCount::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const LeafGradeCount* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const LeafGradeCount>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void LeafGradeCount::MergeFrom(const LeafGradeCount& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_group()) {
+      set_group(from.group());
+    }
+    if (from.has_rank()) {
+      set_rank(from.rank());
+    }
+    if (from.has_count()) {
+      set_count(from.count());
+    }
+  }
+  if (from._internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  }
+}
+
+void LeafGradeCount::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LeafGradeCount::CopyFrom(const LeafGradeCount& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LeafGradeCount::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+
+  return true;
+}
+
+void LeafGradeCount::Swap(LeafGradeCount* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void LeafGradeCount::InternalSwap(LeafGradeCount* other) {
+  std::swap(group_, other->group_);
+  std::swap(rank_, other->rank_);
+  std::swap(count_, other->count_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata LeafGradeCount::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = LeafGradeCount_descriptor_;
+  metadata.reflection = LeafGradeCount_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// LeafGradeCount
+
+// required int32 group = 1;
+bool LeafGradeCount::has_group() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void LeafGradeCount::set_has_group() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void LeafGradeCount::clear_has_group() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void LeafGradeCount::clear_group() {
+  group_ = 0;
+  clear_has_group();
+}
+ ::google::protobuf::int32 LeafGradeCount::group() const {
+  // @@protoc_insertion_point(field_get:LeafGradeCount.group)
+  return group_;
+}
+ void LeafGradeCount::set_group(::google::protobuf::int32 value) {
+  set_has_group();
+  group_ = value;
+  // @@protoc_insertion_point(field_set:LeafGradeCount.group)
+}
+
+// required int32 rank = 2;
+bool LeafGradeCount::has_rank() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void LeafGradeCount::set_has_rank() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void LeafGradeCount::clear_has_rank() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void LeafGradeCount::clear_rank() {
+  rank_ = 0;
+  clear_has_rank();
+}
+ ::google::protobuf::int32 LeafGradeCount::rank() const {
+  // @@protoc_insertion_point(field_get:LeafGradeCount.rank)
+  return rank_;
+}
+ void LeafGradeCount::set_rank(::google::protobuf::int32 value) {
+  set_has_rank();
+  rank_ = value;
+  // @@protoc_insertion_point(field_set:LeafGradeCount.rank)
+}
+
+// required int32 count = 3;
+bool LeafGradeCount::has_count() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void LeafGradeCount::set_has_count() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void LeafGradeCount::clear_has_count() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void LeafGradeCount::clear_count() {
+  count_ = 0;
+  clear_has_count();
+}
+ ::google::protobuf::int32 LeafGradeCount::count() const {
+  // @@protoc_insertion_point(field_get:LeafGradeCount.count)
+  return count_;
+}
+ void LeafGradeCount::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
+  // @@protoc_insertion_point(field_set:LeafGradeCount.count)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int SEndBatchProcessRepProto::kResultFieldNumber;
+const int SEndBatchProcessRepProto::kLeafGradeCountsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SEndBatchProcessRepProto::SEndBatchProcessRepProto()
@@ -8116,6 +8663,7 @@ SEndBatchProcessRepProto* SEndBatchProcessRepProto::New(::google::protobuf::Aren
 
 void SEndBatchProcessRepProto::Clear() {
   result_ = 0u;
+  leaf_grade_counts_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   if (_internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->Clear();
@@ -8142,6 +8690,23 @@ bool SEndBatchProcessRepProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(18)) goto parse_leaf_grade_counts;
+        break;
+      }
+
+      // repeated .LeafGradeCount leaf_grade_counts = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_leaf_grade_counts:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_leaf_grade_counts:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_leaf_grade_counts()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_leaf_grade_counts;
+        input->UnsafeDecrementRecursionDepth();
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -8176,6 +8741,12 @@ void SEndBatchProcessRepProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->result(), output);
   }
 
+  // repeated .LeafGradeCount leaf_grade_counts = 2;
+  for (unsigned int i = 0, n = this->leaf_grade_counts_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->leaf_grade_counts(i), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -8189,6 +8760,13 @@ void SEndBatchProcessRepProto::SerializeWithCachedSizes(
   // required uint32 result = 1;
   if (has_result()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->result(), target);
+  }
+
+  // repeated .LeafGradeCount leaf_grade_counts = 2;
+  for (unsigned int i = 0, n = this->leaf_grade_counts_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->leaf_grade_counts(i), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -8208,6 +8786,14 @@ int SEndBatchProcessRepProto::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->result());
   }
+  // repeated .LeafGradeCount leaf_grade_counts = 2;
+  total_size += 1 * this->leaf_grade_counts_size();
+  for (int i = 0; i < this->leaf_grade_counts_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->leaf_grade_counts(i));
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -8233,6 +8819,7 @@ void SEndBatchProcessRepProto::MergeFrom(const ::google::protobuf::Message& from
 
 void SEndBatchProcessRepProto::MergeFrom(const SEndBatchProcessRepProto& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  leaf_grade_counts_.MergeFrom(from.leaf_grade_counts_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_result()) {
       set_result(from.result());
@@ -8258,6 +8845,7 @@ void SEndBatchProcessRepProto::CopyFrom(const SEndBatchProcessRepProto& from) {
 bool SEndBatchProcessRepProto::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
+  if (!::google::protobuf::internal::AllAreInitialized(this->leaf_grade_counts())) return false;
   return true;
 }
 
@@ -8267,6 +8855,7 @@ void SEndBatchProcessRepProto::Swap(SEndBatchProcessRepProto* other) {
 }
 void SEndBatchProcessRepProto::InternalSwap(SEndBatchProcessRepProto* other) {
   std::swap(result_, other->result_);
+  leaf_grade_counts_.UnsafeArenaSwap(&other->leaf_grade_counts_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -8305,6 +8894,36 @@ void SEndBatchProcessRepProto::clear_result() {
   set_has_result();
   result_ = value;
   // @@protoc_insertion_point(field_set:SEndBatchProcessRepProto.result)
+}
+
+// repeated .LeafGradeCount leaf_grade_counts = 2;
+int SEndBatchProcessRepProto::leaf_grade_counts_size() const {
+  return leaf_grade_counts_.size();
+}
+void SEndBatchProcessRepProto::clear_leaf_grade_counts() {
+  leaf_grade_counts_.Clear();
+}
+const ::LeafGradeCount& SEndBatchProcessRepProto::leaf_grade_counts(int index) const {
+  // @@protoc_insertion_point(field_get:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_.Get(index);
+}
+::LeafGradeCount* SEndBatchProcessRepProto::mutable_leaf_grade_counts(int index) {
+  // @@protoc_insertion_point(field_mutable:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_.Mutable(index);
+}
+::LeafGradeCount* SEndBatchProcessRepProto::add_leaf_grade_counts() {
+  // @@protoc_insertion_point(field_add:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::LeafGradeCount >*
+SEndBatchProcessRepProto::mutable_leaf_grade_counts() {
+  // @@protoc_insertion_point(field_mutable_list:SEndBatchProcessRepProto.leaf_grade_counts)
+  return &leaf_grade_counts_;
+}
+const ::google::protobuf::RepeatedPtrField< ::LeafGradeCount >&
+SEndBatchProcessRepProto::leaf_grade_counts() const {
+  // @@protoc_insertion_point(field_list:SEndBatchProcessRepProto.leaf_grade_counts)
+  return leaf_grade_counts_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

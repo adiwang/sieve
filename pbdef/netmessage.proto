@@ -74,7 +74,8 @@ message CRegisterClientReqProto
 // 客户端向casd注册通道序号的响应协议
 message SRegisterClientRepProto
 {
-	required uint32 result = 1;		// 0: 代表成功, 否则: 失败
+	required uint32 result = 1;		    // 0: 代表成功, 否则: 失败
+    required int32 samples_count = 2;   // 已学习样本数量
 }
 
 // cpsd向casd发送校验图片摆放位置的协议
@@ -147,6 +148,7 @@ message LeafGradeCount
 // casd返回给客户端结束批次处理的响应协议
 message SEndBatchProcessRepProto
 {
-	required uint32 result = 1;					// 0: 代表成功, 否则: 失败
-	required repeated LeafGradeCount leaf_grade_counts = 2;		// 叶片分组分级数量(目前只在学习状态下有效)
+	required uint32 result = 1;					                // 0: 代表成功, 否则: 失败
+	repeated LeafGradeCount leaf_grade_counts = 2;		        // 叶片分组分级数量(目前只在学习状态下有效)
 }
+
