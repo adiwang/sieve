@@ -168,6 +168,7 @@ int main (int argc, char **argv)
     gImagesNumPerObj = atoi(cf.Value("Global", "ImageNumPerObj", "10").c_str());
     std::string camara_address = cf.Value("Global", "CamaraAddress", "127.0.0.1");
 
+	UVNET::TCPClient::StartLog(LL_DEBUG, "cpsd", logfile.c_str());
     casd_client.AddProtocol(PROTOCOL_ID_SREGISTERCPSDREP, new SRegisterCpsdRep());
     casd_client.AddProtocol(PROTOCOL_ID_SPROCESSFEATUREREP, new SProcessFeatureRep());
     casd_client.AddProtocol(PROTOCOL_ID_CSETPROCESSSTATEREQ, new CSetProcessStateReq());
@@ -217,8 +218,9 @@ int main (int argc, char **argv)
     }
 
     // Comment the following two lines to disable waiting on exit.
-    cerr << endl << "Press Enter to exit." << endl;
-    while( cin.get() != '\n');
+	while(true) ThreadSleep(10);
+    // cerr << endl << "Press Enter to exit." << endl;
+    // while( cin.get() != '\n');
 
     // Releases all pylon resources. 
     PylonTerminate(); 
