@@ -57,7 +57,7 @@ public:
         cout << std::endl;
         if(!ptrGrabResult->GrabSucceeded())
         {
-            cout << "Error:" << ptrGrabResult->GetErrorCode() << " " << ptrGrabResult->GetErrorDescription() << std::endl;
+			LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|err|err_code=%d, err_msg=%s", ptrGrabResult->GetErrorCode(), ptrGrabResult->GetErrorDescription());
             return;
         }
 
@@ -84,14 +84,14 @@ public:
             bool isPosSuccess = true;
             FValidatePosReqp validate_proto;
             validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
-            validate_proto._result = 0;
             std::stringstream ss;
             ss << gCurID << "/" << gCurImageSeq << ".png";
             validate_proto._image_path = ss.str();
             validate_proto.Marshal();
+			LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u", gCurID.c_str(), validate_proto._result);
             if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
             {
-                fprintf(stdout, "(%p)send error.%s\n", &casd_client, casd_client.GetLastErrMsg());
+				LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|send failed|id=%s, PostureCheck=%u, err_msg=%s", gCurID.c_str(), validate_proto._result, casd_client.GetLastErrMsg());
             }
             else
             {
@@ -106,6 +106,7 @@ public:
 			snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
 			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
             gGrabImages.push_back(image_BGR8);
+			LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d", gCurID.c_str(), gCurImageSeq);
             ++gCurImageSeq;
         }
 
@@ -117,9 +118,10 @@ public:
             CProcessFeatureReq req_proto(analysor.GetFeature());
 			req_proto._id = gCurID;
             req_proto.Marshal();
+			LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|finished|id=%s", gCurID.c_str());
             if (casd_client.Send(req_proto._marshal_data.c_str(), req_proto._marshal_data.size()) <= 0) 
             {
-                fprintf(stdout, "(%p)send error.%s\n", &casd_client, casd_client.GetLastErrMsg());
+				LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|CProcessFeatureReq send failed|id=%s, err_msg=%s", gCurID.c_str(), casd_client.GetLastErrMsg());
             }
             else
             {
@@ -141,11 +143,11 @@ void ConnectCasdCB(NET_EVENT_TYPE event_type, void* userdata)
     UVNET::TCPClient* client = (UVNET::TCPClient*)userdata;
     if (client->Send(req_proto._marshal_data.c_str(), req_proto._marshal_data.size()) <= 0) 
     {
-        fprintf(stdout, "(%p)send error.%s\n", &client, client->GetLastErrMsg());
+		LOG_ERROR("ConnectCasdCB|CRegisterCpsdReq send failed|seq=%d, err_msg=%s", req_proto._seq, client->GetLastErrMsg());
     }
     else
     {
-        fprintf(stdout, "send succeed\n");
+        LOG_TRACE("ConnectCasdCB|CRegisterCpsdReq send ok|seq=%d", req_proto._seq);
     }
 }
 
