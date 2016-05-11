@@ -65,7 +65,7 @@ public:
         cout << std::endl;
         if(!ptrGrabResult->GrabSucceeded())
         {
-			LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|err|err_code=%d, err_msg=%s", ptrGrabResult->GetErrorCode(), ptrGrabResult->GetErrorDescription());
+			LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|err|err_code=%d, err_msg=%s", ptrGrabResult->GetErrorCode(), ptrGrabResult->GetErrorDescription().c_str());
             return;
         }
 
