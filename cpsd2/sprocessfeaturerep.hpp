@@ -15,6 +15,7 @@ class SProcessFeatureRep : public Protocol
 	virtual void Process(const char* buf, int length, void* userdata)
 	{
 		UnMarshal(buf, length);
+		LOG_TRACE("SProcessFeatureRep|result=%d", _result);
 		if(_result != 0)
 		{
 			// TODO: error handling

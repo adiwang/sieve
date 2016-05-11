@@ -15,6 +15,7 @@ class SRegisterCpsdRep : public Protocol
 	virtual void Process(const char* buf, int length, void* userdata)
 	{
 		UnMarshal(buf, length);
+		LOG_TRACE("SRegisterCpsdRep|result=%d", _result);
 		if(_result != 0)
 		{
 			// TODO: error handling
