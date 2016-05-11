@@ -19,6 +19,7 @@
 #include <pylon/PylonIncludes.h>
 #include <pylon/gige/PylonGigEIncludes.h>
 #include <sstream>
+#include <signal.h>
 
 using namespace Pylon;
 using namespace std;
@@ -30,10 +31,17 @@ uint32_t gCurImageSeq = 0;
 uint32_t gImagesNumPerObj = 0; 
 // 当前物品的id
 std::string gCurID;
+// 是否退出
+bool bQuit = false;
 
 UVNET::TCPClient casd_client(0xF0,0x0F);
 
 std::vector<CPylonImage> gGrabImages;
+
+void sighandler(int signum)
+{
+	bQuit = true;
+}
 
 void GenerateID()
 {
@@ -214,8 +222,6 @@ int main (int argc, char **argv)
     // 注册连接回调函数
     casd_client.SetConnectCB(ConnectCasdCB, &casd_client);
     
-    // TODO: 居然还未在tcpclient中加入clog
-    // UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
     if(!casd_client.Connect(ip.c_str(), atoi(port.c_str()))) 
     {
         fprintf(stdout, "connect error:%s\n", casd_client.GetLastErrMsg());
@@ -238,7 +244,13 @@ int main (int argc, char **argv)
         camera.RegisterImageEventHandler( new CSampleImageEventHandler, RegistrationMode_Append, Cleanup_Delete);
         // Open the camera device.
         camera.Open();
-
+		// just 4 debug gige, modify the heartbeat
+		#ifdef DEBUG
+			GenApi::CIntegerPtr pHeartbeat = camera.GetTLNodeMap()->GetNode("HeartbeatTimeout");
+			// set heartbeat to 600 seconds
+			if(pHeartbeat != NULL) pHeartbeat->SetValue(600 * 1000);
+		#endif
+		
         // Start the grabbing using the grab loop thread, by setting the grabLoopType parameter
         // to GrabLoop_ProvidedByInstantCamera. The grab results are delivered to the image event handlers.
         // The GrabStrategy_OneByOne default grab strategy is used.
@@ -255,8 +267,18 @@ int main (int argc, char **argv)
         cin.ignore(cin.rdbuf()->in_avail());
     }
 
+	struct sigaction act;
+	act.sa_handler = sighandler;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = 0; 
+
+	sigaction(SIGINT, &act, NULL);
+	sigaction(SIGTERM, &act, NULL);
+	sigaction(SIGHUP, &act, NULL);
+
+
     // Comment the following two lines to disable waiting on exit.
-	while(true) ThreadSleep(10);
+	while(!bQuit) ThreadSleep(10);
     // cerr << endl << "Press Enter to exit." << endl;
     // while( cin.get() != '\n');
 
