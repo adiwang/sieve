@@ -74,40 +74,76 @@ public:
 
         if(gCurImageSeq == 0)
         {
-            // 当前图片序号是0说明这一张图片是物体的第一张图片，被用来校验摆放是否正确
-            GenerateID();
-			char image_path[256] = {0};
-			snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
-			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
+			#ifdef DEBUG
+				// 测试，从本地加载图片
+				GenerateID();
+				char image_path[256] = {0};
+				snprintf(image_path, sizeof(image_path), "%s/test/%2d.png", image_root.c_str(), gCurImageSeq);
+				CImagePersistence::Load(image_path, image_BGR8);
 
-            gGrabImages.clear();
-            bool isPosSuccess = true;
-            FValidatePosReqp validate_proto;
-            validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
-            std::stringstream ss;
-            ss << gCurID << "/" << gCurImageSeq << ".png";
-            validate_proto._image_path = ss.str();
-            validate_proto.Marshal();
-			LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u", gCurID.c_str(), validate_proto._result);
-            if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
-            {
-				LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|send failed|id=%s, PostureCheck=%u, err_msg=%s", gCurID.c_str(), validate_proto._result, casd_client.GetLastErrMsg());
-            }
-            else
-            {
-                fprintf(stdout, "send succeed\n");
-            }
-            ++gCurImageSeq;
+				gGrabImages.clear();
+				FValidatePosReqp validate_proto;
+				validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
+				std::stringstream ss;
+				ss  << "test/" << gCurImageSeq << ".png";
+				validate_proto._image_path = ss.str();
+				validate_proto.Marshal();
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u", gCurID.c_str(), validate_proto._result);
+				if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
+				{
+					LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|send failed|id=%s, PostureCheck=%u, err_msg=%s", gCurID.c_str(), validate_proto._result, casd_client.GetLastErrMsg());
+				}
+				else
+				{
+					fprintf(stdout, "send succeed\n");
+				}
+				if(validate_proto._result == 0)
+					++gCurImageSeq;
+			#else
+				// 当前图片序号是0说明这一张图片是物体的第一张图片，被用来校验摆放是否正确
+				GenerateID();
+				char image_path[256] = {0};
+				snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
+				CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
+
+				gGrabImages.clear();
+				FValidatePosReqp validate_proto;
+				validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
+				std::stringstream ss;
+				ss << gCurID << "/" << gCurImageSeq << ".png";
+				validate_proto._image_path = ss.str();
+				validate_proto.Marshal();
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u", gCurID.c_str(), validate_proto._result);
+				if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
+				{
+					LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|send failed|id=%s, PostureCheck=%u, err_msg=%s", gCurID.c_str(), validate_proto._result, casd_client.GetLastErrMsg());
+				}
+				else
+				{
+					fprintf(stdout, "send succeed\n");
+				}
+				if(validate_proto._result == 0)
+					++gCurImageSeq;
+			#endif            
         }
         else if(gCurImageSeq <= gImagesNumPerObj - 1)
         {
-            // 图片数目未达到足够的数量，保存图片数据到vector中
-			char image_path[256] = {0};
-			snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
-			CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
-            gGrabImages.push_back(image_BGR8);
-			LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d", gCurID.c_str(), gCurImageSeq);
-            ++gCurImageSeq;
+			#ifdef DEBUG
+				char image_path[256] = {0};
+				snprintf(image_path, sizeof(image_path), "%s/test/%2d.png", image_root.c_str(), gCurImageSeq);
+				CImagePersistence::Load(image_path, image_BGR8);
+				gGrabImages.push_back(image_BGR8);
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d", gCurID.c_str(), gCurImageSeq);
+				++gCurImageSeq;
+			#else
+				// 图片数目未达到足够的数量，保存图片数据到vector中
+				char image_path[256] = {0};
+				snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
+				CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
+				gGrabImages.push_back(image_BGR8);
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d", gCurID.c_str(), gCurImageSeq);
+				++gCurImageSeq;
+			#endif
         }
 
         if(gCurImageSeq >= gImagesNumPerObj)
