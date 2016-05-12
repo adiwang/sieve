@@ -16,6 +16,7 @@
 #include "fvalidateposreqp.hpp"
 #include "csetprocessstatereq.hpp"
 #include "cendbatchprocessreq.hpp"
+#include "clearnsamplereq.hpp"
 #include "configfile.h"
 #include "channel.h"
 #include "dataman.h"
@@ -25,7 +26,15 @@ void Initialize()
 {
 	CASD::PyLoader::GetInstance().Init();
     CASD::PyLoader::GetInstance().Load("leafgrade");
-	PyObject* pLeafGradeIns = CASD::PyLoader::GetInstance().CreateClassInstance("leafgrade", "LeafGrade");
+	PyObject* pLeafGradeIns = CASD::PyLoader::GetInstance().CreateClassInstance("leaf_grade", "LeafGrade");
+    if(pLeafGradeIns)
+    {
+        LOG_TRACE("Initialize|Load python LeafGrade|OK");
+    }
+    else
+    {
+        LOG_TRACE("Initialize|Load python LeafGrade|Failed");
+    }
 	CASD::DataMan::GetInstance().SetLeafGradeInstance(pLeafGradeIns);
 }
 
@@ -37,6 +46,7 @@ void RegisterProtocol(UVNET::TCPServer& server)
 	server.AddProtocol(PROTOCOL_ID_FVALIDATEPOSREQP, new FValidatePosReqp());
 	server.AddProtocol(PROTOCOL_ID_CSETPROCESSSTATEREQ, new CSetProcessStateReq());
 	server.AddProtocol(PROTOCOL_ID_CENDBATCHPROCESSREQ, new CEndBatchProcessReq());
+	server.AddProtocol(PROTOCOL_ID_CLEARNSAMPLEREQ, new CLearnSampleReq());
 }
 
 int main (int argc, char **argv) 
@@ -59,11 +69,12 @@ int main (int argc, char **argv)
 	std::string redis_address = cf.Value("RedisConfig", "Address", "127.0.0.1");
 	std::string redis_port = cf.Value("RedisConfig", "Port", "6379");
 
+	UVNET::TCPServer server(0xF0,0x0F);
+	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
+
 	// 初始化
 	Initialize();
 
-	UVNET::TCPServer server(0xF0,0x0F);
-	UVNET::TCPServer::StartLog(LL_DEBUG, "casd", logfile.c_str());
 	// 注册协议
 	RegisterProtocol(server);
 
