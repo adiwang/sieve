@@ -25,7 +25,7 @@
 void Initialize()
 {
 	CASD::PyLoader::GetInstance().Init();
-    CASD::PyLoader::GetInstance().Load("leafgrade");
+    CASD::PyLoader::GetInstance().Load("leaf_grade");
 	PyObject* pLeafGradeIns = CASD::PyLoader::GetInstance().CreateClassInstance("leaf_grade", "LeafGrade");
     if(pLeafGradeIns)
     {
