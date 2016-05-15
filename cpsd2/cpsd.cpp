@@ -20,9 +20,12 @@
 #include <pylon/gige/PylonGigEIncludes.h>
 #include <sstream>
 #include <signal.h>
+#include <stdlib.h>
+
 
 using namespace Pylon;
 using namespace std;
+using namespace GenApi;
 
 // 当前图片序号
 // TODO: 貌似需要为此变量加个锁
@@ -61,8 +64,7 @@ class CSampleImageEventHandler : public CImageEventHandler
 public:
     virtual void OnImageGrabbed( CInstantCamera& camera, const CGrabResultPtr& ptrGrabResult)
     {
-        cout << "CSampleImageEventHandler::OnImageGrabbed called." << std::endl;
-        cout << std::endl;
+	    LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed");
         if(!ptrGrabResult->GrabSucceeded())
         {
 			LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|err|err_code=%d, err_msg=%s", ptrGrabResult->GetErrorCode(), ptrGrabResult->GetErrorDescription().c_str());
@@ -71,7 +73,8 @@ public:
 
 	    ConfigFile& cf = ConfigFile::GetInstance();
 	    std::string image_root = cf.Value("Global", "ImageRootDir", "/tmp");
-
+	    
+        LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|Load ImageRootDir|%s", image_root.c_str());
         uint32_t image_seq = gCurImageSeq;
         LeafAnalysis& analysor = LeafAnalysis::GetInstance();
         CImageFormatConverter converter;
@@ -80,23 +83,39 @@ public:
         CPylonImage image_BGR8;
         converter.Convert(image_BGR8, ptrGrabResult);
 
+        LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|gCurImageSeq=%d", gCurImageSeq);
+        #define DEBUG
         if(gCurImageSeq == 0)
         {
 			#ifdef DEBUG
 				// 测试，从本地加载图片
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|gCurImageSeq=%d", gCurImageSeq);
 				GenerateID();
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|id=%s", gCurID.c_str());
 				char image_path[256] = {0};
-				snprintf(image_path, sizeof(image_path), "%s/test/%2d.png", image_root.c_str(), gCurImageSeq);
-				CImagePersistence::Load(image_path, image_BGR8);
+				snprintf(image_path, sizeof(image_path), "%s/test/%02d.png", image_root.c_str(), gCurImageSeq);
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|image_path=%s", image_path);
+				//CImagePersistence::Load(image_path, image_BGR8);
+                image_BGR8.Load(image_path);
 
 				gGrabImages.clear();
 				FValidatePosReqp validate_proto;
-				validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
+                try
+                {
+                    LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|before PostureCheck|analysor=%p", (void*)&analysor);
+				    validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
+                    LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|after PostureCheck");
+                }
+                catch(...)
+                {
+                    LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|PostureCheck Exception");
+                    return;
+                }
 				std::stringstream ss;
 				ss  << "test/" << gCurImageSeq << ".png";
 				validate_proto._image_path = ss.str();
 				validate_proto.Marshal();
-				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u", gCurID.c_str(), validate_proto._result);
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u, image_path=%s, datalen=%d", gCurID.c_str(), validate_proto._result, validate_proto._image_path.c_str(), validate_proto._marshal_data.size());
 				if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
 				{
 					LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|send failed|id=%s, PostureCheck=%u, err_msg=%s", gCurID.c_str(), validate_proto._result, casd_client.GetLastErrMsg());
@@ -109,9 +128,12 @@ public:
 					++gCurImageSeq;
 			#else
 				// 当前图片序号是0说明这一张图片是物体的第一张图片，被用来校验摆放是否正确
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|NONDEBUG|gCurImageSeq=%d", gCurImageSeq);
 				GenerateID();
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|NONDEBUG|id=%s", gCurID.c_str());
 				char image_path[256] = {0};
-				snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
+				snprintf(image_path, sizeof(image_path), "%s/%s/%02d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|NONDEBUG|image_path=%s", image_path);
 				CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
 
 				gGrabImages.clear();
@@ -121,7 +143,7 @@ public:
 				ss << gCurID << "/" << gCurImageSeq << ".png";
 				validate_proto._image_path = ss.str();
 				validate_proto.Marshal();
-				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u", gCurID.c_str(), validate_proto._result);
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u, image_path=%s", gCurID.c_str(), validate_proto._result, validate_proto._image_path.c_str());
 				if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
 				{
 					LOG_ERROR("CSampleImageEventHandler::OnImageGrabbed|send failed|id=%s, PostureCheck=%u, err_msg=%s", gCurID.c_str(), validate_proto._result, casd_client.GetLastErrMsg());
@@ -138,18 +160,18 @@ public:
         {
 			#ifdef DEBUG
 				char image_path[256] = {0};
-				snprintf(image_path, sizeof(image_path), "%s/test/%2d.png", image_root.c_str(), gCurImageSeq);
+				snprintf(image_path, sizeof(image_path), "%s/test/%02d.png", image_root.c_str(), gCurImageSeq);
 				CImagePersistence::Load(image_path, image_BGR8);
 				gGrabImages.push_back(image_BGR8);
-				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d", gCurID.c_str(), gCurImageSeq);
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d, image_path=%s", gCurID.c_str(), gCurImageSeq, image_path);
 				++gCurImageSeq;
 			#else
 				// 图片数目未达到足够的数量，保存图片数据到vector中
 				char image_path[256] = {0};
-				snprintf(image_path, sizeof(image_path), "%s/%s/%2d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
+				snprintf(image_path, sizeof(image_path), "%s/%s/%02d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
 				CImagePersistence::Save( ImageFileFormat_Png, GenICam::gcstring(image_path), ptrGrabResult);
 				gGrabImages.push_back(image_BGR8);
-				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d", gCurID.c_str(), gCurImageSeq);
+				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d, image_path=%s", gCurID.c_str(), gCurImageSeq, image_path);
 				++gCurImageSeq;
 			#endif
         }
@@ -158,7 +180,18 @@ public:
         {
             // 图片数目达到了，此时处理这些图片数据，并将处理结果发向casd
             // 调用处理类的处理函数
-            analysor.FeatureExtract(gGrabImages);
+            try
+            {
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|before FeatureExtract");
+                analysor.FeatureExtract(gGrabImages);
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|after FeatureExtract");
+            }
+            catch(...)
+            {
+                LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|FeatureExtract exception");
+                gCurImageSeq = 0; 
+                return;
+            }
             CProcessFeatureReq req_proto(analysor.GetFeature());
 			req_proto._id = gCurID;
             req_proto.Marshal();
@@ -228,45 +261,6 @@ int main (int argc, char **argv)
     }
 
     int exitcode = 0;
-    // Before using any pylon methods, the pylon runtime must be initialized. 
-    PylonInitialize();
-    try
-    {
-        CTlFactory& TlFactory = CTlFactory::GetInstance();
-        CBaslerGigEDeviceInfo di;
-        di.SetIpAddress( GenICam::gcstring(camara_address.c_str()));
-        IPylonDevice* device = TlFactory.CreateDevice( di );
-        // Create an instant camera object for the camera device found first.
-        // CInstantCamera camera( CTlFactory::GetInstance().CreateFirstDevice());
-        CInstantCamera camera( device );
-
-        // For demonstration purposes only, register another image event handler.
-        camera.RegisterImageEventHandler( new CSampleImageEventHandler, RegistrationMode_Append, Cleanup_Delete);
-        // Open the camera device.
-        camera.Open();
-		// just 4 debug gige, modify the heartbeat
-		#ifdef DEBUG
-			GenApi::CIntegerPtr pHeartbeat = camera.GetTLNodeMap()->GetNode("HeartbeatTimeout");
-			// set heartbeat to 600 seconds
-			if(pHeartbeat != NULL) pHeartbeat->SetValue(600 * 1000);
-		#endif
-		
-        // Start the grabbing using the grab loop thread, by setting the grabLoopType parameter
-        // to GrabLoop_ProvidedByInstantCamera. The grab results are delivered to the image event handlers.
-        // The GrabStrategy_OneByOne default grab strategy is used.
-        camera.StartGrabbing( GrabStrategy_OneByOne, GrabLoop_ProvidedByInstantCamera);
-    }
-    catch (const GenericException &e)
-    {
-        // Error handling.
-        cerr << "An exception occurred." << endl
-        << e.GetDescription() << endl;
-        exitcode = 1;
-
-        // Remove left over characters from input buffer.
-        cin.ignore(cin.rdbuf()->in_avail());
-    }
-
 	struct sigaction act;
 	act.sa_handler = sighandler;
 	sigemptyset(&act.sa_mask);
@@ -275,14 +269,52 @@ int main (int argc, char **argv)
 	sigaction(SIGINT, &act, NULL);
 	sigaction(SIGTERM, &act, NULL);
 	sigaction(SIGHUP, &act, NULL);
-
-
-    // Comment the following two lines to disable waiting on exit.
-	while(!bQuit) ThreadSleep(10);
-    // cerr << endl << "Press Enter to exit." << endl;
-    // while( cin.get() != '\n');
+    // Before using any pylon methods, the pylon runtime must be initialized. 
+    PylonInitialize();
+    CInstantCamera camera( CTlFactory::GetInstance().CreateFirstDevice());
+    try
+    {
+        /*
+        CTlFactory& TlFactory = CTlFactory::GetInstance();
+        CBaslerGigEDeviceInfo di;
+        di.SetIpAddress( GenICam::gcstring(camara_address.c_str()));
+        IPylonDevice* device = TlFactory.CreateDevice( di );
+        CInstantCamera camera( device );
+        */
+        // Create an instant camera object for the camera device found first.
+        camera.RegisterImageEventHandler( new CSampleImageEventHandler, RegistrationMode_Append, Cleanup_Delete);
+        // Open the camera device.
+        camera.Open();
+		// just 4 debug gige, modify the heartbeat
+        /*
+		#ifdef DEBUG
+			GenApi::CIntegerPtr pHeartbeat = camera.GetTLNodeMap().GetNode("HeartbeatTimeout");
+			// set heartbeat to 600 seconds
+			if(pHeartbeat != NULL) pHeartbeat->SetValue(600 * 1000);
+		#endif
+        */
+        //设定相机工作与外部触发模式
+        GenApi::INodeMap *pCameraNodeMap;
+        pCameraNodeMap = &camera.GetNodeMap();
+        CEnumerationPtr ptrTriggerMode = pCameraNodeMap->GetNode("TriggerMode");
+        ptrTriggerMode->FromString("On");
+        CEnumerationPtr ptrTriggerSource = pCameraNodeMap->GetNode("TriggerSource");
+        ptrTriggerSource->FromString("Line1");
+		
+        // Start the grabbing using the grab loop thread, by setting the grabLoopType parameter
+        // to GrabLoop_ProvidedByInstantCamera. The grab results are delivered to the image event handlers.
+        // The GrabStrategy_OneByOne default grab strategy is used.
+        camera.StartGrabbing( GrabStrategy_OneByOne, GrabLoop_ProvidedByInstantCamera);
+	    while(!bQuit) ThreadSleep(10);
+    }
+    catch (const GenericException &e)
+    {
+        exitcode = 1;
+    }
 
     // Releases all pylon resources. 
+    camera.StopGrabbing();
+    camera.DestroyDevice();
     PylonTerminate(); 
     return exitcode;
 }

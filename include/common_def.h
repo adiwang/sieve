@@ -3,8 +3,8 @@
 #include <string>
 
 enum LeafPosture {
-	LEAF_POS_OK = 1,
-	LEAF_POS_ERR = 0,
+	LEAF_POS_OK = 0,
+	LEAF_POS_ERR = 1,
 };
 
 struct LeafFeature {
