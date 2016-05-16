@@ -611,7 +611,6 @@ namespace UVNET
 		TcpClientCtx* ctx = (TcpClientCtx *)userdata;
 		TCPClient* pClient = (TCPClient *)ctx->parent_server;
 		// 收到完整数据封包后调用recv_cb回调函数
-		// TODO: 考虑此处是否向server一样采用处理协议的方式?
 		if(pClient->_recv_cb)	pClient->_recv_cb(packet_head, packet_data, pClient->_recv_userdata);
 
 		unsigned int proto_id = 0;
@@ -621,7 +620,9 @@ namespace UVNET
 		{
 			// 采用protobuf解析协议
 			CProto proto;
-			proto.ParseFromArray(packet_data, packet_head.datalen);
+			LOG_TRACE("GetPacket|before parse cproto|datalen=%d", packethead.datalen);
+			//proto.ParseFromArray(packet_data, packet_head.datalen);
+			proto.ParseFromString(std::string(packet_data, packet_head.datalen));
 			proto_id = proto.id();
 			proto_data = proto.body().c_str();
 			data_size = proto.body().size();
@@ -645,6 +646,7 @@ namespace UVNET
 			if(proto_handle)
 			{
                 Protocol* tmpProto = proto_handle->Clone();
+				LOG_TRACE("GetPacket|before protocol process|datalen=%d", data_size);
 				tmpProto->Process(proto_data, data_size, userdata);
                 delete tmpProto;
 			}

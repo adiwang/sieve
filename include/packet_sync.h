@@ -17,6 +17,7 @@ packet.Start(0x01,0x02);
 #include <openssl/md5.h>
 #include "net_base.h"
 #include "thread_uv.h"//for GetUVError
+#include "log.h"
 #if defined (WIN32) || defined(_WIN32)
 #include <windows.h>
 #define ThreadSleep(ms) Sleep(ms);//睡眠ms毫秒
@@ -63,6 +64,7 @@ public:
 
 public:
     void recvdata(const unsigned char* data, int len) { //接收到数据，把数据保存在circulebuffer_
+		LOG_TRACE("recvdata|datalen=%d", len);
         int iret = 0;
         while (iret < len || truepacketlen >= NET_PACKAGE_HEADLEN + 2) {
             if (PARSE_NOTHING == parsetype) {//未解析出head
@@ -78,6 +80,7 @@ public:
                 headpt = (char*)memchr(thread_readdata.base, HEAD, truepacketlen);
                 if (!headpt) {//1
                     fprintf(stdout, "读取%d数据，找不到包头\n", truepacketlen);
+					LOG_ERROR("读取%d数据，找不到包头", truepacketlen);
                     truepacketlen = 0;//标记thread_readdata里的数据为无效
                     continue;
                 }
@@ -85,6 +88,7 @@ public:
                 if (truepacketlen - headpos - 1 < NET_PACKAGE_HEADLEN) { //2.2
                     if (headpos != 0) {
                         fprintf(stdout, "读取%d数据，找到包头,位于%d,数据不够解析帧头，先缓存\n", truepacketlen, headpos);
+						LOG_ERROR("读取%d数据，找到包头,位于%d,数据不够解析帧头，先缓存", truepacketlen, headpos);
                         memmove(thread_readdata.base, thread_readdata.base + headpos, truepacketlen - headpos);
                         truepacketlen -= headpos;
                     }
@@ -100,6 +104,8 @@ public:
                 CharToNetPacket((const char*)(headpt), theNexPacket);
                 if (theNexPacket.header != HEAD || theNexPacket.tail != TAIL || theNexPacket.datalen < 0) {//帧头数据不合法(帧长允许为0)
                     fprintf(stdout, "读取%d数据,包头位于%d. 帧数据不合法(head:%02x,tail:%02x,datalen:%d)\n",
+                            truepacketlen, headpos, theNexPacket.header, theNexPacket.tail, theNexPacket.datalen);
+					LOG_ERROR("读取%d数据,包头位于%d. 帧数据不合法(head:%02x,tail:%02x,datalen:%d)",
                             truepacketlen, headpos, theNexPacket.header, theNexPacket.tail, theNexPacket.datalen);
                     memmove(thread_readdata.base, thread_readdata.base + headpos + 1, truepacketlen - headpos - 1); //2.4
                     truepacketlen -= headpos + 1;
@@ -134,6 +140,8 @@ public:
             //检测校验码与最后一位
             if (thread_packetdata.base[theNexPacket.datalen] != TAIL) {
                 fprintf(stdout, "包数据长%d, 包尾数据不合法(tail:%02x)\n", theNexPacket.datalen,
+                        (unsigned char)(thread_packetdata.base[theNexPacket.datalen]));
+				LOG_ERROR("包数据长%d, 包尾数据不合法(tail:%02x)\n", theNexPacket.datalen,
                         (unsigned char)(thread_packetdata.base[theNexPacket.datalen]));
                 if (truepacketlen - headpos - 1 - NET_PACKAGE_HEADLEN >= theNexPacket.datalen + 1) {//thread_readdata数据足够
                     memmove(thread_readdata.base, thread_readdata.base + headpos + 1, truepacketlen - headpos - 1); //2.4

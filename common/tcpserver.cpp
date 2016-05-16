@@ -959,6 +959,7 @@ void GetPacket(const NetPacket& packethead, const char* packetdata, void* userda
 		// 采用protobuf解析协议
 		CProto proto;
 		// proto.ParseFromArray(packetdata, packethead.datalen);
+		LOG_TRACE("GetPacket|before parse cproto|datalen=%d", packethead.datalen);
 		proto.ParseFromString(std::string(packetdata, packethead.datalen));
 		proto_id = proto.id();
 		proto_data = proto.body().c_str();
@@ -983,6 +984,7 @@ void GetPacket(const NetPacket& packethead, const char* packetdata, void* userda
 		if(proto_handle)
 		{
             Protocol* tmpProto = proto_handle->Clone();
+			LOG_TRACE("GetPacket|before protocol process|datalen=%d", data_size);
 			tmpProto->Process(proto_data, data_size, userdata);
             delete tmpProto;
 		}
