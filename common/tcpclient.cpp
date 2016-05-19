@@ -507,7 +507,7 @@ namespace UVNET
 		// 调用_send发送circular buf中的数据
 		pClient->_send();
 		// 调用packet对收到的数据进行解包
-		if(nread > 0) pClient->_ctx->packet->recvdata((const unsigned char *)buf->base, nread);
+		if(nread > 0) pClient->_ctx->packet->recvdata((const char *)buf->base, nread);
 	}
 
 	/**
@@ -620,7 +620,7 @@ namespace UVNET
 		{
 			// 采用protobuf解析协议
 			CProto proto;
-			LOG_TRACE("GetPacket|before parse cproto|datalen=%d", packethead.datalen);
+			LOG_TRACE("GetPacket|before parse cproto|datalen=%d", packet_head.datalen);
 			//proto.ParseFromArray(packet_data, packet_head.datalen);
 			proto.ParseFromString(std::string(packet_data, packet_head.datalen));
 			proto_id = proto.id();

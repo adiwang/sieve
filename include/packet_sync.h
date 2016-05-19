@@ -63,8 +63,7 @@ public:
     }
 
 public:
-    void recvdata(const unsigned char* data, int len) { //接收到数据，把数据保存在circulebuffer_
-		LOG_TRACE("recvdata|datalen=%d", len);
+    void recvdata(const char* data, int len) { //接收到数据，把数据保存在circulebuffer_
         int iret = 0;
         while (iret < len || truepacketlen >= NET_PACKAGE_HEADLEN + 2) {
             if (PARSE_NOTHING == parsetype) {//未解析出head

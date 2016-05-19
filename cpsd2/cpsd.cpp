@@ -111,9 +111,12 @@ public:
                     LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|PostureCheck Exception");
                     return;
                 }
-				std::stringstream ss;
-				ss  << "test/" << gCurImageSeq << ".png";
-				validate_proto._image_path = ss.str();
+				// std::stringstream ss;
+				// ss  << "test/" << gCurImageSeq << ".png";
+				// validate_proto._image_path = ss.str();
+				char partial_image_path[256] = {0};
+				snprintf(partial_image_path, sizeof(image_path), "test/%02d.png", gCurImageSeq);
+				validate_proto._image_path = std::string(partial_image_path);
 				validate_proto.Marshal();
 				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u, image_path=%s, datalen=%d", gCurID.c_str(), validate_proto._result, validate_proto._image_path.c_str(), validate_proto._marshal_data.size());
 				if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 

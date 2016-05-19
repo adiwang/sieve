@@ -21,7 +21,7 @@ class FValidatePosReqp : public Protocol
 		UVNET::SessionCtx* ctx = (UVNET::SessionCtx *)userdata;
 		UVNET::TCPServer* server = (UVNET::TCPServer*)ctx->parent_server;
 
-		LOG_TRACE("FValidatePosReqp|sid=%d", ctx->sid);
+		LOG_TRACE("FValidatePosReqp|sid=%d,result=%d,image_path=%s", ctx->sid, _result, _image_path.c_str());
 
 		CASD::ChannelManager& manager = CASD::ChannelManager::GetInstance();
 		std::map<int, uint32_t>::iterator it = manager._sid2seq.find(ctx->sid);

@@ -918,7 +918,7 @@ void OnRecv(uv_stream_t* handle, ssize_t nread, const uv_buf_t* buf)
 	else
 	{
 		// 正常接收，调用解包函数来解包
-		ctx->packet->recvdata((const unsigned char *)buf->base, nread);
+		ctx->packet->recvdata((const char *)buf->base, nread);
 	}
 }
 
@@ -959,7 +959,6 @@ void GetPacket(const NetPacket& packethead, const char* packetdata, void* userda
 		// 采用protobuf解析协议
 		CProto proto;
 		// proto.ParseFromArray(packetdata, packethead.datalen);
-		LOG_TRACE("GetPacket|before parse cproto|datalen=%d", packethead.datalen);
 		proto.ParseFromString(std::string(packetdata, packethead.datalen));
 		proto_id = proto.id();
 		proto_data = proto.body().c_str();
@@ -983,9 +982,15 @@ void GetPacket(const NetPacket& packethead, const char* packetdata, void* userda
 		proto_handle = server->GetProtocol(proto_id);
 		if(proto_handle)
 		{
+            char *p = new char[data_size];
+            for(int i = 0; i < data_size; i++)
+            {
+                p[i] = proto_data[i];
+            }
             Protocol* tmpProto = proto_handle->Clone();
-			LOG_TRACE("GetPacket|before protocol process|datalen=%d", data_size);
-			tmpProto->Process(proto_data, data_size, userdata);
+			//tmpProto->Process(proto_data, data_size, userdata);
+			tmpProto->Process(p, data_size, userdata);
+            delete []p;
             delete tmpProto;
 		}
 	}
