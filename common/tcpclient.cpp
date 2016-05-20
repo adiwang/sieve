@@ -645,9 +645,12 @@ namespace UVNET
 			proto_handle = pClient->GetProtocol(proto_id);
 			if(proto_handle)
 			{
+				char *p = new char[data_size];
+				proto_data.copy(p, data_size, 0);
                 Protocol* tmpProto = proto_handle->Clone();
 				LOG_TRACE("GetPacket|before protocol process|datalen=%d", data_size);
-				tmpProto->Process(proto_data, data_size, userdata);
+				tmpProto->Process(p, data_size, userdata);
+				delete []p;
                 delete tmpProto;
 			}
 		}

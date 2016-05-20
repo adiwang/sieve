@@ -983,12 +983,10 @@ void GetPacket(const NetPacket& packethead, const char* packetdata, void* userda
 		if(proto_handle)
 		{
             char *p = new char[data_size];
-            for(int i = 0; i < data_size; i++)
-            {
-                p[i] = proto_data[i];
-            }
+			proto_data.copy(p, data_size, 0);
             Protocol* tmpProto = proto_handle->Clone();
 			//tmpProto->Process(proto_data, data_size, userdata);
+			// 在clone后不知道为什么proto_data的值被更改了，这里暂时改成先拷贝到数组中
 			tmpProto->Process(p, data_size, userdata);
             delete []p;
             delete tmpProto;
