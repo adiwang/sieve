@@ -1,4 +1,5 @@
 #include "pyloader.h"
+#include "log.h"
 
 namespace CASD
 {
@@ -23,7 +24,7 @@ PyLoader::~PyLoader()
     Py_Finalize();
 }
 
-bool PyLoader::Init()
+bool PyLoader::Init(std::string script_dir)
 {
     Py_Initialize();
     if(!Py_IsInitialized())
@@ -32,6 +33,12 @@ bool PyLoader::Init()
     PyRun_SimpleString("import sys");
     PyRun_SimpleString("sys.path.append('./')");
     PyRun_SimpleString("sys.path.append('./script/')");
+    if(!script_dir.empty())
+    {
+        char append_str[256] = {0};
+        snprintf(append_str, 256, "sys.path.append('%s')", script_dir.c_str());
+        PyRun_SimpleString(append_str);
+    }
     return true;
 }
 
@@ -42,6 +49,7 @@ bool PyLoader::Load(std::string filename)
     if(it != _name2module.end() && it->second)
     {
         // 已加载
+        LOG_TRACE("%s already loadded", filename.c_str());
         return true;
     }
     
@@ -52,9 +60,11 @@ bool PyLoader::Load(std::string filename)
     {
         // 未找到该文件      
 	    //LOG_ERROR("PyLoader::Load|load %s failed", filename.c_str());
+        LOG_TRACE("load %s failed", filename.c_str());
         return false;
     }
     _name2module.insert(std::make_pair(filename, pModule));
+    LOG_TRACE("load %s success", filename.c_str());
     return true;
 }
 

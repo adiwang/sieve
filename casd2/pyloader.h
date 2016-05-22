@@ -21,7 +21,7 @@ public:
         return instance;
     }
 
-    bool Init();
+    bool Init(std::string script_dir);
     bool Load(std::string filename);
     PyObject* GetModule(std::string module_name);
     PyObject* GetObjectFromModule(PyObject* pModule, std::string obj_name);
