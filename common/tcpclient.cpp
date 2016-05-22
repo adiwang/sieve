@@ -646,7 +646,7 @@ namespace UVNET
 			if(proto_handle)
 			{
 				char *p = new char[data_size];
-				proto_data.copy(p, data_size, 0);
+                memcpy(p, proto_data, data_size);
                 Protocol* tmpProto = proto_handle->Clone();
 				LOG_TRACE("GetPacket|before protocol process|datalen=%d", data_size);
 				tmpProto->Process(p, data_size, userdata);
