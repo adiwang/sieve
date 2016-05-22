@@ -4,6 +4,7 @@
 #include "tcpserver.h"
 #include "dataman.h"
 #include <cstdio>
+#include "log.h"
 
 redisAsyncContext* redis_context;
 
@@ -11,9 +12,11 @@ void OnConnect(const redisAsyncContext *c, int status)
 {
     if (status != REDIS_OK) {
         printf("Error: %s\n", c->errstr);
+        LOG_TRACE("OnConnect|Error: %s", c->errstr);
         return;
     }
     printf("Connected...\n");
+    LOG_TRACE("OnConnect|Connected: begin to load samples");
 	// 加载数据, 获取样本库所有数据
 	redisAsyncCommand(const_cast<redisAsyncContext *>(c), GetSamplesCB, NULL, "HVALS samples");
 }
@@ -29,6 +32,7 @@ void OnDisconnect(const redisAsyncContext *c, int status)
 
 void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 {
+    LOG_TRACE("GetSamplesCB");
 	redisReply *reply = (redisReply *)r;
 	if(reply == NULL) return;
 	size_t sample_count = reply->elements;
@@ -52,7 +56,7 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 	}
 	Py_DECREF(pArgs);
 	Py_DECREF(pIns);
-	freeReplyObject(reply);
+	//freeReplyObject(reply);
 }
 
 
