@@ -3,6 +3,7 @@
 #include <exception>
 #include <sstream>
 #include <iostream>
+#include "log.h"
 
 namespace CASD
 {
@@ -152,7 +153,7 @@ void DataMan::AddSample(std::string jsonstr)
 		return;
 	}
 	int group = value["group"].asInt();
-	int grade = value["grade"].asInt();
+	int rank = value["rank"].asInt();
 	GroupRankMapIter git = _samples.find(group);
 	if(git == _samples.end())
 	{
@@ -160,12 +161,12 @@ void DataMan::AddSample(std::string jsonstr)
 		_samples.insert(std::make_pair(group, r2fl));
 		git = _samples.find(group);
 	}
-	RankFeatureListMapIter rit = git->second.find(grade);
+	RankFeatureListMapIter rit = git->second.find(rank);
 	if(rit == git->second.end())
 	{
 		FeatureList fl;
-		git->second.insert(std::make_pair(grade, fl));
-		rit = git->second.find(grade);
+		git->second.insert(std::make_pair(rank, fl));
+		rit = git->second.find(rank);
 	}
 	LeafFeature feature;
 	Json2LeafFeature(value, feature);
@@ -222,6 +223,7 @@ void DataMan::StatisticsSamples(std::vector<LeafGradeCount>& leaf_grade_counts)
             lgc.set_rank(rit->first);
             lgc.set_count(rit->second.size());
             leaf_grade_counts.push_back(lgc);
+            LOG_TRACE("group=%d, rank=%d, count=%d", git->first, rit->first, rit->second.size());
         }
     }
 }
