@@ -131,14 +131,14 @@ class CProto : public ::google::protobuf::Message {
   ::google::protobuf::int32 id() const;
   void set_id(::google::protobuf::int32 value);
 
-  // required string body = 2;
+  // required bytes body = 2;
   bool has_body() const;
   void clear_body();
   static const int kBodyFieldNumber = 2;
   const ::std::string& body() const;
   void set_body(const ::std::string& value);
   void set_body(const char* value);
-  void set_body(const char* value, size_t size);
+  void set_body(const void* value, size_t size);
   ::std::string* mutable_body();
   ::std::string* release_body();
   void set_allocated_body(::std::string* body);
@@ -2576,7 +2576,7 @@ inline void CProto::set_id(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:CProto.id)
 }
 
-// required string body = 2;
+// required bytes body = 2;
 inline bool CProto::has_body() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -2604,7 +2604,7 @@ inline void CProto::set_body(const char* value) {
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:CProto.body)
 }
-inline void CProto::set_body(const char* value, size_t size) {
+inline void CProto::set_body(const void* value, size_t size) {
   set_has_body();
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));

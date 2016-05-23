@@ -1,7 +1,7 @@
 message CProto
 {
 	required int32 id = 1;
-	required string body = 2;
+	required bytes body = 2;
 }
 
 message CP1

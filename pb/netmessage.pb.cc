@@ -597,7 +597,7 @@ void protobuf_AddDesc_netmessage_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020netmessage.proto\"\"\n\006CProto\022\n\n\002id\030\001 \002(\005"
-    "\022\014\n\004body\030\002 \002(\t\"&\n\003CP1\022\t\n\001a\030\001 \002(\005\022\t\n\001b\030\002 "
+    "\022\014\n\004body\030\002 \002(\014\"&\n\003CP1\022\t\n\001a\030\001 \002(\005\022\t\n\001b\030\002 "
     "\002(\003\022\t\n\001c\030\003 \002(\t\"&\n\003CP2\022\t\n\001a\030\001 \002(\t\022\t\n\001b\030\002 "
     "\002(\t\022\t\n\001c\030\003 \002(\003\"\031\n\tEchoProto\022\014\n\004data\030\001 \002("
     "\t\"$\n\025CSetCamaraSeqReqProto\022\013\n\003seq\030\001 \002(\r\""
@@ -808,16 +808,12 @@ bool CProto::MergePartialFromCodedStream(
         break;
       }
 
-      // required string body = 2;
+      // required bytes body = 2;
       case 2: {
         if (tag == 18) {
          parse_body:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_body()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->body().data(), this->body().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "CProto.body");
         } else {
           goto handle_unusual;
         }
@@ -855,13 +851,9 @@ void CProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
 
-  // required string body = 2;
+  // required bytes body = 2;
   if (has_body()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->body().data(), this->body().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "CProto.body");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->body(), output);
   }
 
@@ -880,14 +872,10 @@ void CProto::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
 
-  // required string body = 2;
+  // required bytes body = 2;
   if (has_body()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->body().data(), this->body().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "CProto.body");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->body(), target);
   }
 
@@ -910,9 +898,9 @@ int CProto::RequiredFieldsByteSizeFallback() const {
   }
 
   if (has_body()) {
-    // required string body = 2;
+    // required bytes body = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->body());
   }
 
@@ -927,9 +915,9 @@ int CProto::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->id());
 
-    // required string body = 2;
+    // required bytes body = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->body());
 
   } else {
@@ -1039,7 +1027,7 @@ void CProto::clear_id() {
   // @@protoc_insertion_point(field_set:CProto.id)
 }
 
-// required string body = 2;
+// required bytes body = 2;
 bool CProto::has_body() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1067,7 +1055,7 @@ void CProto::clear_body() {
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:CProto.body)
 }
- void CProto::set_body(const char* value, size_t size) {
+ void CProto::set_body(const void* value, size_t size) {
   set_has_body();
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
