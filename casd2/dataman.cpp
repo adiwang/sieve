@@ -3,6 +3,7 @@
 #include <exception>
 #include <sstream>
 #include <iostream>
+#include "log.h"
 
 namespace CASD
 {
@@ -19,7 +20,7 @@ DataMan::~DataMan()
 	}
 }
 
-std::string DataMan::GroupRankMap2Json(GroupRankMap& group2rank)
+std::string DataMan::GroupRankMap2Json(const GroupRankMap& group2rank)
 {
     std::string jsonstr;
     try
@@ -56,7 +57,7 @@ std::string DataMan::GroupRankMap2Json(GroupRankMap& group2rank)
     return jsonstr;
 }
     
-int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
+int DataMan::Json2GroupRankMap(const std::string& jsonstr, GroupRankMap& group2rank)
 {
     group2rank.clear();
     try
@@ -66,6 +67,7 @@ int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
         if(!reader.parse(jsonstr, value))       
         {
             std::cerr << "DataMan::Json2GroupRankMap parse error!\n" << jsonstr << std::endl;
+			LOG_TRACE("DataMan::Json2GroupRankMap parse error!json:\n%s", jsonstr.c_str());
             return 1;
         }
         Json::Value::Members grp_names = value.getMemberNames();
@@ -95,12 +97,13 @@ int DataMan::Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank)
     catch(std::exception &ex)
     {
         std::cerr << "DataMan::Json2GroupRankMap exception: " << ex.what() << std::endl;
+		LOG_TRACE("DataMan::Json2GroupRankMap exception: %s", ex.what());
         return 1;
     } 
     return 0;
 }
 
-void DataMan::LeafFeature2Json(LeafFeature& feature, Json::Value& value)
+void DataMan::LeafFeature2Json(const LeafFeature& feature, Json::Value& value)
 {
     value["id"] = feature.id;
     value["group"] = feature.Group;
@@ -121,7 +124,7 @@ void DataMan::LeafFeature2Json(LeafFeature& feature, Json::Value& value)
     value["defect_rate"] = feature.DefectRate;
 }
 
-void DataMan::Json2LeafFeature(Json::Value& value, LeafFeature& feature)
+void DataMan::Json2LeafFeature(const Json::Value& value, LeafFeature& feature)
 {
     feature.id = value["id"].asString();
     feature.Group = value["group"].asInt();
@@ -142,13 +145,14 @@ void DataMan::Json2LeafFeature(Json::Value& value, LeafFeature& feature)
     feature.DefectRate = value["defect_rate"].asDouble(); 
 }
 
-void DataMan::AddSample(std::string jsonstr)
+void DataMan::AddSample(const std::string& jsonstr)
 {
 	Json::Reader reader;
 	Json::Value value;
 	if(!reader.parse(jsonstr, value))       
 	{
 		std::cerr << "DataMan::AddSample parse error!\n" << jsonstr << std::endl;
+		LOG_TRACE("DataMan::AddSample parse error! json:\n%s", jsonstr.c_str());
 		return;
 	}
 	int group = value["group"].asInt();
@@ -172,7 +176,7 @@ void DataMan::AddSample(std::string jsonstr)
 	rit->second.push_back(feature);
 }
 
-void DataMan::AddSample(LeafFeature& feature)
+void DataMan::AddSample(const LeafFeature& feature)
 {
 	GroupRankMapIter git = _samples.find(feature.Group);
 	if(git == _samples.end())

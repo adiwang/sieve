@@ -36,12 +36,12 @@ private:
     DataMan() : _leafgrade_instance(NULL) {}
 
 public:
-    std::string GroupRankMap2Json(GroupRankMap& group2rank);
-    int Json2GroupRankMap(std::string jsonstr, GroupRankMap& group2rank);
-    void LeafFeature2Json(LeafFeature& feature, Json::Value& value);
-    void Json2LeafFeature(Json::Value& value, LeafFeature& feature);
-	void AddSample(std::string jsonstr);
-	void AddSample(LeafFeature& feature);
+    std::string GroupRankMap2Json(const GroupRankMap& group2rank);
+    int Json2GroupRankMap(const std::string& jsonstr, GroupRankMap& group2rank);
+    void LeafFeature2Json(const LeafFeature& feature, Json::Value& value);
+    void Json2LeafFeature(const Json::Value& value, LeafFeature& feature);
+	void AddSample(cosnt std::string& jsonstr);
+	void AddSample(const LeafFeature& feature);
 	void SetLeafGradeInstance(PyObject* instance);
 	PyObject* GetLeafGradeInstance();
 	std::string GetSamplesJson();
