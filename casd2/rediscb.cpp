@@ -37,15 +37,16 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 	if(reply == NULL) return;
 	size_t sample_count = reply->elements;
 	using namespace CASD;
+	DataMan& dataman = DataMan::GetInstance();
 	for(size_t i = 0; i < sample_count; ++i)
 	{
-        DataMan::GetInstance().AddSample(reply->element[i]->str);
+        dataman.AddSample(reply->element[i]->str);
 	}
 	//调用处理类加载数据
-	PyObject* pIns = DataMan::GetInstance().GetLeafGradeInstance();
+	PyObject* pIns = dataman.GetLeafGradeInstance();
 	if(!pIns) return;
 	Py_INCREF(pIns);
-	std::string samples_json = DataMan::GetInstance().GetSamplesJson();
+	std::string samples_json = dataman.GetSamplesJson();
 	PyObject* pArgs = PyTuple_New(1);
 	PyTuple_SetItem(pArgs, 0, Py_BuildValue("s",samples_json.c_str()));
 	PyObject* pRes = PyLoader::GetInstance().CallInstanceMethod(pIns, "Load", pArgs);

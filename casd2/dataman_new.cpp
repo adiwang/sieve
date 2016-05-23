@@ -11,6 +11,20 @@ namespace CASD
 DataMan::~DataMan()
 {
     // 清除样本库
+	for(GroupRankMapIter git = _samples.begin(); git != _samples.end(); ++git)
+    {
+        for(RankFeatureListMapIter rit = git->second.begin(); rit != git->second.end(); ++rit)
+        {
+			for(FeatureListIter fit = rit->second.begin(); fit != rit->second.end(); ++fit)
+			{
+				if(*fit)
+				{
+					delete (*fit);
+					*fit = NULL;
+				}
+			}
+        }
+    }
     _samples.clear();
 	// 释放python中类的实例
 	if(_leafgrade_instance)
@@ -36,7 +50,7 @@ std::string DataMan::GroupRankMap2Json(const GroupRankMap& group2rank)
                 for(FeatureListIter fit = rit->second.begin(); fit != rit->second.end(); ++fit)
                 {
                     Json::Value f_value;
-                    LeafFeature2Json(*fit, f_value);
+                    LeafFeature2Json(*(*fit), f_value);
                     fl_value.append(f_value);
                 }
                 ss.str("");
@@ -84,10 +98,10 @@ int DataMan::Json2GroupRankMap(const std::string& jsonstr, GroupRankMap& group2r
                 Json::Value fl_value = r2fl_value[r_name];
                 for(unsigned int i = 0; i < fl_value.size(); ++i)
                 {
-                    LeafFeature f;
+                    LeafFeature* pFeature = new LeafFeature();
                     Json::Value& fval = fl_value[i];
-                    Json2LeafFeature(fval, f);
-                    fl.push_back(f);
+                    Json2LeafFeature(fval, *pFeature);
+                    fl.push_back(pFeature);
                 }
                 r2fl.insert(std::make_pair(atoi(r_name.c_str()), fl));
             }
@@ -171,9 +185,9 @@ void DataMan::AddSample(const std::string& jsonstr)
 		git->second.insert(std::make_pair(rank, fl));
 		rit = git->second.find(rank);
 	}
-	LeafFeature feature;
-	Json2LeafFeature(value, feature);
-	rit->second.push_back(feature);
+	LeafFeature* pFeature = new LeafFeature();
+	Json2LeafFeature(value, *pFeature);
+	rit->second.push_back(pFeature);
 }
 
 void DataMan::AddSample(const LeafFeature& feature)
@@ -192,7 +206,8 @@ void DataMan::AddSample(const LeafFeature& feature)
 		git->second.insert(std::make_pair(feature.Rank, fl));
 		rit = git->second.find(feature.Rank);
 	}
-	rit->second.push_back(feature);
+	LeafFeature* pFeature = new LeafFeature(feature);
+	rit->second.push_back(pFeature);
 }
 
 void DataMan::SetLeafGradeInstance(PyObject* instance)
@@ -226,7 +241,6 @@ void DataMan::StatisticsSamples(std::vector<LeafGradeCount>& leaf_grade_counts)
             lgc.set_rank(rit->first);
             lgc.set_count(rit->second.size());
             leaf_grade_counts.push_back(lgc);
-            LOG_TRACE("group=%d, rank=%d, count=%d", git->first, rit->first, rit->second.size());
         }
     }
 }

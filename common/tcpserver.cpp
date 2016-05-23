@@ -121,6 +121,7 @@ void TCPServer::_close()
 		Session* session = it->second;
 		session->Close();
 	}
+	_sessions.clear();
 	uv_mutex_unlock(&_mutex_sessions);
 	uv_walk(&_loop, CloseWalkCB, this);
 	LOG_TRACE("close server");
@@ -270,17 +271,6 @@ bool TCPServer::SetKeepAlive(int enable, unsigned int delay)
 	}
 	return true;
 }
-
-/**
-**	设置server的处理协议
-**  @proto: 协议处理实例
-*/
-/*
-void TCPServer::SetProtocol(TCPServerProtocolProcess* proto)
-{
-	_protocol = proto;
-}
-*/
 
 /**
 **	添加server的处理协议

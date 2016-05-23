@@ -12,8 +12,8 @@ namespace CASD
 class DataMan
 {
 public:
-    typedef std::vector<LeafFeature> FeatureList;                                   // 特征列表
-    typedef std::vector<LeafFeature>::iterator FeatureListIter;
+    typedef std::vector<LeafFeature*> FeatureList;                                   // 特征列表
+    typedef std::vector<LeafFeature*>::iterator FeatureListIter;
     typedef std::map<int, FeatureList> RankFeatureListMap;                          // 等级到特征列表的映射
     typedef std::map<int, FeatureList>::iterator RankFeatureListMapIter;
     typedef std::map<int, RankFeatureListMap> GroupRankMap;
