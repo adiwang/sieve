@@ -33,7 +33,7 @@ private:
 
 
 private:
-    DataMan() : _leafgrade_instance(NULL) {}
+    DataMan() : _samples(), _leafgrade_instance(NULL) {}
 
 public:
     std::string GroupRankMap2Json(const GroupRankMap& group2rank);
