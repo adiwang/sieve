@@ -226,7 +226,6 @@ void DataMan::StatisticsSamples(std::vector<LeafGradeCount>& leaf_grade_counts)
             lgc.set_rank(rit->first);
             lgc.set_count(rit->second.size());
             leaf_grade_counts.push_back(lgc);
-            LOG_TRACE("group=%d, rank=%d, count=%d", git->first, rit->first, rit->second.size());
         }
     }
 }
