@@ -20,7 +20,7 @@ DataMan::~DataMan()
 	}
 }
 
-std::string DataMan::GroupRankMap2Json(const GroupRankMap& group2rank)
+std::string DataMan::GroupRankMap2Json(GroupRankMap& group2rank)
 {
     std::string jsonstr;
     try
