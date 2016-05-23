@@ -152,7 +152,7 @@ void DataMan::AddSample(std::string jsonstr)
 		return;
 	}
 	int group = value["group"].asInt();
-	int grade = value["grade"].asInt();
+	int rank = value["rank"].asInt();
 	GroupRankMapIter git = _samples.find(group);
 	if(git == _samples.end())
 	{
@@ -160,12 +160,12 @@ void DataMan::AddSample(std::string jsonstr)
 		_samples.insert(std::make_pair(group, r2fl));
 		git = _samples.find(group);
 	}
-	RankFeatureListMapIter rit = git->second.find(grade);
+	RankFeatureListMapIter rit = git->second.find(rank);
 	if(rit == git->second.end())
 	{
 		FeatureList fl;
-		git->second.insert(std::make_pair(grade, fl));
-		rit = git->second.find(grade);
+		git->second.insert(std::make_pair(rank, fl));
+		rit = git->second.find(rank);
 	}
 	LeafFeature feature;
 	Json2LeafFeature(value, feature);
