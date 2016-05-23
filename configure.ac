@@ -24,6 +24,8 @@ AC_PROG_RANLIB
 
 # Checks for header files.
 AC_CHECK_HEADERS([arpa/inet.h memory.h netinet/in.h stdint.h stdlib.h string.h sys/file.h unistd.h])
+CXXFLAGS=${CXXFLAGS--g}
+AC_PROG_CXX 
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
