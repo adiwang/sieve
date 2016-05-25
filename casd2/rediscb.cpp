@@ -49,12 +49,19 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 	std::string samples_json = dataman.GetSamplesJson();
 	PyObject* pArgs = PyTuple_New(1);
 	PyTuple_SetItem(pArgs, 0, Py_BuildValue("s",samples_json.c_str()));
-	PyObject* pRes = PyLoader::GetInstance().CallInstanceMethod(pIns, "Load", pArgs);
+	PyObject* pRes = PyLoader::GetInstance().CallInstanceMethod(pIns, "load", Py_BuildValue("s",samples_json.c_str()));
 	if(pRes)
 	{
 		Py_DECREF(pRes);
 		pRes = NULL;
 	}
+    else
+    {
+        PyObject *ptype, *pvalue, *ptraceback;
+        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
+        char *pStrErrorMessage = PyString_AsString(pvalue);
+        LOG_TRACE("ERROR: %s", pStrErrorMessage);
+    }
 	Py_DECREF(pArgs);
 	Py_DECREF(pIns);
 	//freeReplyObject(reply);

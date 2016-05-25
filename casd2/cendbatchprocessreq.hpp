@@ -65,7 +65,7 @@ class CEndBatchProcessReq : public Protocol
 				return;
 			}
 			Py_INCREF(pLeafGradeIns);
-			PyObject* pRes = CASD::PyLoader::GetInstance().CallInstanceMethod(pLeafGradeIns, "Train");
+			PyObject* pRes = CASD::PyLoader::GetInstance().CallInstanceMethod(pLeafGradeIns, "train_classifier");
 			if(pRes)
 			{
 				Py_DECREF(pRes);

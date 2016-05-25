@@ -79,7 +79,7 @@ class CProcessFeatureReq : public Protocol
 			// 调用Learn来进行学习, 得到学习的结果，更新redis, 内存中的数据更新由算法类负责
             feature.Group = pChannel->GetGroup();
             feature.Rank = pChannel->GetRank();
-			CallMethod(pLeafGradeIns, "LearnOne", feature);
+			CallMethod(pLeafGradeIns, "learn_one", feature);
 			SaveToSamples(feature);
 
 			client_rep._result = 0;
@@ -91,7 +91,7 @@ class CProcessFeatureReq : public Protocol
 		{
 			// 分选
 			// 调用Class来进行分选，得到分选结果，存到redis，设置生命周期
-			CallMethod(pLeafGradeIns, "ClassifyOne", feature);
+			CallMethod(pLeafGradeIns, "classify_one", feature);
 
 			client_rep._result = 0;
             client_rep._group = feature.Group;
@@ -163,16 +163,64 @@ private:
 		PyObject* pArgs = PyTuple_New(1);
 		std::string samples_json = GetFeatureJson(feature);
 		PyTuple_SetItem(pArgs, 0, Py_BuildValue("s",samples_json.c_str()));
-		PyObject* pRes = CASD::PyLoader::GetInstance().CallInstanceMethod(pIns, methodName, pArgs);
+		PyObject* pRes = CASD::PyLoader::GetInstance().CallInstanceMethod(pIns, methodName, Py_BuildValue("s",samples_json.c_str()));
 		if(pRes)
 		{
-			if(strcmp(methodName, "ClassifyOne") == 0)
+			if(strcmp(methodName, "classify_one") == 0)
 			{
 				PyArg_ParseTuple(pRes, "ii", &feature.Group, &feature.Rank);
 			}
 			Py_DECREF(pRes);
 			pRes = NULL;
 		}
+        else
+        {
+            if(PyErr_Occurred() != NULL)
+            {
+                PyObject *type_obj, *value_obj, *traceback_obj;
+                PyErr_Fetch(&type_obj, &value_obj, &traceback_obj);
+                if (value_obj == NULL)
+                    return;
+                std::string strErrorMsg;
+                PyErr_NormalizeException(&type_obj, &value_obj, 0);
+                if (PyString_Check(PyObject_Str(value_obj)))
+                {
+                    strErrorMsg = PyString_AsString(PyObject_Str(value_obj));
+                }
+                if (traceback_obj != NULL)
+                {
+                    strErrorMsg += "Traceback:";
+                    PyObject * pModuleName = PyString_FromString("traceback");
+                    PyObject * pTraceModule = PyImport_Import(pModuleName);
+                    Py_XDECREF(pModuleName);
+                    if (pTraceModule != NULL)
+                    {
+                        PyObject * pModuleDict = PyModule_GetDict(pTraceModule);
+                        if (pModuleDict != NULL)
+                        {
+                            PyObject * pFunc = PyDict_GetItemString(pModuleDict,"format_exception");
+                            if (pFunc != NULL)
+                            {
+                                PyObject * errList = PyObject_CallFunctionObjArgs(pFunc,type_obj,value_obj, traceback_obj,NULL);
+                                if (errList != NULL)
+                                {
+                                    int listSize = PyList_Size(errList);
+                                    for (int i=0;i < listSize;++i)
+                                    {
+                                        strErrorMsg += PyString_AsString(PyList_GetItem(errList,i));
+                                    }
+                                }
+                            }
+                        }
+                        Py_XDECREF(pTraceModule);
+                    }
+                }
+                Py_XDECREF(type_obj);
+                Py_XDECREF(value_obj);
+                Py_XDECREF(traceback_obj);
+                LOG_TRACE("ERROR: %s", strErrorMsg.c_str());
+            }
+        }
 		Py_DECREF(pArgs);
 	}
 };
