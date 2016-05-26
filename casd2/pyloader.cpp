@@ -161,17 +161,22 @@ void PyLoader::LogPyError()
     {
         PyObject *tbList, *emptyString, *strRetval;
 
+        char format_exception_name[] = "format_exception";
+        char format_str[] = "OOO";
+
         tbList = PyObject_CallMethod(
             tracebackModule,
-            "format_exception",
-            "OOO",
+            format_exception_name,
+            format_str,
             type,
             value == NULL ? Py_None : value,
             traceback == NULL ? Py_None : traceback);
 
         emptyString = PyString_FromString("");
-        strRetval = PyObject_CallMethod(emptyString, "join",
-            "O", tbList);
+
+        char join_method_name[] = "join";
+        char join_format_str[] = "O";
+        strRetval = PyObject_CallMethod(emptyString, join_method_name, join_format_str, tbList);
 
         chrRetval = strdup(PyString_AsString(strRetval));
 
