@@ -155,7 +155,9 @@ private:
     {
 		Json::Value value;
         CASD::DataMan::GetInstance().LeafFeature2Json(feature, value);
-		return value.toStyledString();
+        Json::FastWriter writer;
+        return writer.write(value);
+		//return value.toStyledString();
 	}
 
 	void CallMethod(PyObject* pIns, const char * methodName, LeafFeature& feature)

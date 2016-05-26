@@ -47,7 +47,9 @@ std::string DataMan::GroupRankMap2Json(GroupRankMap& group2rank)
             ss << git->first;
             value[ss.str()] = r2f_value;
         }
-        jsonstr = value.toStyledString();
+        Json::FastWriter writer;
+        jsonstr = writer.write(value);
+        //jsonstr = value.toStyledString();
     }
     catch(std::exception &ex)
     {
