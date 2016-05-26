@@ -55,13 +55,6 @@ void GetSamplesCB(redisAsyncContext *c, void *r, void *privdata)
 		Py_DECREF(pRes);
 		pRes = NULL;
 	}
-    else
-    {
-        PyObject *ptype, *pvalue, *ptraceback;
-        PyErr_Fetch(&ptype, &pvalue, &ptraceback);
-        char *pStrErrorMessage = PyString_AsString(pvalue);
-        LOG_TRACE("ERROR: %s", pStrErrorMessage);
-    }
 	Py_DECREF(pArgs);
 	Py_DECREF(pIns);
 	//freeReplyObject(reply);
