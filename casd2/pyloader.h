@@ -34,6 +34,7 @@ public:
 
 private:
     PyLoader();
+	void LogPyError();
 
 private:
     NameModuleMap _name2module;

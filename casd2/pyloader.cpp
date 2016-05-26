@@ -39,6 +39,7 @@ bool PyLoader::Init(std::string script_dir)
         snprintf(append_str, 256, "sys.path.append('%s')", script_dir.c_str());
         PyRun_SimpleString(append_str);
     }
+	LogPyError();
     return true;
 }
 
@@ -65,6 +66,7 @@ bool PyLoader::Load(std::string filename)
     }
     _name2module.insert(std::make_pair(filename, pModule));
     LOG_TRACE("load %s success", filename.c_str());
+	LogPyError();
     return true;
 }
 
@@ -126,6 +128,7 @@ PyObject* PyLoader::CallModuleFunc(std::string module_name, std::string func_nam
     PyObject* pModule = GetModule(module_name);
     if(!pModule) return NULL;
     PyObject* pFunc = GetObjectFromModule(pModule, func_name);
+	LogPyError();
     return ExecFunc(pFunc, pArgs);
 }
 
@@ -135,7 +138,63 @@ PyObject* PyLoader::CallInstanceMethod(PyObject* pInstance, std::string method_n
     PyObject* pName = PyString_FromString(method_name.c_str());
     PyObject* pRes = PyObject_CallMethodObjArgs(pInstance, pName, pArgs, NULL);
     Py_DECREF(pName);
+	LogPyError();
     return pRes;
+}
+
+void PyLoader::LogPyError()
+{
+	if(PyErr_Occurred() == NULL) return;
+	// Python equivilant:
+    // import traceback, sys
+    // return "".join(traceback.format_exception(sys.exc_type,
+    //    sys.exc_value, sys.exc_traceback))
+
+    PyObject *type, *value, *traceback;
+    PyObject *tracebackModule;
+    char *chrRetval = NULL;
+
+    PyErr_Fetch(&type, &value, &traceback);
+
+    tracebackModule = PyImport_ImportModule("traceback");
+    if (tracebackModule != NULL)
+    {
+        PyObject *tbList, *emptyString, *strRetval;
+
+        tbList = PyObject_CallMethod(
+            tracebackModule,
+            "format_exception",
+            "OOO",
+            type,
+            value == NULL ? Py_None : value,
+            traceback == NULL ? Py_None : traceback);
+
+        emptyString = PyString_FromString("");
+        strRetval = PyObject_CallMethod(emptyString, "join",
+            "O", tbList);
+
+        chrRetval = strdup(PyString_AsString(strRetval));
+
+        Py_DECREF(tbList);
+        Py_DECREF(emptyString);
+        Py_DECREF(strRetval);
+        Py_DECREF(tracebackModule);
+    }
+    else
+    {
+        chrRetval = strdup("Unable to import traceback module.");
+    }
+
+    Py_DECREF(type);
+    Py_XDECREF(value);
+    Py_XDECREF(traceback);
+
+	if(chrRetval != NULL)
+	{
+		LOG_TRACE("%s", chrRetval);
+		free(chrRetval);
+		chrRetval = NULL;
+	}
 }
 
 }   // end of namespace CASD

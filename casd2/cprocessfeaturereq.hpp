@@ -173,54 +173,6 @@ private:
 			Py_DECREF(pRes);
 			pRes = NULL;
 		}
-        else
-        {
-            if(PyErr_Occurred() != NULL)
-            {
-                PyObject *type_obj, *value_obj, *traceback_obj;
-                PyErr_Fetch(&type_obj, &value_obj, &traceback_obj);
-                if (value_obj == NULL)
-                    return;
-                std::string strErrorMsg;
-                PyErr_NormalizeException(&type_obj, &value_obj, 0);
-                if (PyString_Check(PyObject_Str(value_obj)))
-                {
-                    strErrorMsg = PyString_AsString(PyObject_Str(value_obj));
-                }
-                if (traceback_obj != NULL)
-                {
-                    strErrorMsg += "Traceback:";
-                    PyObject * pModuleName = PyString_FromString("traceback");
-                    PyObject * pTraceModule = PyImport_Import(pModuleName);
-                    Py_XDECREF(pModuleName);
-                    if (pTraceModule != NULL)
-                    {
-                        PyObject * pModuleDict = PyModule_GetDict(pTraceModule);
-                        if (pModuleDict != NULL)
-                        {
-                            PyObject * pFunc = PyDict_GetItemString(pModuleDict,"format_exception");
-                            if (pFunc != NULL)
-                            {
-                                PyObject * errList = PyObject_CallFunctionObjArgs(pFunc,type_obj,value_obj, traceback_obj,NULL);
-                                if (errList != NULL)
-                                {
-                                    int listSize = PyList_Size(errList);
-                                    for (int i=0;i < listSize;++i)
-                                    {
-                                        strErrorMsg += PyString_AsString(PyList_GetItem(errList,i));
-                                    }
-                                }
-                            }
-                        }
-                        Py_XDECREF(pTraceModule);
-                    }
-                }
-                Py_XDECREF(type_obj);
-                Py_XDECREF(value_obj);
-                Py_XDECREF(traceback_obj);
-                LOG_TRACE("ERROR: %s", strErrorMsg.c_str());
-            }
-        }
 		Py_DECREF(pArgs);
 	}
 };
