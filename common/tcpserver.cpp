@@ -642,10 +642,6 @@ bool TCPServer::_send(const std::string& data, SessionCtx* ctx)
 		LOG_ERROR("%s|send data failed|%s|%d", __FUNCTION__, _err_msg.c_str(), ctx->sid);
 		return false;
 	}
-    else
-    {
-		LOG_TRACE("%s|send data ok|sid=%d, datalen=%d", __FUNCTION__, ctx->sid, param->buf.len);
-    }
 	return true;
 }
 

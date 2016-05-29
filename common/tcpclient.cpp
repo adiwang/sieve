@@ -704,10 +704,6 @@ namespace UVNET
 				_recycle_one_param(param);
 				LOG_ERROR("client send data error|%s", GetUVError(iret).c_str());
 			}
-            else
-            {
-				LOG_TRACE("client send data ok|data_len=%d", param->buf.len);
-            }
 		}	// end of while
 	}
 
