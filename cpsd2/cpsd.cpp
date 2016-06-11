@@ -36,6 +36,10 @@ uint32_t gImagesNumPerObj = 0;
 std::string gCurID;
 // 是否退出
 bool bQuit = false;
+// 选择的随机数
+int rdm = 0;
+
+#define Random(x) (rand() % x) //通过取余取得指定范围的随机数
 
 UVNET::TCPClient casd_client(0xF0,0x0F);
 
@@ -84,16 +88,19 @@ public:
         converter.Convert(image_BGR8, ptrGrabResult);
 
         LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|gCurImageSeq=%d", gCurImageSeq);
-        #define DEBUG
+        //#define DEBUG
         if(gCurImageSeq == 0)
         {
 			#ifdef DEBUG
+                srand((int)time(NULL));
+                rdm = Random(20) + 1; 
 				// 测试，从本地加载图片
                 LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|gCurImageSeq=%d", gCurImageSeq);
 				GenerateID();
                 LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|id=%s", gCurID.c_str());
 				char image_path[256] = {0};
-				snprintf(image_path, sizeof(image_path), "%s/test/%02d.png", image_root.c_str(), gCurImageSeq);
+				//snprintf(image_path, sizeof(image_path), "%s/test/%02d.png", image_root.c_str(), gCurImageSeq);
+				snprintf(image_path, sizeof(image_path), "%s/test/S/B1L_%d_S.png", image_root.c_str(), rdm);
                 LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|DEBUG|image_path=%s", image_path);
 				//CImagePersistence::Load(image_path, image_BGR8);
                 image_BGR8.Load(image_path);
@@ -115,7 +122,8 @@ public:
 				// ss  << "test/" << gCurImageSeq << ".png";
 				// validate_proto._image_path = ss.str();
 				char partial_image_path[256] = {0};
-				snprintf(partial_image_path, sizeof(image_path), "test/%02d.png", gCurImageSeq);
+				//snprintf(partial_image_path, sizeof(image_path), "test/%02d.png", gCurImageSeq);
+				snprintf(partial_image_path, sizeof(image_path), "test/S/B1L_%d_S.png", rdm);
 				validate_proto._image_path = std::string(partial_image_path);
 				validate_proto.Marshal();
 				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u, image_path=%s, datalen=%d", gCurID.c_str(), validate_proto._result, validate_proto._image_path.c_str(), validate_proto._marshal_data.size());
@@ -163,7 +171,15 @@ public:
         {
 			#ifdef DEBUG
 				char image_path[256] = {0};
-				snprintf(image_path, sizeof(image_path), "%s/test/%02d.png", image_root.c_str(), gCurImageSeq);
+				//snprintf(image_path, sizeof(image_path), "%s/test/%02d.png", image_root.c_str(), gCurImageSeq);
+                if(gCurImageSeq <= 3)
+                {
+				    snprintf(image_path, sizeof(image_path), "%s/test/S/B1L_%d_S.png", image_root.c_str(), rdm);
+                }
+                else
+                {
+				    snprintf(image_path, sizeof(image_path), "%s/test/D/B1L_%d_D.png", image_root.c_str(), rdm);
+                }
 				CImagePersistence::Load(image_path, image_BGR8);
 				gGrabImages.push_back(image_BGR8);
 				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, image_seq=%d, image_path=%s", gCurID.c_str(), gCurImageSeq, image_path);
@@ -274,9 +290,9 @@ int main (int argc, char **argv)
 	sigaction(SIGHUP, &act, NULL);
     // Before using any pylon methods, the pylon runtime must be initialized. 
     PylonInitialize();
-    CInstantCamera camera( CTlFactory::GetInstance().CreateFirstDevice());
     try
     {
+        CInstantCamera camera( CTlFactory::GetInstance().CreateFirstDevice());
         /*
         CTlFactory& TlFactory = CTlFactory::GetInstance();
         CBaslerGigEDeviceInfo di;
@@ -289,13 +305,11 @@ int main (int argc, char **argv)
         // Open the camera device.
         camera.Open();
 		// just 4 debug gige, modify the heartbeat
-        /*
 		#ifdef DEBUG
 			GenApi::CIntegerPtr pHeartbeat = camera.GetTLNodeMap().GetNode("HeartbeatTimeout");
 			// set heartbeat to 600 seconds
-			if(pHeartbeat != NULL) pHeartbeat->SetValue(600 * 1000);
+			if(pHeartbeat) pHeartbeat->SetValue(600 * 1000);
 		#endif
-        */
         //设定相机工作与外部触发模式
         GenApi::INodeMap *pCameraNodeMap;
         pCameraNodeMap = &camera.GetNodeMap();
@@ -309,15 +323,15 @@ int main (int argc, char **argv)
         // The GrabStrategy_OneByOne default grab strategy is used.
         camera.StartGrabbing( GrabStrategy_OneByOne, GrabLoop_ProvidedByInstantCamera);
 	    while(!bQuit) ThreadSleep(10);
+        camera.StopGrabbing();
+        camera.DestroyDevice();
     }
-    catch (const GenericException &e)
+    catch (...)
     {
         exitcode = 1;
     }
 
     // Releases all pylon resources. 
-    camera.StopGrabbing();
-    camera.DestroyDevice();
     PylonTerminate(); 
     return exitcode;
 }
