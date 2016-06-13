@@ -21,6 +21,7 @@
 #include <sstream>
 #include <signal.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 
 using namespace Pylon;
@@ -61,6 +62,35 @@ void GenerateID()
 	char id[64] = {0};
 	snprintf(id, sizeof(id), "%s%04d%s", region.c_str(), machine_id, cur_time);
 	gCurID = std::string(id);
+}
+
+int TryCreateDir(const char* path)
+{
+    if(path == NULL) return -1;
+    int len = strlen(path);
+    if(len <= 0) return -1;
+    char* dir_path = new char[len + 1];
+    strncpy(dir_path, path, len);
+    dir_path[len] = 0;
+    for(int i = 0; i < len; ++i)
+    {
+        if(dir_path[i] == '/' && i > 0)
+        {
+            dir_path[i] = 0;
+            if(access(dir_path, F_OK) < 0)
+            {
+                if(mkdir(dir_path, F_OK) < 0)
+                {
+                    LOG_ERROR("TryCreateDir|create failed|%s", dir_path);
+                    delete []dir_path;
+                    return -1;
+                }
+            }
+            dir_path[i] = '/';
+        }
+    }
+    delete []dir_path;
+    return 0;
 }
 
 class CSampleImageEventHandler : public CImageEventHandler
@@ -142,6 +172,9 @@ public:
                 LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|NONDEBUG|gCurImageSeq=%d", gCurImageSeq);
 				GenerateID();
                 LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|NONDEBUG|id=%s", gCurID.c_str());
+                char dir_path[256] = {0};
+				snprintf(dir_path, sizeof(dir_path), "%s/%s/", image_root.c_str(), gCurID.c_str());
+                TryCreateDir(dir_path);
 				char image_path[256] = {0};
 				snprintf(image_path, sizeof(image_path), "%s/%s/%02d.png", image_root.c_str(), gCurID.c_str(), gCurImageSeq);
                 LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|NONDEBUG|image_path=%s", image_path);
@@ -150,9 +183,9 @@ public:
 				gGrabImages.clear();
 				FValidatePosReqp validate_proto;
 				validate_proto._result = (uint32_t)analysor.PostureCheck(image_BGR8);
-				std::stringstream ss;
-				ss << gCurID << "/" << gCurImageSeq << ".png";
-				validate_proto._image_path = ss.str();
+				char partial_image_path[256] = {0};
+				snprintf(partial_image_path, sizeof(partial_image_path), "%s/%02d.png", gCurID.c_str(), gCurImageSeq);
+				validate_proto._image_path = std::string(partial_image_path);
 				validate_proto.Marshal();
 				LOG_TRACE("CSampleImageEventHandler::OnImageGrabbed|id=%s, PostureCheck=%u, image_path=%s", gCurID.c_str(), validate_proto._result, validate_proto._image_path.c_str());
 				if (casd_client.Send(validate_proto._marshal_data.c_str(), validate_proto._marshal_data.size()) <= 0) 
